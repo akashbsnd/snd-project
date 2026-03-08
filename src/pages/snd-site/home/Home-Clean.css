@@ -1,5 +1,45 @@
 /* Home page specific styles */
 
+/* Latest Projects Section - Fix image display issues */
+.project-swiper .item {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.project-swiper .portfolio-img {
+  width: 100% !important;
+  height: 300px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+.project-swiper .description {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 100% !important;
+  z-index: 10 !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+  text-align: center !important;
+  padding: 1rem !important;
+}
+
+.project-swiper .item:hover .description {
+  opacity: 1 !important;
+}
+
+.project-swiper .image-link {
+  display: block !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-decoration: none !important;
+}
+
 /* Quick Links section background */
 #quick-links {
   background-color: #dec49a !important;

@@ -1,0 +1,9 @@
+/* Hide scrollbar for Webkit browsers */
+.projects-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure smooth transitions */
+.projects-carousel {
+  -webkit-overflow-scrolling: touch;
+}

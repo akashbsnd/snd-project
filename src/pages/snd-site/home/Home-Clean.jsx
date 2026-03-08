@@ -1,16 +1,91 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import "../css/vendor.css";
 import 'swiper/css';
 import Logo from '../images/horizontal-logo.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/style.css";
 import "./Home-Clean.css";
+import "./Home-Clean-carousel.css";
+import MediumTabPane from '../../../components/Home/MediumTabPane';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('regular-tab-pane');
+  const [displayedImages, setDisplayedImages] = useState([]);
+  const carouselRef = useRef(null);
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
+  };
+
+  // Initialize displayed images
+  useEffect(() => {
+    // Original 6 images + first 3 duplicated for infinite scroll
+    const originalImages = [
+      {
+        id: 1,
+        title: "Audi R8",
+        image: "https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754182746/lp1_x8d33y.png",
+        link: "https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto//v1754182746/lp1_x8d33y.png"
+      },
+      {
+        id: 2,
+        title: "Mercedes GLC 300",
+        image: "https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754182972/lp3_xmn6rm.png",
+        link: "https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754182972/lp3_xmn6rm.png"
+      },
+      {
+        id: 3,
+        title: "Honda Civic Si",
+        image: "https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754182837/lp2_pyi66n.png",
+        link: "https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754182837/lp2_pyi66n.png"
+      },
+      {
+        id: 4,
+        title: "Mercedes G Wagon",
+        image: "https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754359599/lp8_fxd3br.png",
+        link: "https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754359599/lp8_fxd3br.png"
+      },
+      {
+        id: 5,
+        title: "BMW X3",
+        image: "https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754364681/lp5_arc7pw.png",
+        link: "https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754364681/lp5_arc7pw.png"
+      },
+      {
+        id: 6,
+        title: "Tesla CyberTruck",
+        image: "https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754359771/lp6_f23yy3.png",
+        link: "https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754359771/lp6_f23yy3.png"
+      }
+    ];
+    
+    // Create initial display: original + first 3 duplicates
+    const initialDisplay = [...originalImages, ...originalImages.slice(0, 3)];
+    setDisplayedImages(initialDisplay);
+  }, []);
+
+  // Carousel navigation using array manipulation
+  const scrollCarousel = (direction) => {
+    console.log('🎡🎡🎡🎡 SCROLL CLICKED 🎡🎡🎡🎡🎡');
+    console.log('📍 Direction:', direction);
+    console.log('� Current displayed images count:', displayedImages.length);
+    
+    let newDisplayedImages;
+    
+    if (direction === 'left') {
+      console.log('⬅️ Moving left - removing last image, adding new one at start');
+      // Remove last image, add new one at start
+      const lastImage = displayedImages[displayedImages.length - 1];
+      newDisplayedImages = [lastImage, ...displayedImages.slice(0, -1)];
+    } else {
+      console.log('➡️ Moving right - removing first image, adding new one at end');
+      // Remove first image, add new one at end
+      const firstImage = displayedImages[0];
+      newDisplayedImages = [...displayedImages.slice(1), firstImage];
+    }
+    
+    console.log('🔄 Updating displayed images array');
+    setDisplayedImages(newDisplayedImages);
   };
 
   useEffect(() => {
@@ -485,205 +560,103 @@ export default function Home() {
                 <iconify-icon
                   icon="teenyicons:arrow-left-solid"
                   className="icon-arrow-left me-3"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => scrollCarousel('left')}
                 />
                 <iconify-icon
                   icon="teenyicons:arrow-right-solid"
                   className="icon-arrow-right"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => scrollCarousel('right')}
                 />
               </div>
-              <div className="swiper project-swiper mb-4">
-                <div className="swiper-wrapper">
-                  {/* Slide 1 */}
-                  <div className="swiper-slide">
-                    <div className="item">
-                      <a
-                        href="https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto//v1754182746/lp1_x8d33y.png"
-                        title="Audi R8"
-                        className="image-link"
+              {/* Horizontal Scrolling Carousel */}
+                <div 
+                  className="projects-carousel-container"
+                  style={{
+                    position: 'relative',
+                    overflow: 'hidden',
+                    margin: '0 -15px'
+                  }}
+                >
+                  <div 
+                    className="projects-carousel"
+                    id="projectsCarousel"
+                    ref={carouselRef}
+                    style={{
+                      display: 'flex',
+                      overflowX: 'auto',
+                      gap: '30px',
+                      padding: '0 15px',
+                      scrollBehavior: 'smooth',
+                      scrollbarWidth: 'none', // Hide scrollbar for cleaner look
+                      msOverflowStyle: 'none' // Hide scrollbar for IE/Edge
+                    }}
+                  >
+                    {displayedImages.map((image, index) => (
+                      <div 
+                        key={`${image.id}-${index}`}
+                        style={{
+                          flex: '0 0 calc(33.333% - 20px)',
+                          minWidth: '300px',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          borderRadius: '10px',
+                          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+                          backgroundColor: '#000'
+                        }}
                       >
-                        <img
-                          className="portfolio-img img-fluid"
-                          src="https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754182746/lp1_x8d33y.png"
-                          alt="Audi R8"
-                        />
-                        <div
-                          className="description position-absolute top-50 start-50 translate-middle text-center p-3"
+                        <a
+                          href={image.link}
+                          title={image.title}
+                          style={{
+                            display: 'block',
+                            position: 'relative',
+                            overflow: 'hidden',
+                            textDecoration: 'none'
+                          }}
                         >
-                          <h3 className="text-white">Audi R8</h3>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  {/* Slide 2 */}
-                  <div className="swiper-slide">
-                    <div className="item">
-                      <a
-                        href="https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754182972/lp3_xmn6rm.png"
-                        title="Mercedes GLC 300"
-                        className="image-link"
-                      >
-                        <img
-                          className="portfolio-img img-fluid"
-                          src="https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754182972/lp3_xmn6rm.png"
-                          alt="Mercedes GLC 300"
-                        />
-                        <div
-                          className="description position-absolute top-50 start-50 translate-middle text-center p-3"
-                        >
-                          <h3 className="text-white">Mercedes GLC 300</h3>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  {/* Slide 3 */}
-                  <div className="swiper-slide">
-                    <div className="item">
-                      <a
-                        href="https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754182837/lp2_pyi66n.png"
-                        title="Honda Civic Si"
-                        className="image-link"
-                      >
-                        <img
-                          className="portfolio-img img-fluid"
-                          src="https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754182837/lp2_pyi66n.png"
-                          alt="Honda Civic Si"
-                        />
-                        <div
-                          className="description position-absolute top-50 start-50 translate-middle text-center p-3"
-                        >
-                          <h3 className="text-white">Honda Civic Si</h3>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  {/* Slide 4 */}
-                  <div className="swiper-slide">
-                    <div className="item">
-                      <a
-                        href="https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754359599/lp8_fxd3br.png"
-                        title="Mercedes G Wagon"
-                        className="image-link"
-                      >
-                        <img
-                          className="portfolio-img img-fluid"
-                          src="https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754359599/lp8_fxd3br.png"
-                          alt="Mercedes G Wagon"
-                        />
-                        <div
-                          className="description position-absolute top-50 start-50 translate-middle text-center p-3"
-                        >
-                          <h3 className="text-white">Mercedes G Wagon</h3>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  {/* Slide 5 */}
-                  <div className="swiper-slide">
-                    <div className="item">
-                      <a
-                        href="https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754364681/lp5_arc7pw.png"
-                        title="BMW X3"
-                        className="image-link"
-                      >
-                        <img
-                          className="portfolio-img img-fluid"
-                          src="https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754364681/lp5_arc7pw.png"
-                          alt="BMW X3"
-                        />
-                        <div
-                          className="description position-absolute top-50 start-50 translate-middle text-center p-3"
-                        >
-                          <h3 className="text-white">BMW X3</h3>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  {/* Slide 6 */}
-                  <div className="swiper-slide">
-                    <div className="item">
-                      <a
-                        href="https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754359771/lp6_f23yy3.png"
-                        title="Tesla CyberTruck"
-                        className="image-link"
-                      >
-                        <img
-                          className="portfolio-img img-fluid"
-                          src="https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754359771/lp6_f23yy3.png"
-                          alt="Tesla CyberTruck"
-                        />
-                        <div
-                          className="description position-absolute top-50 start-50 translate-middle text-center p-3"
-                        >
-                          <h3 className="text-white">Tesla CyberTruck</h3>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  {/* Slide 7 */}
-                  <div className="swiper-slide">
-                    <div className="item">
-                      <a
-                        href="https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754357528/lp4_obmatv.png"
-                        title="Toyota Camry XSE"
-                        className="image-link"
-                      >
-                        <img
-                          className="portfolio-img img-fluid"
-                          src="https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754357528/lp4_obmatv.png"
-                          alt="Toyota Camry XSE"
-                        />
-                        <div
-                          className="description position-absolute top-50 start-50 translate-middle text-center p-3"
-                        >
-                          <h3 className="text-white">Toyota Camry XSE</h3>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  {/* Slide 8 */}
-                  <div className="swiper-slide">
-                    <div className="item">
-                      <a
-                        href="https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754358509/lp4_zycevv.png"
-                        title="Honda Accord"
-                        className="image-link"
-                      >
-                        <img
-                          className="portfolio-img img-fluid"
-                          src="https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754358509/lp4_zycevv.png"
-                          alt="Honda Accord"
-                        />
-                        <div
-                          className="description position-absolute top-50 start-50 translate-middle text-center p-3"
-                        >
-                          <h3 className="text-white">Honda Accord</h3>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  {/* Slide 9 */}
-                  <div className="swiper-slide">
-                    <div className="item">
-                      <a
-                        href="https://res.cloudinary.com/dnsc73sla/image/upload/f_auto,q_auto/v1754357528/lp4_zycevv.png"
-                        title="Dodge Hornet"
-                        className="image-link"
-                      >
-                        <img
-                          className="portfolio-img img-fluid"
-                          src="https://res.cloudinary.com/dnsc73sla/image/upload/c_limit,h_480,f_auto,q_auto/v1754357528/lp4_zycevv.png"
-                          alt="Dodge Hornet"
-                        />
-                        <div
-                          className="description position-absolute top-50 start-50 translate-middle text-center p-3"
-                        >
-                          <h3 className="text-white">Dodge Hornet</h3>
-                        </div>
-                      </a>
-                    </div>
+                          <img
+                            src={image.image}
+                            alt={image.title}
+                            style={{
+                              width: '100%',
+                              height: '300px',
+                              objectFit: 'cover',
+                              objectPosition: 'center',
+                              display: 'block'
+                            }}
+                            onError={(e) => {
+                              console.log('Home image failed to load:', e.target.src);
+                            }}
+                            onLoad={(e) => {
+                              console.log('Home image loaded successfully:', e.target.src);
+                            }}
+                          />
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '0',
+                              left: '0',
+                              width: '100%',
+                              height: '100%',
+                              background: 'rgba(0, 0, 0, 0.6)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              opacity: 0,
+                              transition: 'opacity 0.3s ease'
+                            }}
+                            onMouseEnter={(e) => e.target.style.opacity = '1'}
+                            onMouseLeave={(e) => e.target.style.opacity = '0'}
+                          >
+                            <h3 style={{ color: 'white', margin: '0' }}>{image.title}</h3>
+                          </div>
+                        </a>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
@@ -840,100 +813,7 @@ export default function Home() {
             )}
             
             {activeTab === 'medium-tab-pane' && (
-              <div className="row">
-                <div className="col-lg-3 mb-4">
-                  <div className="plan-post">
-                    <div className="header-top mb-3 text-center">Premium</div>
-                    <h2 className="display-5 text-primary text-center">$300</h2>
-                    <div className="price-option">
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />6 Month Ceramic Wax1</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Iron Removal Treatment</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Clay Treatment</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Wheel Surfaces, Barrel, & Tire Clean</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Tire Dressing</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Foam Bath and Hand Wash</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Shampoo and Conditioner</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Headliner Spot Cleaning</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Seats & Carpets Sanitized</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />UV Protect & Sanitize Dash/Vents/Trims/Panels</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Deep Interior & Trunk Vacuum</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Windows and Door Jams Cleaned</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Rain-X® Window Treatment</p>
-                    </div>
-                    <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
-                        Book Now
-                        <iconify-icon icon="tabler:arrow-right" className="arrow-icon ms-2" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 mb-4">
-                  <div className="plan-post">
-                    <div className="header-top mb-3 text-center">Exterior</div>
-                    <h2 className="display-5 text-primary text-center">$160</h2>
-                    <div className="price-option">
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />6 Month Ceramic Wax1</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Iron Removal Treatment</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Clay Treatment</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Wheel Surface, Barrel & Tire Wash</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Tire Dressing</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Foam Bath & Hand Wash</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Windows & Door Jams Cleaned</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Rain-X® Window Treatment</p>
-                    </div>
-                    <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
-                        Book Now
-                        <iconify-icon icon="tabler:arrow-right" className="arrow-icon ms-2" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 mb-4">
-                  <div className="plan-post">
-                    <div className="header-top mb-3 text-center">Interior</div>
-                    <h2 className="display-5 text-primary text-center">$160</h2>
-                    <div className="price-option">
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Shampoo and Conditioner</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Headliner Spot Cleaning</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Steam Interior Surfaces</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Seats & Carpets Sanitized</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />UV Protect and Sanitize Dash/Vents/Trims/Panels</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Deep Interior & Trunk Vacuum</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Windows and Door Jams Cleaned</p>
-                    </div>
-                    <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
-                        Book Now
-                        <iconify-icon icon="tabler:arrow-right" className="arrow-icon ms-2" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 mb-4">
-                  <div className="plan-post">
-                    <div className="header-top mb-3 text-center">Express</div>
-                    <h2 className="display-5 text-primary text-center">$125</h2>
-                    <div className="price-option">
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Basic Wax Coating1</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Wheel Surface and Tire Wash</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Tire Dressing</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Foam Bath & Hand Wash</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Seats & Carpets Sanitized</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Dash/Vents/Trims/Panels Wipe Down</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Interior Vacuum</p>
-                      <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Windows Only</p>
-                    </div>
-                    <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
-                        Book Now
-                        <iconify-icon icon="tabler:arrow-right" className="arrow-icon ms-2" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <MediumTabPane />
             )}
             
             {activeTab === 'van-tab-pane' && (
@@ -941,7 +821,7 @@ export default function Home() {
                 <div className="col-lg-3 mb-4">
                   <div className="plan-post">
                     <div className="header-top mb-3 text-center">Premium</div>
-                    <h2 className="display-5 text-primary text-center">$300</h2>
+                    <h2 className="display-5 text-primary text-center">$400</h2>
                     <div className="price-option">
                       <p><iconify-icon icon="mdi:check" className="price-tick me-2" />6 Month Ceramic Wax1</p>
                       <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Iron Removal Treatment</p>
@@ -968,7 +848,7 @@ export default function Home() {
                 <div className="col-lg-3 mb-4">
                   <div className="plan-post">
                     <div className="header-top mb-3 text-center">Exterior</div>
-                    <h2 className="display-5 text-primary text-center">$160</h2>
+                    <h2 className="display-5 text-primary text-center">$200</h2>
                     <div className="price-option">
                       <p><iconify-icon icon="mdi:check" className="price-tick me-2" />6 Month Ceramic Wax1</p>
                       <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Iron Removal Treatment</p>
@@ -990,7 +870,7 @@ export default function Home() {
                 <div className="col-lg-3 mb-4">
                   <div className="plan-post">
                     <div className="header-top mb-3 text-center">Interior</div>
-                    <h2 className="display-5 text-primary text-center">$160</h2>
+                    <h2 className="display-5 text-primary text-center">$200</h2>
                     <div className="price-option">
                       <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Shampoo and Conditioner</p>
                       <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Headliner Spot Cleaning</p>
@@ -1011,7 +891,7 @@ export default function Home() {
                 <div className="col-lg-3 mb-4">
                   <div className="plan-post">
                     <div className="header-top mb-3 text-center">Express</div>
-                    <h2 className="display-5 text-primary text-center">$125</h2>
+                    <h2 className="display-5 text-primary text-center">$175</h2>
                     <div className="price-option">
                       <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Basic Wax Coating1</p>
                       <p><iconify-icon icon="mdi:check" className="price-tick me-2" />Wheel Surface and Tire Wash</p>

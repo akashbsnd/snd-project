@@ -9,11 +9,14 @@ import { labels } from "./static/labels";
 import axios from "axios";
 import { PackageSession, ModifierSession } from "./middleware/packageContext";
 import { packageNameCamelCase } from "./hooks/packageNameCamelCase";
-import CardForm from "./components/Purchase/CardForm";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { TailSpin } from "react-loader-spinner";
 import Home from "./pages/snd-site/home/Home-Clean";
+import About from "./pages/snd-site/about/About";
+import Gallery from "./pages/snd-site/gallery/Gallery";
+import Services from "./pages/snd-site/services/Services";
+import Academy from "./pages/snd-site/academy/Academy";
 
 export default function BrowserRoutes() {
   const [packages, setPackages] = useState([]);
@@ -122,10 +125,16 @@ export default function BrowserRoutes() {
           <BrowserRouter>
             <Routes>
               <Route path="/appointments" element={<Appointments />} />
-              <Route path="/purchase" element={<CardForm />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/" element={<Home />} />
               <Route path="/bookings" element={<Bookings />} />
+              
+              {/* snd-site routes */}
+              <Route path="/snd-site/home" element={<Home />} />
+              <Route path="/snd-site/about" element={<About />} />
+              <Route path="/snd-site/gallery" element={<Gallery />} />
+              <Route path="/snd-site/services" element={<Services />} />
+              <Route path="/snd-site/academy" element={<Academy />} />
               {packages.map((packageService) => {
                 if (packageService.name !== "Touch Up Labor (Hourly)") {
                   const camelCasedPackageName = packageNameCamelCase({

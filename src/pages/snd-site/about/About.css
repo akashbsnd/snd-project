@@ -1,0 +1,180 @@
+/* About Page Specific Styles */
+
+/* Hero Section */
+.hero-about {
+  background-image: url('../images/HERO ABOUT US.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* About Us Section */
+.about-us-team-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.section-element {
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.element-title {
+  color: #dec49a;
+  font-weight: 600;
+  font-family: 'Oswald', sans-serif;
+}
+
+.about-supreme {
+  font-size: 1.5rem;
+}
+
+/* Team Section */
+.member-photo {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 4px solid #dec49a;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.heading-color {
+  color: #dec49a;
+  font-weight: 500;
+}
+
+.member-2 {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+/* Social Links */
+.social-links .social-icon {
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.social-links .social-icon:hover {
+  color: #dec49a !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-about {
+    min-height: 80vh;
+    background-position: center center;
+  }
+  
+  .about-us-team-img {
+    margin-bottom: 2rem;
+  }
+  
+  .member-photo {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .element-title {
+    font-size: 1.25rem;
+  }
+  
+  .about-supreme {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-about {
+    min-height: 70vh;
+    background-position: center center;
+  }
+  
+  .section-element {
+    padding: 1.5rem !important;
+  }
+  
+  .member-2 {
+    padding: 1rem;
+  }
+}
+
+/* Animation Classes */
+.vertical-element {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.vertical-element[data-aos="zoom-out"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Footer specific styles for About page */
+.footer-containerG {
+  background: #1a1a1a;
+  color: white;
+}
+
+.footer-logo {
+  max-width: 250px;
+  height: auto;
+}
+
+.footer-heading2 {
+  color: #dec49a;
+  font-weight: 600;
+  font-family: 'Oswald', sans-serif;
+}
+
+.footer-list a {
+  color: #ffffff !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-list a:hover {
+  color: #dec49a !important;
+}
+
+.social-icon-footer {
+  font-size: 1.5rem;
+  color: #ffffff !important;
+  transition: color 0.3s ease;
+}
+
+.social-icon-footer:hover {
+  color: #dec49a !important;
+}
+
+.footer-em {
+  color: #dec49a !important;
+}
+
+.footer-copy {
+  color: #6c757d;
+  font-size: 0.875rem;
+}

@@ -1,0 +1,293 @@
+/* Gallery Page Specific Styles */
+
+/* Hero Section */
+.hero-gallery {
+  background-image: url('../images/HERO GALLERY.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Gallery Section - Clean minimal styles */
+.isotope-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.item {
+  padding: 0 15px;
+  margin-bottom: 30px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  z-index: 10;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+/* Override conflicting styles from main style.css */
+.item .description {
+  position: absolute !important;
+  width: 100% !important;
+  z-index: 10 !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+/* Social Buttons */
+.gallerySocials {
+  background: #dec49a;
+  border: none;
+  color: #000;
+  padding: 12px 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.gallerySocials:hover {
+  background: #c4a975;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(222, 196, 154, 0.3);
+}
+
+.social-button-wrapper {
+  display: inline-block;
+}
+
+/* YouTube Video Container */
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto 50px;
+  padding-bottom: 50px;
+}
+
+.video-container iframe {
+  position: relative;
+  width: 100%;
+  height: 315px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Lightbox Styles */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-image {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lightbox-close:hover {
+  color: #dec49a;
+}
+
+/* Footer specific styles for Gallery page */
+.footer-containerG {
+  background: #1a1a1a;
+  color: white;
+}
+
+.footer-logo {
+  max-width: 250px;
+  height: auto;
+}
+
+.footer-heading2 {
+  color: #dec49a;
+  font-weight: 600;
+  font-family: 'Oswald', sans-serif;
+}
+
+.footer-list a {
+  color: #ffffff !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-list a:hover {
+  color: #dec49a !important;
+}
+
+.social-icon-footer {
+  font-size: 1.5rem;
+  color: #ffffff !important;
+  transition: color 0.3s ease;
+}
+
+.social-icon-footer:hover {
+  color: #dec49a !important;
+}
+
+.footer-em {
+  color: #dec49a !important;
+}
+
+.footer-copy {
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-gallery {
+    min-height: 80vh;
+    background-position: center center;
+  }
+  
+  .gallery-item {
+    margin-bottom: 20px;
+  }
+  
+  .video-container iframe {
+    height: 250px;
+  }
+  
+  .lightbox-nav {
+    font-size: 1.5rem;
+    padding: 15px;
+  }
+  
+  .lightbox-close {
+    font-size: 1.5rem;
+    top: 10px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-gallery {
+    min-height: 70vh;
+    background-position: center center;
+  }
+  
+  .gallerySocials {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .video-container {
+    padding: 0 15px 30px;
+  }
+  
+  .video-container iframe {
+    height: 200px;
+  }
+}
+
+/* Animation Classes */
+.vertical-element {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.vertical-element[data-aos="zoom-out"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Isotope Grid Animation */
+.item {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.5s ease;
+}
+
+.item.isotope-item {
+  opacity: 1;
+  transform: scale(1);
+}
