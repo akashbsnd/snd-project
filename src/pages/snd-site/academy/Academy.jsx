@@ -208,7 +208,7 @@ const Academy = () => {
               <ul className="navbar-nav align-items-center justify-content-end justify-content-xxl-center flex-grow-1">
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/")}`}
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/")}`}
                     to="/"
                   >
                     Home
@@ -216,7 +216,7 @@ const Academy = () => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/gallery")}`}
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/gallery")}`}
                     to="/snd-site/gallery"
                   >
                     Gallery
@@ -224,7 +224,7 @@ const Academy = () => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/services")}`}
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/services")}`}
                     to="/snd-site/services"
                   >
                     Our Services
@@ -232,7 +232,7 @@ const Academy = () => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/about")}`}
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/about")}`}
                     to="/snd-site/about"
                   >
                     About Us
@@ -240,7 +240,7 @@ const Academy = () => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/academy")}`}
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/academy")}`}
                     to="/snd-site/academy"
                   >
                     Academy

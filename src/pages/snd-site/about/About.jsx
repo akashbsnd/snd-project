@@ -223,7 +223,7 @@ export default function About() {
               <ul className="navbar-nav align-items-center justify-content-end justify-content-xxl-center flex-grow-1">
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/")}`}
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/")}`}
                     to="/"
                   >
                     Home
@@ -231,7 +231,7 @@ export default function About() {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/gallery")}`}
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/gallery")}`}
                     to="/snd-site/gallery"
                   >
                     Gallery
@@ -239,7 +239,7 @@ export default function About() {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/services")}`}
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/services")}`}
                     to="/snd-site/services"
                   >
                     Our Services
@@ -247,7 +247,7 @@ export default function About() {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/about")}`}
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/about")}`}
                     to="/snd-site/about"
                   >
                     About Us
@@ -255,7 +255,7 @@ export default function About() {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/academy")}`}
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/academy")}`}
                     to="/snd-site/academy"
                   >
                     Academy
@@ -388,11 +388,11 @@ export default function About() {
                   </div>
                 </div>
                 <div className="col-lg-6 col-12 order-1 order-md-2">
-                  <div className="section-element p-4 p-md-5">
+                  <div className="p-4 p-md-5">
                     <h2 className="element-title text-uppercase mb-4">
                       Who are we?
                     </h2>
-                    <p>
+                <p className="fs-5 text-[rgba(102,102,102)] lh-base">
                       Supreme Nomads Detailing sparked from a shared passion for
                       ensuring that every vehicle we touch is left in the most
                       pristine condition possible through our detailing
@@ -421,11 +421,11 @@ export default function About() {
             <div className="container">
               <div className="row d-flex align-items-center justify-content-between">
                 <div className="col-lg-6 col-12">
-                  <div className="section-element p-4 p-md-5">
+                  <div className="p-4 p-md-5">
                     <h2 className="element-title text-uppercase mb-4 about-supreme">
                       CHOOSE US FOR THE SUPREME TREATMENT
                     </h2>
-                    <p>
+                <p className="fs-5 text-[rgba(102,102,102)] lh-base">
                       At Supreme Nomads, perfection is at the heart of how we
                       operate. Even as a respected name in the Charlotte Auto
                       Industry, we're committed to continuous improvement and
@@ -502,7 +502,7 @@ export default function About() {
               <div className="col-md-8 text-center">
                 <h5 className="element-title text-uppercase mt-3">Akash</h5>
                 <h6 className="heading-color">Co-CEO</h6>
-                <p>
+                <p className="fs-5 text-[rgba(102,102,102)] lh-base">
                   I was born and raised in New Jersey. I've moved around a lot
                   and have even lived in Texas for a couple of years. I finished
                   high school in Cary, NC and have lived in Charlotte since
@@ -542,7 +542,7 @@ export default function About() {
               <div className="col-md-8 text-center">
                 <h5 className="element-title text-uppercase mt-3">Tenzin</h5>
                 <h6 className="heading-color">Co-CEO</h6>
-                <p>
+                <p className="fs-5 text-[rgba(102,102,102)] lh-base">
                   Growing up in New York City, vehicles were luxury items as
                   trains were my primary mode of transportation. My fascination
                   for cars started in 2005, when I picked up one of my childhood
