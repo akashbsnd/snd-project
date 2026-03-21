@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router";
 import { labels } from "../../static/labels";
-import { removePackage } from "../../hooks/removePackage";
 import { updateModifier } from "./AddModifier";
 import Button from "../Button";
 import { packageNameCamelCase } from "../../hooks/packageNameCamelCase";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 export default function AddButtons({ packageName, addOnOption }) {
   const navigate = useNavigate();
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
 
   return (
     <div className="package-button-container">
@@ -20,7 +22,7 @@ export default function AddButtons({ packageName, addOnOption }) {
       <Button
         className="button"
         onClick={() =>
-          updateModifier({ packageName, addOnItems: addOnOption, navigate })
+          updateModifier({ packageName, addOnItems: addOnOption, navigate, cartItems, setCartItems })
         }
         label={labels.services.updateButton}
       />

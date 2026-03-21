@@ -1,10 +1,7 @@
 import { labels } from "../static/labels";
 import { packageNameCamelCase } from "./packageNameCamelCase";
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
 
-export function updatePackage({ packageOption, packageName, navigate }) {
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+export function updatePackage({ packageOption, packageName, navigate, cartItems, setCartItems }) {  
 
   if (packageOption) {
     const updatedCartPackageOption = cartItems.map((item) => {

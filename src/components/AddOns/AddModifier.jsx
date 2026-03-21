@@ -1,10 +1,6 @@
 import { labels } from "../../static/labels";
-import { getCart, setCart } from "../../static/cartItems";
-import { useContext } from "react";
-import { CartContext } from "../../context/CartContext";
 
-export function updateModifier({ addOnItems, packageName, navigate }) {
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: getCart(), setCartItems: setCart };
+export function updateModifier({ addOnItems, packageName, navigate, cartItems, setCartItems }) {
 
   if (addOnItems.length) {
     const updatedCartModifier = cartItems.map((item) => {

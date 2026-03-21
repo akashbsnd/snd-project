@@ -4,6 +4,8 @@ import { updatePackage } from "../../hooks/updatePackage";
 import { checkForDupPackages } from "../../hooks/checkForDupPackages";
 import { labels } from "../../static/labels";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 export default function PackageButtons({
   packageName,
@@ -13,12 +15,13 @@ export default function PackageButtons({
   packageTimeAlloted,
 }) {
   const navigate = useNavigate();
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
 
   return checkForDupPackages({ packageName }) ? (
     <div className="package-button-container">
       <button
         className="button remove-button"
-        onClick={() => removePackage({ packageName, navigate })}
+        onClick={() => removePackage({ packageName, navigate, cartItems, setCartItems })}
       >
         {labels.services.removeButton}
       </button>
