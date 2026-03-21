@@ -1,4 +1,5 @@
 import { labels } from "../../../static/labels";
+import CartHero from "../../Cart/CartHero";
 import CartArrowButton from "../../Cart/CartArrowButton";
 import PackageItemList from "../../Cart/PackageItemList";
 import { useState } from "react";
@@ -10,9 +11,7 @@ import { useNavigate } from "react-router-dom";
 export default function CheckoutCart({ BookAppointment, userInfo }) {
   const navigate = useNavigate();
   const [togglePackageItemList, setTogglePackageItemList] = useState(false);
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
 
   return (
     <>

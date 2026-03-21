@@ -6,9 +6,7 @@ import { weekNameList, months } from "../../../static/dateObj";
 import { getDay, getMonth, getDate } from "../../../hooks/dateFuncs";
 
 export default function CheckoutCartHero() {
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
 
   const date = cartItems[0]?.apptDate;
 

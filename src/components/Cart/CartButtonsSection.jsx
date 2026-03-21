@@ -1,9 +1,7 @@
 import { labels } from "../../static/labels";
 
 export default function CartButtonsSection() {
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
   if (cartItems.length) {
     return (
       <div className="market-button-group">

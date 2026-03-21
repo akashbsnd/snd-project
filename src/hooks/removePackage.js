@@ -1,10 +1,9 @@
 import { labels } from "../static/labels";
-import { setCart } from "../static/cartItems";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 export function removePackage({ packageName, navigate }) {
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
 
   const updatedCartRemovePackage = cartItems.filter((item) => {
     if (item.packageName !== packageName) {
@@ -12,7 +11,7 @@ export function removePackage({ packageName, navigate }) {
     }
   });
 
-  setCart(updatedCartRemovePackage);
+  setCartItems(updatedCartRemovePackage);
 
   return navigate(labels.links.bookingsLink);
 }

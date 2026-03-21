@@ -1,10 +1,10 @@
 import { labels } from "../../static/labels";
-import { setCart } from "../../static/cartItems";
+import { getCart, setCart } from "../../static/cartItems";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 export function updateModifier({ addOnItems, packageName, navigate }) {
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: getCart(), setCartItems: setCart };
 
   if (addOnItems.length) {
     const updatedCartModifier = cartItems.map((item) => {
@@ -15,7 +15,7 @@ export function updateModifier({ addOnItems, packageName, navigate }) {
         return item;
       }
     });
-    setCart(updatedCartModifier);
+    setCartItems(updatedCartModifier);
   }
 
   return navigate(labels.links.appointmentsLink);

@@ -20,9 +20,7 @@ export default function Availabilty({
   isLoading,
   setIsLoading,
 }) {
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
   const [nextAvailableDate, setNextAvailableDate] = useState(null);
 
   // Function to validate nextAvailableDate data

@@ -1,9 +1,7 @@
 import { setCart } from "../../static/cartItems";
 
 export function removeAddOn({ addOnItemName }) {
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
 
   const updatedCartRemovePackage = cartItems.map((item) => {
     item.addOns = item.addOns.filter((addOn) => {
@@ -14,5 +12,5 @@ export function removeAddOn({ addOnItemName }) {
     return item;
   });
 
-  setCart(updatedCartRemovePackage);
+  setCartItems(updatedCartRemovePackage);
 }

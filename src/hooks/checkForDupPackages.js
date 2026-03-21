@@ -1,8 +1,5 @@
 export function checkForDupPackages({ packageName }) {
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
-
+  const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
   let isDup = false;
 
   if (cartItems) {
@@ -12,6 +9,6 @@ export function checkForDupPackages({ packageName }) {
         return;
       }
     });
-    return isDup;
   }
+  return isDup;
 }

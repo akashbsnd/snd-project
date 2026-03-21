@@ -1,7 +1,6 @@
 import { labels } from "../../static/labels";
 import AptBtnsContainer from "./AptBtnsContainer";
 import TimeButton from "./TimeButton";
-import { setCart } from "../../static/cartItems";
 import Button from "../Button";
 import { formatDate } from "../../hooks/dateFuncs";
 import { useNavigate } from "react-router";
@@ -13,15 +12,13 @@ export default function TimeButtonCategories({
   nextAvailableDate,
 }) {
   const navigate = useNavigate();
-
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
 
   function addBookingToCart({ time }) {
-    cartItems[0]["apptTime"] = time;
-    cartItems[0]["apptDate"] = selectedDate;
-    setCart(cartItems);
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[0]["apptTime"] = time;
+    updatedCartItems[0]["apptDate"] = selectedDate;
+    setCartItems(updatedCartItems);
     navigate(labels.links.checkoutLink);
   }
 

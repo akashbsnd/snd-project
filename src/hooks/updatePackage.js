@@ -1,11 +1,8 @@
 import { labels } from "../static/labels";
 import { packageNameCamelCase } from "./packageNameCamelCase";
-import { setCart } from "../static/cartItems";
 
 export function updatePackage({ packageOption, packageName, navigate }) {
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
 
   if (packageOption) {
     const updatedCartPackageOption = cartItems.map((item) => {
@@ -16,7 +13,7 @@ export function updatePackage({ packageOption, packageName, navigate }) {
         return item;
       }
     });
-    setCart(updatedCartPackageOption);
+    setCartItems(updatedCartPackageOption);
   }
 
   if (packageName !== "Ceramic Coating") {

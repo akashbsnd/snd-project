@@ -6,9 +6,7 @@ import { useState } from "react";
 
 export default function Cart() {
   const [togglePackageItemList, setTogglePackageItemList] = useState(false);
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
   return (
     <>
       {cartItems.length ? (

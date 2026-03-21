@@ -13,6 +13,7 @@ export default function AddOnOption({
   id,
   findPackage,
 }) {
+  const { cartItems } = useContext(CartContext) || { cartItems: getCart() };
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
@@ -24,10 +25,6 @@ export default function AddOnOption({
       : false;
     setIsChecked(isOptionInCart);
   }, []);
-
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
 
   let modifiers;
   let isDisabled;

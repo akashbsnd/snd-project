@@ -17,6 +17,7 @@ import About from "./pages/snd-site/about/About";
 import Gallery from "./pages/snd-site/gallery/Gallery";
 import Services from "./pages/snd-site/services/Services";
 import Academy from "./pages/snd-site/academy/Academy";
+import { CartProvider } from "./context/CartContext";
 
 export default function BrowserRoutes() {
   const [packages, setPackages] = useState([]);
@@ -120,70 +121,72 @@ export default function BrowserRoutes() {
         draggable
         pauseOnHover
       />
-      <PackageSession.Provider value={{ packages }}>
-        <ModifierSession.Provider value={{ modifiers }}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/appointments" element={<Appointments />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/bookings" element={<Bookings />} />
+      <CartProvider>
+        <PackageSession.Provider value={{ packages }}>
+          <ModifierSession.Provider value={{ modifiers }}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/appointments" element={<Appointments />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/bookings" element={<Bookings />} />
 
-              {/* snd-site routes */}
-              <Route path="/snd-site/about" element={<About />} />
-              <Route path="/snd-site/gallery" element={<Gallery />} />
-              <Route path="/snd-site/services" element={<Services />} />
-              <Route path="/snd-site/academy" element={<Academy />} />
-              {packages.map((packageService) => {
-                if (packageService.name !== "Touch Up Labor (Hourly)") {
-                  const camelCasedPackageName = packageNameCamelCase({
-                    packageName: packageService.name,
-                  });
-                  return (
-                    <Route
-                      key={`${camelCasedPackageName}-addons`}
-                      path={`/${camelCasedPackageName}/addOns`}
-                      element={<AddOns packageName={packageService.name} />}
-                    />
-                  );
-                }
-                return null;
-              })}
-              {packages.map((packageService) => {
-                if (packageService.name !== "Touch Up Labor (Hourly)") {
-                  const camelCasedPackageName = packageNameCamelCase({
-                    packageName: packageService.name,
-                  });
-                  const packagePrice =
-                    labels.packages[camelCasedPackageName]?.price || 0;
-                  const packageTimeAlloted =
-                    labels.packages[camelCasedPackageName]?.timeAlloted || 0;
+                {/* snd-site routes */}
+                <Route path="/snd-site/about" element={<About />} />
+                <Route path="/snd-site/gallery" element={<Gallery />} />
+                <Route path="/snd-site/services" element={<Services />} />
+                <Route path="/snd-site/academy" element={<Academy />} />
+                {packages.map((packageService) => {
+                  if (packageService.name !== "Touch Up Labor (Hourly)") {
+                    const camelCasedPackageName = packageNameCamelCase({
+                      packageName: packageService.name,
+                    });
+                    return (
+                      <Route
+                        key={`${camelCasedPackageName}-addons`}
+                        path={`/${camelCasedPackageName}/addOns`}
+                        element={<AddOns packageName={packageService.name} />}
+                      />
+                    );
+                  }
+                  return null;
+                })}
+                {packages.map((packageService) => {
+                  if (packageService.name !== "Touch Up Labor (Hourly)") {
+                    const camelCasedPackageName = packageNameCamelCase({
+                      packageName: packageService.name,
+                    });
+                    const packagePrice =
+                      labels.packages[camelCasedPackageName]?.price || 0;
+                    const packageTimeAlloted =
+                      labels.packages[camelCasedPackageName]?.timeAlloted || 0;
 
-                  return (
-                    <Route
-                      path={`/${camelCasedPackageName}`}
-                      key={camelCasedPackageName}
-                      element={
-                        <Package
-                          packageVersion={packageService.version}
-                          packageName={packageService.name}
-                          packagePrice={packagePrice}
-                          packageTimeAlloted={packageTimeAlloted}
-                          packageFeatureList={
-                            packageService.descriptionPlaintext
-                          }
-                          packageOptionList={packageService.variations}
-                        />
-                      }
-                    />
-                  );
-                }
-                return null;
-              })}
-            </Routes>
-          </BrowserRouter>
-        </ModifierSession.Provider>
-      </PackageSession.Provider>
+                    return (
+                      <Route
+                        path={`/${camelCasedPackageName}`}
+                        key={camelCasedPackageName}
+                        element={
+                          <Package
+                            packageVersion={packageService.version}
+                            packageName={packageService.name}
+                            packagePrice={packagePrice}
+                            packageTimeAlloted={packageTimeAlloted}
+                            packageFeatureList={
+                              packageService.descriptionPlaintext
+                            }
+                            packageOptionList={packageService.variations}
+                          />
+                        }
+                      />
+                    );
+                  }
+                  return null;
+                })}
+              </Routes>
+            </BrowserRouter>
+          </ModifierSession.Provider>
+        </PackageSession.Provider>
+      </CartProvider>
     </>
   );
 }

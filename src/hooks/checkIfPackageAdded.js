@@ -1,7 +1,5 @@
 export function checkIfPackageAdded({ packageName }) {
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
   if (cartItems) {
     let isAdded = false;
 
@@ -11,7 +9,7 @@ export function checkIfPackageAdded({ packageName }) {
         return;
       }
     });
-
     return isAdded;
   }
+  return false;
 }

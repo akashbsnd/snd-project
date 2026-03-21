@@ -11,10 +11,7 @@ import { formattedDate } from "../../static/dateObj";
 import { generateDateRange } from "../../hooks/generateDateRange";
 import axios from "axios";
 import { generateCalendarDates } from "../../hooks/generateCalendarDates";
-import {
-
-  formatDate,
-} from "../../hooks/dateFuncs";
+import { formatDate } from "../../hooks/dateFuncs";
 
 export default function Appointments() {
   const [toggleCalendarView, setToggleCalendarView] = useState(false);
@@ -22,10 +19,7 @@ export default function Appointments() {
   const [appointments, setAppointments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextAvailableDate, setNextAvailableDate] = useState(null);
-
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
 
   // Function to validate nextAvailableDate data
   function isValidDate(dateObj) {

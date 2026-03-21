@@ -1,9 +1,7 @@
 import { calculateItemsTotal } from "../../hooks/calculateItemsTotal";
 
 export default function CartHero() {
-  const cartItems = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
+  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
   /*TODO: handle multiple cart items*/
   return (
     <div className="flex-grow flex-col overflow-wrap-anywhere">
