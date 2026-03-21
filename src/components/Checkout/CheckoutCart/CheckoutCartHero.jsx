@@ -4,6 +4,8 @@ import { labels } from "../../../static/labels";
 import { calculateCheckoutTimeRange } from "../../../hooks/calculateCheckoutTimeRange";
 import { weekNameList, months } from "../../../static/dateObj";
 import { getDay, getMonth, getDate } from "../../../hooks/dateFuncs";
+import { useContext } from "react";
+import { CartContext } from "../../../context/CartContext";
 
 export default function CheckoutCartHero() {
   const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };

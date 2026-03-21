@@ -1,5 +1,5 @@
 import { handleOnOptionSelect } from "./handleOnOptionSelect";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { removeAddOn } from "./removeAddOn";
 import { useNavigate } from "react-router";
 

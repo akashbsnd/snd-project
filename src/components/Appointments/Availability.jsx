@@ -1,7 +1,7 @@
 import { generateCalendarDates } from "../../hooks/generateCalendarDates";
 import { generateDateRange } from "../../hooks/generateDateRange";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { labels } from "../../static/labels";
 import { months, weekNameList } from "../../static/dateObj";
 import TimeButtonCategories from "./TimeButtonCategories";
@@ -11,6 +11,7 @@ import {
   getDate,
   formatDate,
 } from "../../hooks/dateFuncs";
+import { CartContext } from "../../context/CartContext";
 
 export default function Availabilty({
   setSelectedDate,

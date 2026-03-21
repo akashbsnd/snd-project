@@ -2,7 +2,8 @@ import { labels } from "../../static/labels";
 import CartHero from "./CartHero";
 import CartArrowButton from "./CartArrowButton";
 import PackageItemList from "./PackageItemList";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 export default function Cart() {
   const [togglePackageItemList, setTogglePackageItemList] = useState(false);

@@ -4,6 +4,8 @@ import TimeButton from "./TimeButton";
 import Button from "../Button";
 import { formatDate } from "../../hooks/dateFuncs";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 export default function TimeButtonCategories({
   appointments,

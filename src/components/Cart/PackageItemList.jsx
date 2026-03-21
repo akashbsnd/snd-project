@@ -1,4 +1,6 @@
 import PackageCartItem from "./PackageCartItem";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 export default function PackageItemList() {
   const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };

@@ -1,4 +1,6 @@
 import { labels } from "../../static/labels";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 export default function CartButtonsSection() {
   const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };

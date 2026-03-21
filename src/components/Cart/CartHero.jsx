@@ -1,4 +1,6 @@
 import { calculateItemsTotal } from "../../hooks/calculateItemsTotal";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 export default function CartHero() {
   const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
