@@ -8,6 +8,14 @@ import { toast } from "react-toastify";
 const API_BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
 const LOCATION_ID = import.meta.env.VITE_LOCATION_ID;
 
+// Validate environment variables at startup
+if (!API_BASE_URL) {
+  throw new Error('VITE_BACKEND_API_URL environment variable is not set');
+}
+if (!LOCATION_ID) {
+  throw new Error('VITE_LOCATION_ID environment variable is not set');
+}
+
 /**
  * Main function to handle the complete booking process
  * @param {Object} userInfo - User information object
@@ -211,6 +219,10 @@ async function findOrCreateCustomer(userInfo) {
     zip,
   } = userInfo;
 
+  console.log('=== FIND OR CREATE CUSTOMER ===');
+  console.log('User email:', email);
+  console.log('API URL:', `${API_BASE_URL}/getCustomers`);
+
   try {
     // First, get all customers
     const { data: allCustomers } = await axios.get(
@@ -221,17 +233,21 @@ async function findOrCreateCustomer(userInfo) {
       throw new Error("Failed to retrieve customers");
     }
 
+    console.log('Customers retrieved:', allCustomers.data.length);
+
     // Then use find to locate the customer by email
     const existingCustomer = allCustomers.data.filter(
       (customer) => customer.email === email,
     );
 
     if (existingCustomer.length > 0) {
+      console.log('Found existing customer:', existingCustomer[0].id);
       return existingCustomer[0].id;
     }
 
     // If customer doesn't exist, create a new one
-    const { data: newCustomer } = await axios.post(
+    console.log('Creating new customer...');
+    const newCustomer = await axios.post(
       `${API_BASE_URL}/createCustomer`,
       {
         firstName,
@@ -246,9 +262,18 @@ async function findOrCreateCustomer(userInfo) {
         country: "US",
       },
     );
-    return newCustomer.id;
+    
+    if (!newCustomer || !newCustomer.data || !newCustomer.data.id) {
+      throw new Error("Failed to create new customer");
+    }
+    
+    console.log('New customer created:', newCustomer.data.id);
+    return newCustomer.data.id;
   } catch (error) {
     console.error("Customer processing error:", error);
+    if (error.response?.status === 403) {
+      throw new Error("Authentication failed. Please log in again.");
+    }
     throw new Error("Unable to process customer information");
   }
 }
@@ -256,7 +281,16 @@ async function findOrCreateCustomer(userInfo) {
 async function createOrder(customerId, cartItems) {
   console.log('=== CREATE ORDER ===');
   console.log('Customer ID:', customerId);
+  console.log('Location ID:', LOCATION_ID);
   console.log('Cart Items:', cartItems);
+  
+  // Validate required fields
+  if (!customerId) {
+    throw new Error("Customer ID is required to create order");
+  }
+  if (!LOCATION_ID) {
+    throw new Error("Location ID is required to create order");
+  }
   
   const orderData = {
     locationId: LOCATION_ID,
@@ -264,11 +298,23 @@ async function createOrder(customerId, cartItems) {
     lineItems: cartItems.map((item) => createLineItem(item, cartItems.length)),
   };
 
-  const data = await axios.post(`${API_BASE_URL}/createOrder`, orderData);
-  
-  console.log('Order created:', data);
-  if (!data) throw new Error("Failed to create order");
-  return data;
+  console.log('Order data being sent:', JSON.stringify(orderData, null, 2));
+
+  try {
+    const response = await axios.post(`${API_BASE_URL}/createOrder`, orderData);
+    console.log('Order created successfully:', response.data);
+    return response;
+  } catch (error) {
+    console.error('=== CREATE ORDER ERROR ===');
+    console.error('Error response:', error.response?.data);
+    
+    // Handle specific authentication errors
+    if (error.response?.data?.errors?.some(err => err.code === 'FORBIDDEN')) {
+      throw new Error('Authentication failed. Please check your login status and try again.');
+    }
+    
+    throw error;
+  }
 }
 
 async function createAndPublishInvoice(orderId, customerId, dueDate) {
