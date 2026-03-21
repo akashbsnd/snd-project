@@ -4,6 +4,30 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
+// Add axios interceptor for debugging
+axios.interceptors.request.use(request => {
+  console.log('=== AXIOS REQUEST ===');
+  console.log('URL:', request.url);
+  console.log('Method:', request.method);
+  console.log('Headers:', request.headers);
+  console.log('Data:', request.data);
+  return request;
+});
+
+axios.interceptors.response.use(response => {
+  console.log('=== AXIOS RESPONSE ===');
+  console.log('URL:', response.config.url);
+  console.log('Status:', response.status);
+  console.log('Headers:', response.headers);
+  return response;
+}, error => {
+  console.log('=== AXIOS ERROR ===');
+  console.log('URL:', error.config?.url);
+  console.log('Status:', error.response?.status);
+  console.log('Error Data:', error.response?.data);
+  return Promise.reject(error);
+});
+
 // Constants
 const API_BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
 const LOCATION_ID = import.meta.env.VITE_LOCATION_ID;
@@ -25,6 +49,23 @@ if (!LOCATION_ID) {
  */
 // Update the BookAppointment function
 export async function BookAppointment(userInfo, navigate) {
+  // Runtime environment debugging
+  console.log('=== RUNTIME ENVIRONMENT DEBUG ===');
+  console.log('Raw env vars:', {
+    VITE_BACKEND_API_URL: import.meta.env.VITE_BACKEND_API_URL,
+    VITE_LOCATION_ID: import.meta.env.VITE_LOCATION_ID,
+    MODE: import.meta.env.MODE
+  });
+  console.log('Parsed constants:', {
+    API_BASE_URL,
+    LOCATION_ID
+  });
+  console.log('Types:', {
+    API_BASE_URL_TYPE: typeof API_BASE_URL,
+    LOCATION_ID_TYPE: typeof LOCATION_ID,
+    API_BASE_URL_LENGTH: API_BASE_URL?.length,
+    LOCATION_ID_LENGTH: LOCATION_ID?.length
+  });
 
   const onSuccess = (data) => {
     toast.success("Appointment booked successfully!");
@@ -60,7 +101,14 @@ export async function BookAppointment(userInfo, navigate) {
     const { isoStart, dueDate } = getAndValidateDate(cartItems);
 
     // Process complete booking flow
+    console.log('=== STARTING BOOKING FLOW ===');
+    console.log('User info provided:', !!userInfo);
+    console.log('User info keys:', userInfo ? Object.keys(userInfo) : 'No user info');
+    
     const customerId = await findOrCreateCustomer(userInfo);
+    console.log('Customer ID result:', customerId);
+    console.log('Customer ID type:', typeof customerId);
+    console.log('Customer ID is truthy:', !!customerId);
   
     if(!customerId) {
       throw new Error("Failed to find or create customer");
