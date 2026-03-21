@@ -17,6 +17,14 @@ const LOCATION_ID = import.meta.env.VITE_LOCATION_ID;
  */
 // Update the BookAppointment function
 export async function BookAppointment(userInfo, navigate) {
+  // Environment logging
+  console.log('=== ENVIRONMENT DEBUG ===');
+  console.log('API_BASE_URL:', API_BASE_URL);
+  console.log('LOCATION_ID:', LOCATION_ID);
+  console.log('NODE_ENV:', import.meta.env.MODE);
+  console.log('VITE_BACKEND_API_URL:', import.meta.env.VITE_BACKEND_API_URL);
+  console.log('VITE_LOCATION_ID:', import.meta.env.VITE_LOCATION_ID);
+  
   const onSuccess = (data) => {
     toast.success("Appointment booked successfully!");
     clearSessionData();
@@ -25,6 +33,12 @@ export async function BookAppointment(userInfo, navigate) {
   };
 
   const onError = (error) => {
+    console.error('=== BOOKING ERROR ===');
+    console.error('Full error object:', error);
+    console.error('Error response:', error?.response);
+    console.error('Error status:', error?.response?.status);
+    console.error('Error data:', error?.response?.data);
+    
     const errorMessage =
       error?.response?.data?.message ||
       error.message ||
@@ -39,20 +53,39 @@ export async function BookAppointment(userInfo, navigate) {
       throw new Error("Invalid user information provided");
     }
 
+    console.log('=== USER INFO ===');
+    console.log('User info:', userInfo);
+
     // Get and validate cart items
     const cartItems = getAndValidateCart();
+    console.log('=== CART ITEMS ===');
+    console.log('Cart items:', cartItems);
+    
     const { isoStart, dueDate } = getAndValidateDate(cartItems);
+    console.log('=== DATE INFO ===');
+    console.log('ISO start:', isoStart);
+    console.log('Due date:', dueDate);
 
-    // Process the complete booking flow
+    // Process complete booking flow
     const customerId = await findOrCreateCustomer(userInfo);
+    console.log('=== CUSTOMER ===');
+    console.log('Customer ID:', customerId);
+    
     const order = await createOrder(customerId, cartItems);
+    console.log('=== ORDER ===');
+    console.log('Order:', order);
+    
     const invoice = await createAndPublishInvoice(
       order.data.orderId,
       customerId,
       dueDate,
     );
+    console.log('=== INVOICE ===');
+    console.log('Invoice:', invoice);
 
     const teamMember = await getFirstTeamMember();
+    console.log('=== TEAM MEMBER ===');
+    console.log('Team member:', teamMember);
 
     const appointmentSegments = cartItems.map((item) => ({
       teamMemberId: teamMember.id,
@@ -60,13 +93,18 @@ export async function BookAppointment(userInfo, navigate) {
       serviceVariationId: item.packageOption.id,
       serviceVariationVersion: item.packageVersion,
     }));
+    console.log('=== APPOINTMENT SEGMENTS ===');
+    console.log('Appointment segments:', appointmentSegments);
 
     // Create booking
+    console.log('=== CREATING BOOKING ===');
     const booking = await createBooking(
       customerId,
       appointmentSegments,
       isoStart,
     );
+    console.log('=== BOOKING RESULT ===');
+    console.log('Booking:', booking);
 
     if (booking) {
       const result = { order, invoice, booking, customerId };
@@ -76,6 +114,7 @@ export async function BookAppointment(userInfo, navigate) {
       throw new Error("Failed to create booking");
     }
   } catch (error) {
+    console.error("=== FINAL ERROR ===");
     console.error("Booking error:", error);
     onError(error);
     throw error;
@@ -263,11 +302,30 @@ async function createBooking(customerId, appointmentSegments, startAt) {
     appointmentSegments: appointmentSegments,
   };
 
-  const { data } = await axios.post(
-    `${API_BASE_URL}/createBooking`,
-    bookingData,
-  );
-  return data;
+  console.log('=== CREATE BOOKING DEBUG ===');
+  console.log('Booking data being sent:', JSON.stringify(bookingData, null, 2));
+  console.log('Request URL:', `${API_BASE_URL}/createBooking`);
+  console.log('Headers:', {
+    'Content-Type': 'application/json'
+  });
+
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/createBooking`,
+      bookingData,
+    );
+    console.log('Booking response:', response);
+    console.log('Booking response data:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('=== BOOKING API ERROR ===');
+    console.error('Error status:', error.response?.status);
+    console.error('Error status text:', error.response?.statusText);
+    console.error('Error data:', error.response?.data);
+    console.error('Error config:', error.config);
+    console.error('Full error:', error);
+    throw error;
+  }
 }
 
 function clearSessionData() {
