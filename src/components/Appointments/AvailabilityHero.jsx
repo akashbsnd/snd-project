@@ -8,7 +8,7 @@ import {
 } from "../../hooks/dateFuncs";
 import { formattedDate, weekNameList } from "../../static/dateObj";
 
-export default function AvailabilityHero({ selectedDate }) {
+export default function AvailabilityHero({ selectedDate, appointments }) {
   return (
     <>
       <div>
@@ -20,7 +20,13 @@ export default function AvailabilityHero({ selectedDate }) {
         </div>
       </div>
       <h3 className="my-6">
-        {selectedDate === formattedDate ? (
+        {
+        appointments.length === 0 ? (
+          <span>
+            No appointments available for this date
+          </span>
+        ) : 
+        selectedDate === formattedDate ? (
           <span>
             {labels.appointments.today}, {weekNameList[getDay(selectedDate)]},{" "}
             {getAbbrMonth(selectedDate)} {getDate(selectedDate)},{" "}
@@ -31,7 +37,8 @@ export default function AvailabilityHero({ selectedDate }) {
             {weekNameList[getDay(selectedDate)]}, {getAbbrMonth(selectedDate)}{" "}
             {getDate(selectedDate)}, {getFullYear(selectedDate)}
           </span>
-        )}
+        )
+      }
       </h3>
     </>
   );

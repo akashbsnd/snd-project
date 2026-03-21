@@ -173,7 +173,6 @@ export default function Availabilty({
           </div>
         ) : !appointments.length && isValidDate(nextAvailableDate) ? (
           <div className="mb-4">
-            {labels.appointments.noAvailability}
             {labels.appointments.nextAvailableOn}{" "}
             {weekNameList[
               new Date(
