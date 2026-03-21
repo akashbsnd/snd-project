@@ -105,12 +105,12 @@ export default function TimeButtonCategories({
           }}
           rank="primary"
           size="small"
-          className={`w-full market-button button ${!appointments.length || !nextAvailableDate ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`w-full market-button button ${!appointments.length && !nextAvailableDate ? 'opacity-50 cursor-not-allowed' : ''}`}
           type="button"
           variant="regular"
           hydrated=""
-          label={!appointments.length ? labels.appointments.noAvailabilityFound : labels.appointments.nextAvail}
-          disabled={!appointments.length || !nextAvailableDate}
+          label={!appointments.length && !nextAvailableDate ? labels.appointments.noAvailabilityFound : labels.appointments.nextAvail}
+          disabled={!appointments.length && !nextAvailableDate}
         />
       )}
     </div>
