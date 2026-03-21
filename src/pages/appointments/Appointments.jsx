@@ -5,7 +5,7 @@ import CalendarToggleButton from "../../components/Appointments/CalendarToggleBu
 import Availabilty from "../../components/Appointments/Availability";
 import AvailabilityHero from "../../components/Appointments/AvailabilityHero";
 import Footer from "../../components/Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import HiddenCalendar from "../../components/Appointments/HiddenCalendar";
 import { formattedDate } from "../../static/dateObj";
 import { generateDateRange } from "../../hooks/generateDateRange";

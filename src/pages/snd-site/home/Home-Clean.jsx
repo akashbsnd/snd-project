@@ -8,7 +8,6 @@ import "../css/style.css";
 import "./Home-Clean.css";
 import "./Home-Clean-carousel.css";
 import MediumTabPane from "../../../components/Home/MediumTabPane";
-import { getFullYear } from "../../../hooks/dateFuncs";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("regular-tab-pane");
