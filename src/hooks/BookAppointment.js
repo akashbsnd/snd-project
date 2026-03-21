@@ -257,6 +257,10 @@ async function findOrCreateCustomer(userInfo) {
 }
 
 async function createOrder(customerId, cartItems) {
+  console.log('=== CREATE ORDER ===');
+  console.log('Customer ID:', customerId);
+  console.log('Cart Items:', cartItems);
+  
   const orderData = {
     locationId: LOCATION_ID,
     customerId,
@@ -264,7 +268,8 @@ async function createOrder(customerId, cartItems) {
   };
 
   const data = await axios.post(`${API_BASE_URL}/createOrder`, orderData);
-
+  
+  console.log('Order created:', data);
   if (!data) throw new Error("Failed to create order");
   return data;
 }
