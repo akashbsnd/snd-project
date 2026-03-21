@@ -17,14 +17,7 @@ const LOCATION_ID = import.meta.env.VITE_LOCATION_ID;
  */
 // Update the BookAppointment function
 export async function BookAppointment(userInfo, navigate) {
-  // Environment logging
-  console.log('=== ENVIRONMENT DEBUG ===');
-  console.log('API_BASE_URL:', API_BASE_URL);
-  console.log('LOCATION_ID:', LOCATION_ID);
-  console.log('NODE_ENV:', import.meta.env.MODE);
-  console.log('VITE_BACKEND_API_URL:', import.meta.env.VITE_BACKEND_API_URL);
-  console.log('VITE_LOCATION_ID:', import.meta.env.VITE_LOCATION_ID);
-  
+
   const onSuccess = (data) => {
     toast.success("Appointment booked successfully!");
     clearSessionData();
@@ -53,39 +46,39 @@ export async function BookAppointment(userInfo, navigate) {
       throw new Error("Invalid user information provided");
     }
 
-    console.log('=== USER INFO ===');
-    console.log('User info:', userInfo);
-
     // Get and validate cart items
     const cartItems = getAndValidateCart();
-    console.log('=== CART ITEMS ===');
-    console.log('Cart items:', cartItems);
     
     const { isoStart, dueDate } = getAndValidateDate(cartItems);
-    console.log('=== DATE INFO ===');
-    console.log('ISO start:', isoStart);
-    console.log('Due date:', dueDate);
 
     // Process complete booking flow
     const customerId = await findOrCreateCustomer(userInfo);
-    console.log('=== CUSTOMER ===');
-    console.log('Customer ID:', customerId);
+  
+    if(!customerId) {
+      throw new Error("Failed to find or create customer");
+    }
     
     const order = await createOrder(customerId, cartItems);
-    console.log('=== ORDER ===');
-    console.log('Order:', order);
     
+    if(!order) {
+      throw new Error("Failed to create order");
+    }
+
     const invoice = await createAndPublishInvoice(
       order.data.orderId,
       customerId,
       dueDate,
     );
-    console.log('=== INVOICE ===');
-    console.log('Invoice:', invoice);
+
+    if(!invoice) {
+      throw new Error("Failed to create invoice");
+    }
 
     const teamMember = await getFirstTeamMember();
-    console.log('=== TEAM MEMBER ===');
-    console.log('Team member:', teamMember);
+    
+    if(!teamMember) {
+      throw new Error("Failed to get team member");
+    }
 
     const appointmentSegments = cartItems.map((item) => ({
       teamMemberId: teamMember.id,
@@ -93,18 +86,18 @@ export async function BookAppointment(userInfo, navigate) {
       serviceVariationId: item.packageOption.id,
       serviceVariationVersion: item.packageVersion,
     }));
-    console.log('=== APPOINTMENT SEGMENTS ===');
-    console.log('Appointment segments:', appointmentSegments);
 
     // Create booking
-    console.log('=== CREATING BOOKING ===');
     const booking = await createBooking(
       customerId,
       appointmentSegments,
       isoStart,
     );
-    console.log('=== BOOKING RESULT ===');
-    console.log('Booking:', booking);
+    
+
+    if(!booking) {
+      throw new Error("Failed to create booking");
+    } 
 
     if (booking) {
       const result = { order, invoice, booking, customerId };
@@ -223,6 +216,10 @@ async function findOrCreateCustomer(userInfo) {
     const { data: allCustomers } = await axios.get(
       `${API_BASE_URL}/getCustomers`,
     );
+
+    if(!allCustomers || !allCustomers.data) {
+      throw new Error("Failed to retrieve customers");
+    }
 
     // Then use find to locate the customer by email
     const existingCustomer = allCustomers.data.filter(
