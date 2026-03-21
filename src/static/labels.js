@@ -47,7 +47,7 @@ export const labels = {
     loading: "Loading availability...",
     noAppointmentsToday: "No appointments available for today",
     noAppointmentsSelected: "Please select a time to continue",
-    noAvailabilityFound: "No availability found for the next 60 days",
+    noAvailabilityFound: "Slots not available",
     nextAvailableOn: "Next available on",
     selectTimeBelow: "Select a time below to book your appointment",
     today: "Today",

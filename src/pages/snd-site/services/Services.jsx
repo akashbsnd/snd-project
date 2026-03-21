@@ -671,7 +671,6 @@ export default function Services() {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8 text-center">
-              <p className="header-top mb-3">Our Services</p>
               <h2 className="display-4">Detailing Packages</h2>
             </div>
           </div>

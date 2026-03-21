@@ -110,6 +110,7 @@ export default function TimeButtonCategories({
           variant="regular"
           hydrated=""
           label={labels.appointments.nextAvail}
+          disabled={!nextAvailableDate}
         />
       )}
     </div>
