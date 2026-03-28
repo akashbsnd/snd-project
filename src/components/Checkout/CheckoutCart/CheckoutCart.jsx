@@ -59,7 +59,6 @@ export default function CheckoutCart({ BookAppointment, userInfo, authLink }) {
               BookAppointment(userInfo, navigate);
             }}
             label={labels.checkout.bookApt}
-            children={authLink}
           />
         </div>
       ) : (

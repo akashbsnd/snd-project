@@ -11,7 +11,7 @@ export default function Button({ label, className, onClick, disabled, children =
         }
       }}
     >
-      {children ? <a href={children}>{label}</a> : label}
+      {label}
     </button>
   );
 }
