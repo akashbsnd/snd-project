@@ -4,8 +4,9 @@ import TimeButton from "./TimeButton";
 import Button from "../Button";
 import { formatDate } from "../../hooks/dateFuncs";
 import { useNavigate } from "react-router";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../../context/CartContext";
+import axios from "axios";
 
 export default function TimeButtonCategories({
   appointments,
@@ -15,13 +16,30 @@ export default function TimeButtonCategories({
 }) {
   const navigate = useNavigate();
   const { cartItems, setCartItems } = useContext(CartContext);
+  const [authLink, setAuthLink] = useState("");
+
+  useEffect(() => {
+    async function generateToken() {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_API_URL}/generateToken`,
+        );
+        setAuthLink(response.data.url);
+      } catch (err) {
+        console.error(`Error fetching auth link: ${err.message}`);
+      }
+    }
+    generateToken();
+  }, []);
 
   function addBookingToCart({ time }) {
     const updatedCartItems = [...cartItems];
     updatedCartItems[0]["apptTime"] = time;
     updatedCartItems[0]["apptDate"] = selectedDate;
     setCartItems(updatedCartItems);
-    navigate(labels.links.checkoutLink);
+    if (authLink) {
+      window.location.href = authLink;
+    }
   }
 
   const filterApts = {
