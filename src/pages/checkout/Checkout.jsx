@@ -32,6 +32,7 @@ export default function Checkout() {
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_API_URL}/getJWT`,
+          { withCredentials: true }
         );
 
         const { userId, accessToken, refreshToken } = response.data;
@@ -62,7 +63,30 @@ export default function Checkout() {
       }
     }
 
-    fetchUserSession();
+    function extractAuthParamsFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const jwt = params.get("jwt");
+      const userId = params.get("userId");
+
+      if (jwt && userId) {
+        console.log("Extracted auth params from URL:");
+        console.log("JWT:", jwt);
+        console.log("UserId:", userId);
+
+        sessionStorage.setItem("jwt_token", jwt);
+        sessionStorage.setItem("userId", userId);
+        setIsCurrUser(true);
+
+        window.history.replaceState({}, "", "/checkout");
+        return true;
+      }
+      return false;
+    }
+
+    const hasUrlParams = extractAuthParamsFromUrl();
+    if (!hasUrlParams) {
+      fetchUserSession();
+    }
     generateToken();
   }, []);
 
