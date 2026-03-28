@@ -1,6 +1,5 @@
 import { labels } from "../static/labels";
 import { packageNameCamelCase } from "./packageNameCamelCase";
-import { setCart } from "../static/cartItems";
 
 export function addPackage({
   packageOption,
@@ -9,6 +8,7 @@ export function addPackage({
   packagePrice,
   packageTimeAlloted,
   navigate,
+  setCartItems,
 }) {
   if (!packageOption) {
     document.querySelector("#noOptionSelected").innerHTML =
@@ -27,7 +27,7 @@ export function addPackage({
     },
   ];
 
-  setCart(cart);
+  setCartItems(cart);
 
   return navigate(
     `/${packageNameCamelCase({ packageName: packageName })}${labels.links.addOnsLink}`,

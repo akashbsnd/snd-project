@@ -20,7 +20,7 @@ export default function Appointments() {
   const [appointments, setAppointments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextAvailableDate, setNextAvailableDate] = useState(null);
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   // Function to validate nextAvailableDate data
   function isValidDate(dateObj) {

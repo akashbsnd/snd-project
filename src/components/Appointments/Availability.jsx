@@ -21,7 +21,7 @@ export default function Availabilty({
   isLoading,
   setIsLoading,
 }) {
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems } = useContext(CartContext);
   const [nextAvailableDate, setNextAvailableDate] = useState(null);
 
   // Function to validate nextAvailableDate data

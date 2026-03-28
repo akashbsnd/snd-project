@@ -15,7 +15,7 @@ export default function PackageButtons({
   packageTimeAlloted,
 }) {
   const navigate = useNavigate();
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   return checkForDupPackages({ packageName }) ? (
     <div className="package-button-container">
@@ -47,6 +47,7 @@ export default function PackageButtons({
             packageTimeAlloted,
             packageOption,
             navigate,
+            setCartItems,
           })
         }
       >

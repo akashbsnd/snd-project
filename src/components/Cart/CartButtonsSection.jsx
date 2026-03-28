@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
 export default function CartButtonsSection() {
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems } = useContext(CartContext);
   if (cartItems.length) {
     return (
       <div className="market-button-group">

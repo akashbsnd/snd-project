@@ -8,7 +8,7 @@ import { CartContext } from "../../context/CartContext";
 
 export default function AddButtons({ packageName, addOnOption }) {
   const navigate = useNavigate();
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   return (
     <div className="package-button-container">

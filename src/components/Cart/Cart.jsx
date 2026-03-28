@@ -7,7 +7,7 @@ import { CartContext } from "../../context/CartContext";
 
 export default function Cart() {
   const [togglePackageItemList, setTogglePackageItemList] = useState(false);
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems } = useContext(CartContext);
   return (
     <>
       {cartItems.length ? (

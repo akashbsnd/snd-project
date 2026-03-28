@@ -40,6 +40,10 @@ if (!LOCATION_ID) {
   throw new Error('VITE_LOCATION_ID environment variable is not set');
 }
 
+function getUserId() {
+  return sessionStorage.getItem('userId');
+}
+
 /**
  * Main function to handle the complete booking process
  * @param {Object} userInfo - User information object
@@ -199,7 +203,10 @@ function timeStringToMinutes(timeString) {
  */
 export async function getFirstTeamMember() {
   try {
-    const response = await axios.get(`${API_BASE_URL}/searchTeamMembers`);
+    const userId = getUserId();
+    const response = await axios.get(`${API_BASE_URL}/searchTeamMembers`, {
+      params: { userId },
+    });
 
     if (
       !response.data ||
@@ -267,6 +274,8 @@ async function findOrCreateCustomer(userInfo) {
     zip,
   } = userInfo;
 
+  const userId = getUserId();
+
   console.log('=== FIND OR CREATE CUSTOMER ===');
   console.log('User email:', email);
   console.log('API URL:', `${API_BASE_URL}/getCustomers`);
@@ -275,6 +284,7 @@ async function findOrCreateCustomer(userInfo) {
     // First, get all customers
     const { data: allCustomers } = await axios.get(
       `${API_BASE_URL}/getCustomers`,
+      { params: { userId } },
     );
 
     if(!allCustomers || !allCustomers.data) {
@@ -297,6 +307,7 @@ async function findOrCreateCustomer(userInfo) {
     const newCustomer = await axios.post(
       `${API_BASE_URL}/createCustomer`,
       {
+        userId,
         firstName,
         lastName,
         email,
@@ -330,6 +341,8 @@ async function findOrCreateCustomer(userInfo) {
 }
 
 async function createOrder(customerId, cartItems) {
+  const userId = getUserId();
+
   console.log('=== CREATE ORDER ===');
   console.log('Customer ID:', customerId);
   console.log('Location ID:', LOCATION_ID);
@@ -344,6 +357,7 @@ async function createOrder(customerId, cartItems) {
   }
   
   const orderData = {
+    userId,
     locationId: LOCATION_ID,
     customerId,
     lineItems: cartItems.map((item) => createLineItem(item, cartItems.length)),
@@ -369,9 +383,12 @@ async function createOrder(customerId, cartItems) {
 }
 
 async function createAndPublishInvoice(orderId, customerId, dueDate) {
+  const userId = getUserId();
+
   const { data: invoiceId } = await axios.post(
     `${API_BASE_URL}/${orderId}/createInvoice`,
     {
+      userId,
       orderId,
       customerId,
       dueDate,
@@ -383,6 +400,7 @@ async function createAndPublishInvoice(orderId, customerId, dueDate) {
       const publishInvoice = await axios.post(
         `${API_BASE_URL}/${invoiceId.id}/publish`,
         {
+          userId,
           version: invoiceId.version,
         },
       );
@@ -394,7 +412,10 @@ async function createAndPublishInvoice(orderId, customerId, dueDate) {
 }
 
 async function createBooking(customerId, appointmentSegments, startAt) {
+  const userId = getUserId();
+
   const bookingData = {
+    userId,
     customerId,
     startAt,
     locationId: LOCATION_ID,
@@ -430,6 +451,11 @@ async function createBooking(customerId, appointmentSegments, startAt) {
 function clearSessionData() {
   try {
     sessionStorage.clear();
+    document.cookie = 'cart_backup=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    document.cookie = 'userId=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    document.cookie = 'refreshToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    document.cookie = 'jwt=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
   } catch (error) {
     console.warn("Error clearing session data:", error);
   }

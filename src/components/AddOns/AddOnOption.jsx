@@ -14,17 +14,18 @@ export default function AddOnOption({
   id,
   findPackage,
 }) {
-  const { cartItems } = useContext(CartContext) || { cartItems: getCart() };
+  const { cartItems } = useContext(CartContext);
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isOptionInCart = cartItems[0].addOns.find(
-      (addOn) => addOn.optionName === optionName,
-    )
-      ? true
-      : false;
-    setIsChecked(isOptionInCart);
+    const isOptionInCart = async () => {
+      const addOns = await cartItems[0]?.addOns;
+      return addOns?.find((addOn) => addOn.optionName === optionName) ? true : false;
+    };
+    isOptionInCart().then((result) => {
+      setIsChecked(result);
+    });
   }, [cartItems, optionName]);
 
   let modifiers;

@@ -14,7 +14,7 @@ export default function TimeButtonCategories({
   nextAvailableDate,
 }) {
   const navigate = useNavigate();
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   function addBookingToCart({ time }) {
     const updatedCartItems = [...cartItems];

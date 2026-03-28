@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
 export default function CartHero() {
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems } = useContext(CartContext);
   /*TODO: handle multiple cart items*/
   return (
     <div className="flex-grow flex-col overflow-wrap-anywhere">

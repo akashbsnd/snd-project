@@ -25,9 +25,30 @@ export default function Checkout() {
     carModel: "",
     note: "",
   });
-    const [authLink, setAuthLink] = useState("");
+  const [authLink, setAuthLink] = useState("");
 
   useEffect(() => {
+    async function fetchUserSession() {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_API_URL}/getJWT`,
+        );
+
+        const { userId, accessToken, refreshToken } = response.data;
+
+        sessionStorage.setItem("userId", userId);
+        sessionStorage.setItem("accessToken", accessToken);
+        sessionStorage.setItem("refreshToken", refreshToken);
+
+        setIsCurrUser(true);
+      } catch (err) {
+        console.error(
+          `There was an error fetching user session: ${err.message}`,
+        );
+        setIsCurrUser(false);
+      }
+    }
+
     async function generateToken() {
       try {
         const generatedToken = await axios.get(
@@ -38,34 +59,11 @@ export default function Checkout() {
         console.error(
           `There was an error grabbing the generateToken endpoint: ${err.message}`,
         );
-        throw new Error(
-          `There was an error grabbing the generateToken endpoint: ${err.message}`,
-        );
       }
     }
+
+    fetchUserSession();
     generateToken();
-  }, []);
-
-  useEffect(() => {
-    async function getCurrUser() {
-      try {
-        const user = await axios.post(
-          `${import.meta.env.VITE_BACKEND_API_URL}/getCurrUser`,
-          { oAuthCode: "" },
-        );
-
-        const date = new Date(user.data.expiresAt);
-
-        if (date) {
-          setIsCurrUser(true);
-        }
-      } catch (err) {
-        console.error(
-          `There was an error getting the current user: ${err.message}`,
-        );
-      }
-    }
-    getCurrUser();
   }, []);
 
   return (

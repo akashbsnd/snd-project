@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
 export default function PackageItemList() {
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems } = useContext(CartContext);
   return (
     <div className="py-4 px-4 md-lg:max-h-[calc(100vh-280px)] overflow-y-auto">
       <div className="">

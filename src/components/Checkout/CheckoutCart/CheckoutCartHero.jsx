@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
 
 export default function CheckoutCartHero() {
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems } = useContext(CartContext);
 
   const date = cartItems[0]?.apptDate;
 

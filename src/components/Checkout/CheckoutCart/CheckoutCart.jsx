@@ -13,7 +13,7 @@ import { CartContext } from "../../../context/CartContext";
 export default function CheckoutCart({ BookAppointment, userInfo, authLink }) {
   const navigate = useNavigate();
   const [togglePackageItemList, setTogglePackageItemList] = useState(false);
-  const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   return (
     <>
