@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
 
-export default function CheckoutCart({ BookAppointment, userInfo }) {
+export default function CheckoutCart({ BookAppointment, userInfo, authLink }) {
   const navigate = useNavigate();
   const [togglePackageItemList, setTogglePackageItemList] = useState(false);
   const { cartItems, setCartItems } = useContext(CartContext) || { cartItems: [], setCartItems: () => {} };

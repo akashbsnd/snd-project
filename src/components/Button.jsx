@@ -1,4 +1,4 @@
-export default function Button({ label, className, onClick, disabled }) {
+export default function Button({ label, className, onClick, disabled, children = "" }) {
   return (
     <button
       role="button"
@@ -11,7 +11,7 @@ export default function Button({ label, className, onClick, disabled }) {
         }
       }}
     >
-      {label}
+      {children ? <a href={children}>{label}</a> : label}
     </button>
   );
 }
