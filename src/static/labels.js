@@ -271,6 +271,58 @@ export const labels = {
         },
       ],
     },
+    frontBumperInstallation: {
+      name: "Front Bumper Installation",
+      featureList: [],
+      price: "Price varies",
+      timeAlloted: "30 min",
+      options: [
+        {
+          name: "Sedan/Coupé",
+          price: "$950.00",
+          timeAlloted: "30 min",
+          timeTaken: { min: 30 },
+        },
+        {
+          name: "2 Row SUV/Small Truck",
+          price: "$1,100.00",
+          timeAlloted: "3 hr 30 min",
+          timeTaken: { hr: 3, min: 30 },
+        },
+        {
+          name: "3 Row SUV/Large Truck",
+          price: "$1,300.00",
+          timeAlloted: "3 hr 30 min",
+          timeTaken: { hr: 3, min: 30 },
+        },
+      ],
+    },
+    rearBumperInstallation: {
+      name: "Rear Bumper Installation",
+      featureList: [],
+      price: "Price varies",
+      timeAlloted: "30 min",
+      options: [
+        {
+          name: "Sedan/Coupé",
+          price: "$950.00",
+          timeAlloted: "30 min",
+          timeTaken: { min: 30 },
+        },
+        {
+          name: "2 Row SUV/Small Truck",
+          price: "$1,100.00",
+          timeAlloted: "3 hr 30 min",
+          timeTaken: { hr: 3, min: 30 },
+        },
+        {
+          name: "3 Row SUV/Large Truck",
+          price: "$1,300.00",
+          timeAlloted: "3 hr 30 min",
+          timeTaken: { hr: 3, min: 30 },
+        },
+      ],
+    },
     ceramicCoating: {
       name: "Ceramic Coating",
       featureList: [],

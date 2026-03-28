@@ -8,13 +8,6 @@ export default function CollapsedPackageList() {
   const { packages } = useContext(PackageSession);
 
   if (packages && packages.length) {
-    const ceramicCamelCasedPackageName = packageNameCamelCase({
-      packageName: packages[0].name,
-    });
-    const ceramicPackagePrice =
-      labels.packages[ceramicCamelCasedPackageName].price;
-    const ceramicPackageTimeAlloted =
-      labels.packages[ceramicCamelCasedPackageName].timeAlloted;
 
     return (
       <section
@@ -28,14 +21,13 @@ export default function CollapsedPackageList() {
             if (
               packageService &&
               packageService.descriptionPlaintext &&
-              (packageService.name !== "Ceramic Coating" ||
-                packageService.variations.length > 0)
+              (packageService.name !== "Ceramic Coating" && packageService.name !== "Front Bumper Installation" && packageService.name !== "Rear Bumper Installation")
             ) {
+              const camelCasedPackageName = packageNameCamelCase({
+              packageName: packageService.name,
+            });
               const splitDescriptionText =
                 packageService.descriptionPlaintext.split("\n");
-              const camelCasedPackageName = packageNameCamelCase({
-                packageName: packageService.name,
-              });
               const packagePrice = labels.packages[camelCasedPackageName].price;
               const packageTimeAlloted =
                 labels.packages[camelCasedPackageName].timeAlloted;

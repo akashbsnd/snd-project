@@ -293,8 +293,7 @@ async function findOrCreateCustomer(userInfo) {
     if (existingCustomer.length > 0) {
       console.log('Found existing customer:', existingCustomer[0].id);
       return existingCustomer[0].id;
-    }
-
+    }else{
     const newCustomer = await axios.post(
       `${API_BASE_URL}/createCustomer`,
       {
@@ -320,6 +319,7 @@ async function findOrCreateCustomer(userInfo) {
     
     console.log('New customer created:', newCustomer.data.id);
     return newCustomer.data.id;
+    }
   } catch (error) {
     console.error("Customer processing error:", error);
     if (error.response?.status === 403) {

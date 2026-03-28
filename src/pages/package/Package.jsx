@@ -16,7 +16,6 @@ export default function Package({
   packageVersion,
 }) {
   const [packageOption, setPackageOption] = useState(null);
-
   /*
   Add verbage to scheduling page:
   need service sooner than the available time slots? Call us (link to phone number) for additional availability.
