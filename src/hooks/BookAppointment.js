@@ -114,11 +114,11 @@ export async function BookAppointment(userInfo, navigate) {
       throw new Error("Failed to find or create customer");
     }
     
-    const order = await createOrder(customerId, cartItems);
+    // const order = await createOrder(customerId, cartItems);
     
-    if(!order) {
-      throw new Error("Failed to create order");
-    }
+    // if(!order) {
+    //   throw new Error("Failed to create order");
+    // }
 
     const invoice = await createAndPublishInvoice(
       order.data.orderId,
