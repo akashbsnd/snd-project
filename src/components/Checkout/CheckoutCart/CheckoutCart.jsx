@@ -13,6 +13,7 @@ import { CartContext } from "../../../context/CartContext";
 export default function CheckoutCart({ BookAppointment, userInfo, authLink }) {
   const navigate = useNavigate();
   const [togglePackageItemList, setTogglePackageItemList] = useState(false);
+  const [isBooking, setIsBooking] = useState(false);
   const { cartItems, setCartItems } = useContext(CartContext);
 
   return (
@@ -55,10 +56,16 @@ export default function CheckoutCart({ BookAppointment, userInfo, authLink }) {
 
           <Button
             className="button"
-            onClick={() => {
-              BookAppointment(userInfo, navigate);
+            onClick={async () => {
+              setIsBooking(true);
+              try {
+                await BookAppointment(userInfo, navigate);
+              } finally {
+                setIsBooking(false);
+              }
             }}
-            label={labels.checkout.bookApt}
+            label={isBooking ? "Booking..." : labels.checkout.bookApt}
+            disabled={isBooking}
           />
         </div>
       ) : (
