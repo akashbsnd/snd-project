@@ -5,8 +5,14 @@ import {
   getDay,
   getFullYear,
   getDate,
+  formatDate,
 } from "../../hooks/dateFuncs";
-import { formattedDate, weekNameList } from "../../static/dateObj";
+import { weekNameList } from "../../static/dateObj";
+
+function getFormattedDate() {
+  const now = new Date();
+  return `${now.getFullYear()},${formatDate(now.getMonth() + 1)},${formatDate(now.getDate())}`;
+}
 
 export default function AvailabilityHero({ selectedDate, appointments }) {
   return (
@@ -26,7 +32,7 @@ export default function AvailabilityHero({ selectedDate, appointments }) {
             No appointments available for this date
           </span>
         ) : 
-        selectedDate === formattedDate ? (
+        selectedDate === getFormattedDate() ? (
           <span>
             {labels.appointments.today}, {weekNameList[getDay(selectedDate)]},{" "}
             {getAbbrMonth(selectedDate)} {getDate(selectedDate)},{" "}

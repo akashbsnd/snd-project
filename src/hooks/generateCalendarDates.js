@@ -1,22 +1,15 @@
-import {
-  abbrWeekNameList,
-  month,
-  date,
-  year,
-  hrs,
-  min,
-  sec,
-} from "../static/dateObj";
+import { abbrWeekNameList } from "../static/dateObj";
 import { formatDate, getDay } from "./dateFuncs";
 
 export function generateCalendarDates({ dateRange }) {
-  const currHrs = formatDate(hrs);
-  const currMin = formatDate(min);
-  const currSecs = formatDate(sec);
+  const now = new Date();
+  const currHrs = formatDate(now.getHours());
+  const currMin = formatDate(now.getMinutes());
+  const currSecs = formatDate(now.getSeconds());
 
-  let newDate = date;
-  let newMonth = month;
-  let newYear = year;
+  let newDate = now.getDate();
+  let newMonth = now.getMonth() + 1;
+  let newYear = now.getFullYear();
 
   const calendar = [];
 
@@ -55,13 +48,13 @@ export function generateCalendarDates({ dateRange }) {
         break;
     }
 
-    const newEndDate = `${newYear}-${newMonth}-${newDate}T${currHrs}:${currMin}:${currSecs}`;
+    const newEndDate = new Date(Date.UTC(newYear, newMonth - 1, newDate, 13, 0, 0));
 
     calendar.push({
       month: newMonth,
       year: newYear,
       date: newDate,
-      dateName: abbrWeekNameList[getDay(newEndDate)],
+      dateName: abbrWeekNameList[newEndDate.getDay()],
     });
 
     newDate += 1;

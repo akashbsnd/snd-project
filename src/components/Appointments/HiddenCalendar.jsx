@@ -1,6 +1,5 @@
 import { Calendar } from "../ui/calendar";
 import { addMonths, startOfMonth, startOfDay, isSameDay } from "date-fns";
-import { currDate } from "../../static/dateObj";
 import { Button } from "../ui/button";
 import { labels } from "../../static/labels";
 import {
@@ -17,6 +16,7 @@ export default function HiddenCalendar({
   nextAvailableDate,
   setAppointments,
 }) {
+  const currDate = new Date();
   const formatDateDisplay = (dateString) => {
     if (!dateString) return "";
     const date = createNewDate(dateString);

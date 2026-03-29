@@ -7,7 +7,6 @@ import AvailabilityHero from "../../components/Appointments/AvailabilityHero";
 import Footer from "../../components/Footer";
 import { useState, useEffect, useContext } from "react";
 import HiddenCalendar from "../../components/Appointments/HiddenCalendar";
-import { formattedDate } from "../../static/dateObj";
 import { generateDateRange } from "../../hooks/generateDateRange";
 import axios from "axios";
 import { generateCalendarDates } from "../../hooks/generateCalendarDates";
@@ -18,9 +17,14 @@ function getJwtToken() {
   return localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
 }
 
+function getFormattedDate() {
+  const now = new Date();
+  return `${now.getFullYear()},${formatDate(now.getMonth() + 1)},${formatDate(now.getDate())}`;
+}
+
 export default function Appointments() {
   const [toggleCalendarView, setToggleCalendarView] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(formattedDate);
+  const [selectedDate, setSelectedDate] = useState(getFormattedDate);
   const [appointments, setAppointments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextAvailableDate, setNextAvailableDate] = useState(null);
@@ -68,8 +72,8 @@ export default function Appointments() {
         if (endDate) {
           // Create Date object from the date string format (year,month,day)
           const [year, month, day] = dateString.split(",").map(Number);
-          const newStartDate = new Date(year, month - 1, day);
-          const newEndDate = new Date(endDate);
+          const newStartDate = new Date(Date.UTC(year, month - 1, day, 13, 0, 0));
+          const newEndDate = endDate;
 
           const appts = await axios.post(
             `${import.meta.env.VITE_BACKEND_API_URL}/bookings`,
@@ -121,8 +125,8 @@ export default function Appointments() {
         if (endDate && cartItems.length) {
           // Parse selectedDate format (year,month,day) to create Date object
           const [year, month, day] = selectedDate.split(",").map(Number);
-          const newStartDate = new Date(year, month - 1, day);
-          const newEndDate = new Date(endDate);
+          const newStartDate = new Date(Date.UTC(year, month - 1, day, 13, 0, 0));
+          const newEndDate = endDate;
 
           const appts = await axios.post(
             `${import.meta.env.VITE_BACKEND_API_URL}/bookings`,

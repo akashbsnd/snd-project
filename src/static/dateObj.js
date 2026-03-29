@@ -1,19 +1,21 @@
 import { formatDate } from "../hooks/dateFuncs";
 
-const currDate = new Date();
-const formattedDate = `${currDate.getFullYear()},${formatDate(
-  currDate.getMonth() + 1,
-)},${formatDate(currDate.getDate())}`;
-
-const hrs = currDate.getHours();
-const min = currDate.getMinutes();
-const sec = currDate.getSeconds();
-
-const month = currDate.getMonth() + 1;
-const date = currDate.getDate();
-const year = currDate.getFullYear();
-
-const day = currDate.getDay();
+export function getCurrentDateInfo() {
+  const currDate = new Date();
+  return {
+    currDate,
+    formattedDate: `${currDate.getFullYear()},${formatDate(
+      currDate.getMonth() + 1,
+    )},${formatDate(currDate.getDate())}`,
+    hrs: currDate.getHours(),
+    min: currDate.getMinutes(),
+    sec: currDate.getSeconds(),
+    month: currDate.getMonth() + 1,
+    date: currDate.getDate(),
+    year: currDate.getFullYear(),
+    day: currDate.getDay(),
+  };
+}
 
 const abbrToFullWeekNames = {
   Mo: "Monday",
@@ -70,16 +72,7 @@ const abbrWeekNameList = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 export {
   abbrToFullWeekNames,
   months,
-  currDate,
   weekNameList,
   abbrWeekNameList,
-  formattedDate,
   abbrMonths,
-  hrs,
-  min,
-  sec,
-  month,
-  date,
-  year,
-  day,
 };
