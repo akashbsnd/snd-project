@@ -32,7 +32,11 @@ axios.interceptors.response.use(response => {
 const API_BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
 
 function getLocationId() {
-  return sessionStorage.getItem('locationId') || localStorage.getItem('locationId');
+  const sessionLocId = sessionStorage.getItem('locationId');
+  const localLocId = localStorage.getItem('locationId');
+  console.log('[getLocationId] sessionStorage locationId:', sessionLocId);
+  console.log('[getLocationId] localStorage locationId:', localLocId);
+  return sessionLocId || localLocId;
 }
 
 // Validate environment variables at startup

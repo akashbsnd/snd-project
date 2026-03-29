@@ -30,18 +30,28 @@ export default function Checkout() {
   useEffect(() => {
     async function fetchUserSession() {
       try {
+        console.log('[Checkout] Fetching user session from /getJWT...');
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_API_URL}/getJWT`,
           { withCredentials: true }
         );
 
+        console.log('[Checkout] /getJWT response:', response.data);
+        console.log('[Checkout] Full response:', response);
+
         const { userId, accessToken, refreshToken, locationId } = response.data;
+
+        console.log('[Checkout] Extracted - userId:', userId);
+        console.log('[Checkout] Extracted - locationId:', locationId);
 
         sessionStorage.setItem("userId", userId);
         sessionStorage.setItem("accessToken", accessToken);
         sessionStorage.setItem("refreshToken", refreshToken);
         if (locationId) {
           sessionStorage.setItem("locationId", locationId);
+          console.log('[Checkout] Stored locationId in sessionStorage:', locationId);
+        } else {
+          console.warn('[Checkout] WARNING: locationId is null/undefined from backend!');
         }
 
         setIsCurrUser(true);
