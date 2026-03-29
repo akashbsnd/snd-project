@@ -65,18 +65,12 @@ export default function Checkout() {
 
     function extractAuthParamsFromUrl() {
       const params = new URLSearchParams(window.location.search);
-      const jwt = params.get("jwt");
-      const userId = params.get("userId");
+      const hasJwtParam = params.has("jwt");
 
-      if (jwt && userId) {
-        console.log("Extracted auth params from URL:");
-        console.log("JWT:", jwt);
-        console.log("UserId:", userId);
-
+      if (hasJwtParam) {
+        const jwt = params.get("jwt");
+        console.log("Extracted JWT from URL:", jwt);
         sessionStorage.setItem("jwt_token", jwt);
-        sessionStorage.setItem("userId", userId);
-        setIsCurrUser(true);
-
         window.history.replaceState({}, "", "/checkout");
         return true;
       }
