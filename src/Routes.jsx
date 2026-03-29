@@ -24,6 +24,9 @@ export default function BrowserRoutes() {
   const [modifiers, setModifiers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [jwtToken, setJwtToken] = useState(() => {
+    return localStorage.getItem("jwt") || null;
+  });
 
   // Fetch packages from backend
   useEffect(() => {
@@ -54,6 +57,21 @@ export default function BrowserRoutes() {
     };
 
     fetchPackages();
+  }, []);
+
+  // Check for JWT in URL on page visit
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const jwtParam = urlParams.get("jwt");
+    
+    if (jwtParam) {
+      setJwtToken(jwtParam);
+      localStorage.setItem("jwt", jwtParam);
+      
+      // Clean URL without triggering re-render
+      const cleanUrl = window.location.pathname;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
   }, []);
 
   // Refresh oAuth Token
