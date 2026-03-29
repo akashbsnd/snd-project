@@ -1,13 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Logo from "../../public/images/horizontal-logo.png";
+import { CartContext } from "../context/CartContext";
+import { getPackageBaseUrl } from "../hooks/packageNameCamelCase";
 import "../pages/snd-site/css/vendor.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../pages/snd-site/css/style.css";
 
 export default function Header() {
     const location = useLocation();
+    const { cartItems } = useContext(CartContext);
+    const [isCartOpen, setIsCartOpen] = useState(false);
 
     const openFacebook = (event) => {
         event.preventDefault();
@@ -141,6 +145,22 @@ export default function Header() {
 
                 {/* Mobile Layout */}
                 <div className="d-flex align-items-center gap-3 d-xl-none">
+                    <button
+                        className="position-relative bg-transparent border-0 p-1"
+                        onClick={() => setIsCartOpen(true)}
+                        aria-label="Open cart"
+                    >
+                        <iconify-icon
+                            icon="lucide:shopping-bag"
+                            className="text-white"
+                            style={{ fontSize: "1.5rem" }}
+                        />
+                        {cartItems.length > 0 && (
+                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontSize: "0.65rem" }}>
+                                {cartItems.length}
+                            </span>
+                        )}
+                    </button>
                     <a href="tel:+17045611927" className="text-white pt-2">
                         <iconify-icon
                             icon="ic:baseline-call"
@@ -160,6 +180,103 @@ export default function Header() {
                             className="hamburger-menu"
                         />
                     </button>
+                </div>
+
+                {/* Cart Drawer Backdrop */}
+                {isCartOpen && (
+                    <div
+                        className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"
+                        style={{ zIndex: 1040 }}
+                        onClick={() => setIsCartOpen(false)}
+                    />
+                )}
+
+                {/* Cart Drawer */}
+                <div
+                    className={`offcanvas offcanvas-start ${isCartOpen ? 'show' : ''}`}
+                    tabIndex={-1}
+                    style={{ visibility: isCartOpen ? 'visible' : 'hidden', zIndex: 1045 }}
+                    aria-hidden={!isCartOpen}
+                >
+                    <div className="offcanvas-header border-bottom">
+                        <h5 className="offcanvas-title">Your Cart</h5>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            onClick={() => setIsCartOpen(false)}
+                            aria-label="Close cart"
+                        />
+                    </div>
+                    <div className="offcanvas-body p-0 d-flex flex-column">
+                        {cartItems.length === 0 ? (
+                            <div className="flex-grow-1 d-flex flex-column align-items-center justify-content-center p-4 text-center">
+                                <iconify-icon
+                                    icon="lucide:shopping-bag"
+                                    style={{ fontSize: "4rem", opacity: 0.3 }}
+                                />
+                                <p className="mt-3 text-muted">Your cart is empty</p>
+                                <Link
+                                    to="/bookings"
+                                    className="btn btn-primary mt-2"
+                                    onClick={() => setIsCartOpen(false)}
+                                >
+                                    Book Now
+                                </Link>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="flex-grow-1 overflow-y-auto">
+                                    {cartItems.map((cartItem, index) => (
+                                        <div key={index} className="border-bottom p-3">
+                                            <div className="d-flex justify-content-between align-items-start">
+                                                <div>
+                                                    <h6 className="mb-1">{cartItem.packageName}</h6>
+                                                    <small className="text-muted">{cartItem.packageOption.name}</small>
+                                                    <div className="mt-1">${cartItem.packageOption.price}</div>
+                                                </div>
+                                                <Link
+                                                    to={getPackageBaseUrl({ packageName: cartItem.packageName })}
+                                                    className="btn btn-sm btn-outline-secondary"
+                                                    onClick={() => setIsCartOpen(false)}
+                                                >
+                                                    Edit
+                                                </Link>
+                                            </div>
+                                            {cartItem.addOns && cartItem.addOns.length > 0 && (
+                                                <div className="mt-2">
+                                                    {cartItem.addOns.map((addOn, i) => (
+                                                        <div key={i} className="d-flex justify-content-between small">
+                                                            <span>+ {addOn.name}</span>
+                                                            <span>${addOn.price}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="p-3 border-top bg-light">
+                                    <div className="d-flex justify-content-between mb-3">
+                                        <strong>Total</strong>
+                                        <strong>
+                                            ${cartItems.reduce((sum, item) => {
+                                                const basePrice = item.packageOption.price;
+                                                const addOnsTotal = item.addOns?.reduce((aSum, addOn) => aSum + (addOn.price || 0), 0) || 0;
+                                                return sum + basePrice + addOnsTotal;
+                                            }, 0)}
+                                        </strong>
+                                    </div>
+                                    <Link
+                                        to="/bookings"
+                                        className="btn btn-primary w-100"
+                                        onClick={() => setIsCartOpen(false)}
+                                    >
+                                        Continue to Book
+                                    </Link>
+                                </div>
+                            </>
+                        )}
+                    </div>
                 </div>
                 <div
                     className="offcanvas offcanvas-end"
