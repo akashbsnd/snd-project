@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import { useDeviceType } from '../hooks/useDeviceType';
 import { useStorageAvailable } from '../hooks/useStorageAvailable';
 
 const CART_COOKIE_NAME = 'cart_backup';
@@ -39,9 +38,8 @@ function deleteCookie(name) {
 }
 
 export const CartProvider = ({ children }) => {
-  const { isMobile } = useDeviceType();
   const storageAvailable = useStorageAvailable();
-  const canPersist = !isMobile && storageAvailable;
+  const canPersist = storageAvailable;
 
   const [cartItems, setCartItems] = useState(() => {
     if (!canPersist) {
