@@ -14,6 +14,10 @@ import { generateCalendarDates } from "../../hooks/generateCalendarDates";
 import { formatDate } from "../../hooks/dateFuncs";
 import { CartContext } from "../../context/CartContext";
 
+function getJwtToken() {
+  return localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
+}
+
 export default function Appointments() {
   const [toggleCalendarView, setToggleCalendarView] = useState(false);
   const [selectedDate, setSelectedDate] = useState(formattedDate);
@@ -74,6 +78,11 @@ export default function Appointments() {
               endAt: newEndDate,
               serviceVariationId: cartItems[0].packageOption.id,
             },
+            {
+              headers: {
+                Authorization: `Bearer ${getJwtToken()}`,
+              },
+            }
           );
 
           if (appts.data.appts && appts.data.appts.length > 0) {
@@ -122,6 +131,11 @@ export default function Appointments() {
               endAt: newEndDate,
               serviceVariationId: cartItems[0].packageOption.id,
             },
+            {
+              headers: {
+                Authorization: `Bearer ${getJwtToken()}`,
+              },
+            }
           );
 
           const apptTimes = appts.data.appts.map((appt) => {

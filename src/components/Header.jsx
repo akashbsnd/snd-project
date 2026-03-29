@@ -144,7 +144,7 @@ export default function Header() {
                 </Link>
 
                 {/* Mobile Layout */}
-                <div className="d-flex align-items-center gap-3 d-md-none">
+                {/* <div className="d-flex align-items-center gap-3 d-md-none">
                     <button
                         className="position-relative bg-transparent border-0 p-1"
                         onClick={() => setIsCartOpen(true)}
@@ -180,19 +180,19 @@ export default function Header() {
                             className="hamburger-menu"
                         />
                     </button>
-                </div>
+                </div> */}
 
                 {/* Cart Drawer Backdrop */}
-                {isCartOpen && (
+                {/* {isCartOpen && (
                     <div
                         className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"
                         style={{ zIndex: 1040 }}
                         onClick={() => setIsCartOpen(false)}
                     />
-                )}
+                )} */}
 
                 {/* Cart Drawer */}
-                <div
+                {/* <div
                     className={`offcanvas offcanvas-start ${isCartOpen ? 'show' : ''}`}
                     tabIndex={-1}
                     style={{ visibility: isCartOpen ? 'visible' : 'hidden', zIndex: 1045 }}
@@ -277,7 +277,7 @@ export default function Header() {
                             </>
                         )}
                     </div>
-                </div>
+                </div> */}
                 <div
                     className="offcanvas offcanvas-end"
                     tabIndex={-1}
