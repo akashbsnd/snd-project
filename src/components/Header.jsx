@@ -144,7 +144,7 @@ export default function Header() {
                 </Link>
 
                 {/* Mobile Layout */}
-                <div className="d-flex align-items-center gap-3 d-xl-none">
+                <div className="d-flex align-items-center gap-3 d-md-none">
                     <button
                         className="position-relative bg-transparent border-0 p-1"
                         onClick={() => setIsCartOpen(true)}

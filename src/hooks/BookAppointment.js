@@ -39,6 +39,32 @@ function getLocationId() {
   return sessionLocId || localLocId;
 }
 
+export async function getAuthTokens(jwtToken = null) {
+  const token = jwtToken || getJwtToken();
+  
+  if (!token) {
+    throw new Error("JWT token required. Please log in.");
+  }
+  
+  try {
+    const response = await axios.get(`${API_BASE_URL}/getAuthTokens`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    
+    if (response.data.locationId) {
+      localStorage.setItem('locationId', response.data.locationId);
+      sessionStorage.setItem('locationId', response.data.locationId);
+    }
+    
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching auth tokens:', error);
+    throw error;
+  }
+}
+
 // Validate environment variables at startup
 if (!API_BASE_URL) {
   throw new Error('VITE_BACKEND_API_URL environment variable is not set');
@@ -122,6 +148,14 @@ export async function BookAppointment(userInfo, navigate, jwtToken = null) {
     // Validate input parameters
     if (!userInfo || typeof userInfo !== "object") {
       throw new Error("Invalid user information provided");
+    }
+
+    // Fetch user's auth tokens including locationId
+    try {
+      await getAuthTokens(token);
+      console.log('[BookAppointment] User auth tokens fetched successfully');
+    } catch (authError) {
+      console.warn('[BookAppointment] Could not fetch auth tokens:', authError.message);
     }
 
     // Get and validate cart items
@@ -390,17 +424,17 @@ async function createOrder(customerId, cartItems, jwtToken = null) {
 
   console.log('=== CREATE ORDER ===');
   console.log('Customer ID:', customerId);
-    console.log('Location ID:', getLocationId());
+  console.log('Location ID:', getLocationId());
   console.log('Cart Items:', cartItems);
   
   // Validate required fields
   if (!customerId) {
     throw new Error("Customer ID is required to create order");
   }
-  const locationId = process.env.LOCATION_ID;
+  
+  // Note: locationId is now handled by the backend from user's stored data
   
   const orderData = {
-    locationId,
     customerId,
     lineItems: cartItems.map((item) => createLineItem(item, cartItems.length)),
   };
@@ -467,12 +501,12 @@ async function createBooking(customerId, appointmentSegments, startAt, jwtToken 
   }
   
   const headers = { Authorization: `Bearer ${token}` };
-  const locationId = process.env.LOCATION_ID;
+
+  // Note: locationId is now handled by the backend from user's stored data
 
   const bookingData = {
     customerId,
     startAt,
-    locationId,
     appointmentSegments: appointmentSegments,
   };
 
