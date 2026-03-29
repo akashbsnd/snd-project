@@ -18,6 +18,7 @@ import Gallery from "./pages/snd-site/gallery/Gallery";
 import Services from "./pages/snd-site/services/Services";
 import Academy from "./pages/snd-site/academy/Academy";
 import { CartProvider } from "./context/CartContext";
+import { AuthContext } from "./context/AuthContext";
 
 export default function BrowserRoutes() {
   const [packages, setPackages] = useState([]);
@@ -140,9 +141,10 @@ export default function BrowserRoutes() {
         pauseOnHover
       />
       <CartProvider>
-        <PackageSession.Provider value={{ packages }}>
-          <ModifierSession.Provider value={{ modifiers }}>
-            <BrowserRouter>
+        <AuthContext.Provider value={{ jwtToken, setJwtToken }}>
+          <PackageSession.Provider value={{ packages }}>
+            <ModifierSession.Provider value={{ modifiers }}>
+              <BrowserRouter>
               <Routes>
                 <Route path="/appointments" element={<Appointments />} />
                 <Route path="/checkout" element={<Checkout />} />
@@ -204,6 +206,7 @@ export default function BrowserRoutes() {
             </BrowserRouter>
           </ModifierSession.Provider>
         </PackageSession.Provider>
+        </AuthContext.Provider>
       </CartProvider>
     </>
   );

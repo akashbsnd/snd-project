@@ -44,6 +44,25 @@ function getUserId() {
   return sessionStorage.getItem('userId');
 }
 
+function getJwtToken(providedToken = null) {
+  if (providedToken) return providedToken;
+  return localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
+}
+
+async function verifyUserWithJwt(jwtToken) {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/verifyUser`, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('JWT verification failed:', error);
+    throw new Error('User verification failed. Please log in again.');
+  }
+}
+
 /**
  * Main function to handle the complete booking process
  * @param {Object} userInfo - User information object
@@ -52,7 +71,13 @@ function getUserId() {
  * @returns {Promise<Object>} - Object containing order, invoice, and booking details
  */
 // Update the BookAppointment function
-export async function BookAppointment(userInfo, navigate) {
+export async function BookAppointment(userInfo, navigate, jwtToken = null) {
+  const token = jwtToken || getJwtToken();
+  
+  console.log('=== JWT TOKEN DEBUG ===');
+  console.log('Token present:', !!token);
+  console.log('Token source:', jwtToken ? 'parameter' : 'storage');
+  
   // Runtime environment debugging
   console.log('=== RUNTIME ENVIRONMENT DEBUG ===');
   console.log('Raw env vars:', {
@@ -109,7 +134,7 @@ export async function BookAppointment(userInfo, navigate) {
     console.log('User info provided:', !!userInfo);
     console.log('User info keys:', userInfo ? Object.keys(userInfo) : 'No user info');
     
-    const customerId = await findOrCreateCustomer(userInfo);
+    const customerId = await findOrCreateCustomer(userInfo, token);
     console.log('Customer ID result:', customerId);
     console.log('Customer ID type:', typeof customerId);
     console.log('Customer ID is truthy:', !!customerId);
@@ -118,7 +143,7 @@ export async function BookAppointment(userInfo, navigate) {
       throw new Error("Failed to find or create customer");
     }
     
-    const order = await createOrder(customerId, cartItems);
+    const order = await createOrder(customerId, cartItems, token);
     
     if(!order) {
       throw new Error("Failed to create order");
@@ -128,13 +153,14 @@ export async function BookAppointment(userInfo, navigate) {
       order.data.orderId,
       customerId,
       dueDate,
+      token,
     );
 
     if(!invoice) {
       throw new Error("Failed to create invoice");
     }
 
-    const teamMember = await getFirstTeamMember();
+    const teamMember = await getFirstTeamMember(token);
     
     if(!teamMember) {
       throw new Error("Failed to get team member");
@@ -152,6 +178,7 @@ export async function BookAppointment(userInfo, navigate) {
       customerId,
       appointmentSegments,
       isoStart,
+      token,
     );
     
 
@@ -201,11 +228,15 @@ function timeStringToMinutes(timeString) {
  * @returns {Promise<Object>} The first team member object from the API response
  * @throws {Error} If the request fails or no team members are found
  */
-export async function getFirstTeamMember() {
+export async function getFirstTeamMember(jwtToken = null) {
+  const token = jwtToken || getJwtToken();
+  
   try {
     const userId = getUserId();
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
     const response = await axios.get(`${API_BASE_URL}/searchTeamMembers`, {
       params: { userId },
+      headers,
     });
 
     if (
@@ -261,7 +292,9 @@ function getAndValidateDate(cartItems) {
   };
 }
 
-async function findOrCreateCustomer(userInfo) {
+async function findOrCreateCustomer(userInfo, jwtToken = null) {
+  const token = jwtToken || getJwtToken();
+  
   const {
     email,
     firstName,
@@ -275,6 +308,7 @@ async function findOrCreateCustomer(userInfo) {
   } = userInfo;
 
   const userId = getUserId();
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
   console.log('=== FIND OR CREATE CUSTOMER ===');
   console.log('User email:', email);
@@ -284,7 +318,7 @@ async function findOrCreateCustomer(userInfo) {
     // First, get all customers
     const { data: allCustomers } = await axios.get(
       `${API_BASE_URL}/getCustomers`,
-      { params: { userId } },
+      { params: { userId }, headers },
     );
 
     if(!allCustomers || !allCustomers.data) {
@@ -319,6 +353,7 @@ async function findOrCreateCustomer(userInfo) {
         zipCode: zip,
         country: "US",
       },
+      { headers },
     );
 
     // If customer doesn't exist, create a new one
@@ -340,8 +375,10 @@ async function findOrCreateCustomer(userInfo) {
   }
 }
 
-async function createOrder(customerId, cartItems) {
+async function createOrder(customerId, cartItems, jwtToken = null) {
+  const token = jwtToken || getJwtToken();
   const userId = getUserId();
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
   console.log('=== CREATE ORDER ===');
   console.log('Customer ID:', customerId);
@@ -366,7 +403,7 @@ async function createOrder(customerId, cartItems) {
   console.log('Order data being sent:', JSON.stringify(orderData, null, 2));
 
   try {
-    const response = await axios.post(`${API_BASE_URL}/createOrder`, orderData);
+    const response = await axios.post(`${API_BASE_URL}/createOrder`, orderData, { headers });
     console.log('Order created successfully:', response.data);
     return response;
   } catch (error) {
@@ -382,8 +419,10 @@ async function createOrder(customerId, cartItems) {
   }
 }
 
-async function createAndPublishInvoice(orderId, customerId, dueDate) {
+async function createAndPublishInvoice(orderId, customerId, dueDate, jwtToken = null) {
+  const token = jwtToken || getJwtToken();
   const userId = getUserId();
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
   const { data: invoiceId } = await axios.post(
     `${API_BASE_URL}/${orderId}/createInvoice`,
@@ -393,6 +432,7 @@ async function createAndPublishInvoice(orderId, customerId, dueDate) {
       customerId,
       dueDate,
     },
+    { headers },
   );
 
   if (invoiceId.id) {
@@ -403,6 +443,7 @@ async function createAndPublishInvoice(orderId, customerId, dueDate) {
           userId,
           version: invoiceId.version,
         },
+        { headers },
       );
     } catch (error) {
       console.warn("Invoice created but publishing failed:", error);
@@ -411,8 +452,10 @@ async function createAndPublishInvoice(orderId, customerId, dueDate) {
   return invoiceId;
 }
 
-async function createBooking(customerId, appointmentSegments, startAt) {
+async function createBooking(customerId, appointmentSegments, startAt, jwtToken = null) {
+  const token = jwtToken || getJwtToken();
   const userId = getUserId();
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
   const bookingData = {
     userId,
@@ -426,13 +469,15 @@ async function createBooking(customerId, appointmentSegments, startAt) {
   console.log('Booking data being sent:', JSON.stringify(bookingData, null, 2));
   console.log('Request URL:', `${API_BASE_URL}/createBooking`);
   console.log('Headers:', {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    ...headers,
   });
 
   try {
     const response = await axios.post(
       `${API_BASE_URL}/createBooking`,
       bookingData,
+      { headers },
     );
     console.log('Booking response:', response);
     console.log('Booking response data:', response.data);
@@ -451,6 +496,7 @@ async function createBooking(customerId, appointmentSegments, startAt) {
 function clearSessionData() {
   try {
     sessionStorage.clear();
+    localStorage.removeItem('jwt');
     document.cookie = 'cart_backup=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
     document.cookie = 'userId=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
     document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
