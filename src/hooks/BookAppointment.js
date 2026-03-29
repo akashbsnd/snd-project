@@ -397,10 +397,7 @@ async function createOrder(customerId, cartItems, jwtToken = null) {
   if (!customerId) {
     throw new Error("Customer ID is required to create order");
   }
-  const locationId = getLocationId();
-  if (!locationId) {
-    throw new Error("Location ID is required. Please log in again.");
-  }
+  const locationId = process.env.LOCATION_ID;
   
   const orderData = {
     locationId,
