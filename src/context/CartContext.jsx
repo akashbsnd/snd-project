@@ -1,12 +1,22 @@
 import { createContext, useEffect, useState } from 'react';
 import { useDeviceType } from '../hooks/useDeviceType';
+import { useStorageAvailable } from '../hooks/useStorageAvailable';
 
 const CART_COOKIE_NAME = 'cart_backup';
 
 function setCookie(name, value, days = 1) {
-  const expires = new Date();
-  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-  document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
+  try {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    const expiresStr = expires.toUTCString();
+    if (expiresStr === 'Invalid Date') {
+      throw new Error('Invalid Date');
+    }
+    document.cookie = `${name}=${encodeURIComponent(value)};expires=${expiresStr};path=/;SameSite=Lax`;
+  } catch (e) {
+    const fallback = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${encodeURIComponent(value)};expires=${fallback.toString()};path=/;SameSite=Lax`;
+  }
 }
 
 function getCookie(name) {
@@ -30,9 +40,11 @@ function deleteCookie(name) {
 
 export const CartProvider = ({ children }) => {
   const { isMobile } = useDeviceType();
+  const storageAvailable = useStorageAvailable();
+  const canPersist = !isMobile && storageAvailable;
 
   const [cartItems, setCartItems] = useState(() => {
-    if (isMobile) {
+    if (!canPersist) {
       return [];
     }
     try {
@@ -53,17 +65,18 @@ export const CartProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    if (!isMobile) {
-      const cartJson = JSON.stringify(cartItems);
-      sessionStorage.setItem('cart', cartJson);
-      setCookie(CART_COOKIE_NAME, cartJson, 7);
+    if (!canPersist) {
+      return;
     }
-  }, [cartItems, isMobile]);
+    const cartJson = JSON.stringify(cartItems);
+    sessionStorage.setItem('cart', cartJson);
+    setCookie(CART_COOKIE_NAME, cartJson, 7);
+  }, [cartItems, canPersist]);
 
   const addToCart = (item) => {
     setCartItems((prev) => {
       const updated = [...prev, item];
-      if (!isMobile) {
+      if (canPersist) {
         const cartJson = JSON.stringify(updated);
         sessionStorage.setItem('cart', cartJson);
         setCookie(CART_COOKIE_NAME, cartJson, 7);
@@ -74,7 +87,7 @@ export const CartProvider = ({ children }) => {
 
   const updateCart = (updatedItems) => {
     setCartItems(updatedItems);
-    if (!isMobile) {
+    if (canPersist) {
       const cartJson = JSON.stringify(updatedItems);
       sessionStorage.setItem('cart', cartJson);
       setCookie(CART_COOKIE_NAME, cartJson, 7);
@@ -83,7 +96,7 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    if (!isMobile) {
+    if (canPersist) {
       sessionStorage.removeItem('cart');
       deleteCookie(CART_COOKIE_NAME);
     }
