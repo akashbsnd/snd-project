@@ -40,10 +40,6 @@ if (!LOCATION_ID) {
   throw new Error('VITE_LOCATION_ID environment variable is not set');
 }
 
-function getUserId() {
-  return sessionStorage.getItem('userId');
-}
-
 function getJwtToken(providedToken = null) {
   if (providedToken) return providedToken;
   return localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
@@ -231,11 +227,13 @@ function timeStringToMinutes(timeString) {
 export async function getFirstTeamMember(jwtToken = null) {
   const token = jwtToken || getJwtToken();
   
+  if (!token) {
+    throw new Error("JWT token required. Please log in.");
+  }
+  
   try {
-    const userId = getUserId();
-    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    const headers = { Authorization: `Bearer ${token}` };
     const response = await axios.get(`${API_BASE_URL}/searchTeamMembers`, {
-      params: { userId },
       headers,
     });
 
@@ -295,6 +293,10 @@ function getAndValidateDate(cartItems) {
 async function findOrCreateCustomer(userInfo, jwtToken = null) {
   const token = jwtToken || getJwtToken();
   
+  if (!token) {
+    throw new Error("JWT token required. Please log in.");
+  }
+  
   const {
     email,
     firstName,
@@ -307,8 +309,7 @@ async function findOrCreateCustomer(userInfo, jwtToken = null) {
     zip,
   } = userInfo;
 
-  const userId = getUserId();
-  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  const headers = { Authorization: `Bearer ${token}` };
 
   console.log('=== FIND OR CREATE CUSTOMER ===');
   console.log('User email:', email);
@@ -318,7 +319,7 @@ async function findOrCreateCustomer(userInfo, jwtToken = null) {
     // First, get all customers
     const { data: allCustomers } = await axios.get(
       `${API_BASE_URL}/getCustomers`,
-      { params: { userId }, headers },
+      { headers },
     );
 
     if(!allCustomers || !allCustomers.data) {
@@ -341,7 +342,6 @@ async function findOrCreateCustomer(userInfo, jwtToken = null) {
     const newCustomer = await axios.post(
       `${API_BASE_URL}/createCustomer`,
       {
-        userId,
         firstName,
         lastName,
         email,
@@ -377,8 +377,12 @@ async function findOrCreateCustomer(userInfo, jwtToken = null) {
 
 async function createOrder(customerId, cartItems, jwtToken = null) {
   const token = jwtToken || getJwtToken();
-  const userId = getUserId();
-  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  
+  if (!token) {
+    throw new Error("JWT token required. Please log in.");
+  }
+  
+  const headers = { Authorization: `Bearer ${token}` };
 
   console.log('=== CREATE ORDER ===');
   console.log('Customer ID:', customerId);
@@ -394,7 +398,6 @@ async function createOrder(customerId, cartItems, jwtToken = null) {
   }
   
   const orderData = {
-    userId,
     locationId: LOCATION_ID,
     customerId,
     lineItems: cartItems.map((item) => createLineItem(item, cartItems.length)),
@@ -421,13 +424,16 @@ async function createOrder(customerId, cartItems, jwtToken = null) {
 
 async function createAndPublishInvoice(orderId, customerId, dueDate, jwtToken = null) {
   const token = jwtToken || getJwtToken();
-  const userId = getUserId();
-  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  
+  if (!token) {
+    throw new Error("JWT token required. Please log in.");
+  }
+  
+  const headers = { Authorization: `Bearer ${token}` };
 
   const { data: invoiceId } = await axios.post(
     `${API_BASE_URL}/${orderId}/createInvoice`,
     {
-      userId,
       orderId,
       customerId,
       dueDate,
@@ -440,7 +446,6 @@ async function createAndPublishInvoice(orderId, customerId, dueDate, jwtToken = 
       const publishInvoice = await axios.post(
         `${API_BASE_URL}/${invoiceId.id}/publish`,
         {
-          userId,
           version: invoiceId.version,
         },
         { headers },
@@ -454,11 +459,14 @@ async function createAndPublishInvoice(orderId, customerId, dueDate, jwtToken = 
 
 async function createBooking(customerId, appointmentSegments, startAt, jwtToken = null) {
   const token = jwtToken || getJwtToken();
-  const userId = getUserId();
-  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  
+  if (!token) {
+    throw new Error("JWT token required. Please log in.");
+  }
+  
+  const headers = { Authorization: `Bearer ${token}` };
 
   const bookingData = {
-    userId,
     customerId,
     startAt,
     locationId: LOCATION_ID,
