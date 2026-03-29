@@ -68,13 +68,13 @@ export default function Availabilty({
           endTime: 13,
         });
 
-        if (endDate) {
-          // Create Date object from the date string format (year,month,day)
-          const [year, month, day] = dateString.split(",").map(Number);
-          const newStartDate = new Date(year, month - 1, day);
-          const newEndDate = new Date(endDate);
+          if (endDate) {
+            // Create Date object from the date string format (year,month,day)
+            const [year, month, day] = dateString.split(",").map(Number);
+            const newStartDate = new Date(Date.UTC(year, month - 1, day, 13, 0, 0));
+            const newEndDate = endDate;
 
-          const appts = await axios.post(
+            const appts = await axios.post(
             `${import.meta.env.VITE_BACKEND_API_URL}/bookings`,
             {
               startAt: newStartDate,
@@ -124,8 +124,8 @@ export default function Availabilty({
         if (endDate && cartItems.length) {
           // Parse selectedDate format (year,month,day) to create Date object
           const [year, month, day] = selectedDate.split(",").map(Number);
-          const newStartDate = new Date(year, month - 1, day);
-          const newEndDate = new Date(endDate);
+          const newStartDate = new Date(Date.UTC(year, month - 1, day, 13, 0, 0));
+          const newEndDate = endDate;
 
           const appts = await axios.post(
             `${import.meta.env.VITE_BACKEND_API_URL}/bookings`,

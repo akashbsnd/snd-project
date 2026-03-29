@@ -21,8 +21,8 @@ export function generateDateRange({ startDate, endTime }) {
 
     currHrs = endTime;
 
-    const endDate = `${newYear}-${formatDate(newMonth)}-${formatDate(newDate)}T${formatDate(currHrs)}:${formatDate(currMin)}:${formatDate(currSecs)}`;
-    return endDate;
+    const endDate = new Date(newYear, newMonth - 1, newDate, currHrs, currMin, currSecs);
+    return endDate.toISOString();
   }
 
   return "";
