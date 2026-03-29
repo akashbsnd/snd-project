@@ -467,11 +467,7 @@ async function createBooking(customerId, appointmentSegments, startAt, jwtToken 
   }
   
   const headers = { Authorization: `Bearer ${token}` };
-  const locationId = getLocationId();
-  
-  if (!locationId) {
-    throw new Error("Location ID is required. Please log in again.");
-  }
+  const locationId = process.env.LOCATION_ID;
 
   const bookingData = {
     customerId,
