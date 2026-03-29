@@ -35,11 +35,14 @@ export default function Checkout() {
           { withCredentials: true }
         );
 
-        const { userId, accessToken, refreshToken } = response.data;
+        const { userId, accessToken, refreshToken, locationId } = response.data;
 
         sessionStorage.setItem("userId", userId);
         sessionStorage.setItem("accessToken", accessToken);
         sessionStorage.setItem("refreshToken", refreshToken);
+        if (locationId) {
+          sessionStorage.setItem("locationId", locationId);
+        }
 
         setIsCurrUser(true);
       } catch (err) {

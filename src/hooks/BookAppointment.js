@@ -30,14 +30,14 @@ axios.interceptors.response.use(response => {
 
 // Constants
 const API_BASE_URL = import.meta.env.VITE_BACKEND_API_URL;
-const LOCATION_ID = import.meta.env.VITE_LOCATION_ID;
+
+function getLocationId() {
+  return sessionStorage.getItem('locationId') || localStorage.getItem('locationId');
+}
 
 // Validate environment variables at startup
 if (!API_BASE_URL) {
   throw new Error('VITE_BACKEND_API_URL environment variable is not set');
-}
-if (!LOCATION_ID) {
-  throw new Error('VITE_LOCATION_ID environment variable is not set');
 }
 
 function getJwtToken(providedToken = null) {
@@ -83,13 +83,13 @@ export async function BookAppointment(userInfo, navigate, jwtToken = null) {
   });
   console.log('Parsed constants:', {
     API_BASE_URL,
-    LOCATION_ID
+    locationId: getLocationId()
   });
   console.log('Types:', {
     API_BASE_URL_TYPE: typeof API_BASE_URL,
-    LOCATION_ID_TYPE: typeof LOCATION_ID,
+    locationId_TYPE: typeof getLocationId(),
     API_BASE_URL_LENGTH: API_BASE_URL?.length,
-    LOCATION_ID_LENGTH: LOCATION_ID?.length
+    locationId_LENGTH: getLocationId()?.length
   });
 
   const onSuccess = (data) => {
@@ -386,19 +386,20 @@ async function createOrder(customerId, cartItems, jwtToken = null) {
 
   console.log('=== CREATE ORDER ===');
   console.log('Customer ID:', customerId);
-  console.log('Location ID:', LOCATION_ID);
+    console.log('Location ID:', getLocationId());
   console.log('Cart Items:', cartItems);
   
   // Validate required fields
   if (!customerId) {
     throw new Error("Customer ID is required to create order");
   }
-  if (!LOCATION_ID) {
-    throw new Error("Location ID is required to create order");
+  const locationId = getLocationId();
+  if (!locationId) {
+    throw new Error("Location ID is required. Please log in again.");
   }
   
   const orderData = {
-    locationId: LOCATION_ID,
+    locationId,
     customerId,
     lineItems: cartItems.map((item) => createLineItem(item, cartItems.length)),
   };
@@ -465,11 +466,16 @@ async function createBooking(customerId, appointmentSegments, startAt, jwtToken 
   }
   
   const headers = { Authorization: `Bearer ${token}` };
+  const locationId = getLocationId();
+  
+  if (!locationId) {
+    throw new Error("Location ID is required. Please log in again.");
+  }
 
   const bookingData = {
     customerId,
     startAt,
-    locationId: LOCATION_ID,
+    locationId,
     appointmentSegments: appointmentSegments,
   };
 
