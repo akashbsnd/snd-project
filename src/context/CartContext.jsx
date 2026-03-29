@@ -46,14 +46,21 @@ export const CartProvider = ({ children }) => {
       return [];
     }
     try {
+      // Check localStorage first (more persistent across page reloads)
+      const localItems = localStorage.getItem('cart');
+      if (localItems) {
+        return JSON.parse(localItems);
+      }
+      // Then check sessionStorage
       const sessionItems = sessionStorage.getItem('cart');
       if (sessionItems) {
         return JSON.parse(sessionItems);
       }
+      // Then check cookies
       const cookieItems = getCookie(CART_COOKIE_NAME);
       if (cookieItems) {
         const parsed = JSON.parse(cookieItems);
-        sessionStorage.setItem('cart', JSON.stringify(parsed));
+        localStorage.setItem('cart', JSON.stringify(parsed));
         return parsed;
       }
       return [];
@@ -68,6 +75,7 @@ export const CartProvider = ({ children }) => {
     }
     const cartJson = JSON.stringify(cartItems);
     sessionStorage.setItem('cart', cartJson);
+    localStorage.setItem('cart', cartJson);
     setCookie(CART_COOKIE_NAME, cartJson, 7);
   }, [cartItems, canPersist]);
 
@@ -77,6 +85,7 @@ export const CartProvider = ({ children }) => {
       if (canPersist) {
         const cartJson = JSON.stringify(updated);
         sessionStorage.setItem('cart', cartJson);
+        localStorage.setItem('cart', cartJson);
         setCookie(CART_COOKIE_NAME, cartJson, 7);
       }
       return updated;
@@ -88,6 +97,7 @@ export const CartProvider = ({ children }) => {
     if (canPersist) {
       const cartJson = JSON.stringify(updatedItems);
       sessionStorage.setItem('cart', cartJson);
+      localStorage.setItem('cart', cartJson);
       setCookie(CART_COOKIE_NAME, cartJson, 7);
     }
   };
@@ -96,6 +106,7 @@ export const CartProvider = ({ children }) => {
     setCartItems([]);
     if (canPersist) {
       sessionStorage.removeItem('cart');
+      localStorage.removeItem('cart');
       deleteCookie(CART_COOKIE_NAME);
     }
   };

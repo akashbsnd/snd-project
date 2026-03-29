@@ -83,7 +83,7 @@ export default function Checkout() {
       if (hasJwtParam) {
         const jwt = params.get("jwt");
         console.log("Extracted JWT from URL:", jwt);
-        sessionStorage.setItem("jwt_token", jwt);
+        localStorage.setItem("jwt", jwt);
         window.history.replaceState({}, "", "/checkout");
         return true;
       }
@@ -91,10 +91,14 @@ export default function Checkout() {
     }
 
     const hasUrlParams = extractAuthParamsFromUrl();
+    
+    // Always fetch user session - either from existing session or after OAuth redirect
+    fetchUserSession();
+    
+    // Only generate new auth link if user is not signed in
     if (!hasUrlParams) {
-      fetchUserSession();
+      generateToken();
     }
-    generateToken();
   }, []);
 
   return (
