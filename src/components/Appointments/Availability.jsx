@@ -71,7 +71,7 @@ export default function Availabilty({
           if (endDate) {
             // Create Date object from the date string format (year,month,day)
             const [year, month, day] = dateString.split(",").map(Number);
-            const newStartDate = new Date(Date.UTC(year, month - 1, day, 13, 0, 0));
+            const newStartDate = new Date(Date.UTC(year, month - 1, day, 9, 0, 0));
             const newEndDate = endDate;
 
             const appts = await axios.post(
@@ -124,7 +124,7 @@ export default function Availabilty({
         if (endDate && cartItems.length) {
           // Parse selectedDate format (year,month,day) to create Date object
           const [year, month, day] = selectedDate.split(",").map(Number);
-          const newStartDate = new Date(Date.UTC(year, month - 1, day, 13, 0, 0));
+          const newStartDate = new Date(Date.UTC(year, month - 1, day, 9, 0, 0));
           const newEndDate = endDate;
 
           const appts = await axios.post(
