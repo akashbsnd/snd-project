@@ -10,10 +10,12 @@ export function generateDateRange({ startDate, endTime }) {
   const currDateNum = now.getDate();
   const currYear = now.getFullYear();
 
+  const formattedCurrentDate = `${currYear},${formatDate(currMonth)},${formatDate(currDateNum)}`;
+
   if (
-    (startDate === `${currYear},${currMonth},${currDateNum}` &&
+    (startDate === formattedCurrentDate &&
       currHrs < endTime) ||
-    startDate !== `${currYear},${currMonth},${currDateNum}`
+    startDate !== formattedCurrentDate
   ) {
     const newYear = getFullYear(startDate);
     const newMonth = getMonth(startDate, false);
