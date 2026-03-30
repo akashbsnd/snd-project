@@ -24,7 +24,7 @@ function getFormattedDate() {
 
 export default function Appointments() {
   const [toggleCalendarView, setToggleCalendarView] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(getFormattedDate);
+  const [selectedDate, setSelectedDate] = useState(getFormattedDate());
   const [appointments, setAppointments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextAvailableDate, setNextAvailableDate] = useState(null);
