@@ -24,11 +24,15 @@ function getFormattedDate() {
 
 export default function Appointments() {
   const [toggleCalendarView, setToggleCalendarView] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(getFormattedDate());
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const now = new Date();
+    return `${now.getFullYear()},${formatDate(now.getMonth() + 1)},${formatDate(now.getDate())}`;
+  });
   const [appointments, setAppointments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextAvailableDate, setNextAvailableDate] = useState(null);
   const { cartItems, setCartItems } = useContext(CartContext);
+  const [hasInitiallyFetched, setHasInitiallyFetched] = useState(false);
 
   // Function to validate nextAvailableDate data
   function isValidDate(dateObj) {
@@ -112,6 +116,62 @@ export default function Appointments() {
 
     return null;
   }
+
+  // Fetch appointments on mount
+  useEffect(() => {
+    async function fetchOnMount() {
+      if (hasInitiallyFetched) return;
+      
+      const endDate = generateDateRange({
+        startDate: selectedDate,
+        endTime: 13,
+      });
+
+      if (endDate && cartItems.length > 0) {
+        try {
+          setIsLoading(true);
+          const [year, month, day] = selectedDate.split(",").map(Number);
+          const newStartDate = new Date(Date.UTC(year, month - 1, day, 9, 0, 0));
+          const newEndDate = endDate;
+
+          const appts = await axios.post(
+            `${import.meta.env.VITE_BACKEND_API_URL}/bookings`,
+            {
+              startAt: newStartDate,
+              endAt: newEndDate,
+              serviceVariationId: cartItems[0].packageOption.id,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${getJwtToken()}`,
+              },
+            }
+          );
+
+          const apptTimes = appts.data.appts.map((appt) => {
+            let hours = new Date(appt.startAt).getHours();
+            const min = new Date(appt.startAt).getMinutes();
+            let timeMeridiem = "AM";
+            if (hours > 12) {
+              hours -= 12;
+              timeMeridiem = "PM";
+            } else if (hours === 12) {
+              timeMeridiem = "PM";
+            }
+            return { hrs: hours, min: min, timeMeridiem: timeMeridiem };
+          });
+          setAppointments(apptTimes);
+          setHasInitiallyFetched(true);
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    }
+    
+    fetchOnMount();
+  }, [cartItems, hasInitiallyFetched]);
 
   useEffect(() => {
     async function getAppointments() {
