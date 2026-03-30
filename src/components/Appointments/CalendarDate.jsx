@@ -14,7 +14,7 @@ export default function CalendarDate({
     <>
       {selectedDate === `${year},${formatDate(month)},${formatDate(date)}` ? (
         <Button
-          onClick={() => setSelectedDate(`${year},${month},${date}`)}
+          onClick={() => setSelectedDate(`${year},${formatDate(month)},${formatDate(date)}`)}
           aria-pressed="true"
           data-testid={`date-${date}-selected`}
           rank="secondary"
