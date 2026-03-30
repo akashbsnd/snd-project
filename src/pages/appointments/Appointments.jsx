@@ -122,20 +122,33 @@ export default function Appointments() {
     async function fetchOnMount() {
       if (hasInitiallyFetched) return;
       
-      const endDate = generateDateRange({
-        startDate: selectedDate,
+      let dateToFetch = selectedDate;
+      let endDate = generateDateRange({
+        startDate: dateToFetch,
         endTime: 13,
       });
 
+      // If endDate is empty (past 1 PM), try the next day
+      if (!endDate) {
+        const now = new Date();
+        now.setDate(now.getDate() + 1);
+        dateToFetch = `${now.getFullYear()},${formatDate(now.getMonth() + 1)},${formatDate(now.getDate())}`;
+        endDate = generateDateRange({
+          startDate: dateToFetch,
+          endTime: 13,
+        });
+        setSelectedDate(dateToFetch);
+      }
+
       console.log('[Appointments] fetchOnMount - cartItems:', cartItems);
-      console.log('[Appointments] fetchOnMount - selectedDate:', selectedDate);
+      console.log('[Appointments] fetchOnMount - dateToFetch:', dateToFetch);
       console.log('[Appointments] fetchOnMount - endDate:', endDate);
       console.log('[Appointments] fetchOnMount - hasInitiallyFetched:', hasInitiallyFetched);
 
       if (endDate && cartItems.length > 0) {
         try {
           setIsLoading(true);
-          const [year, month, day] = selectedDate.split(",").map(Number);
+          const [year, month, day] = dateToFetch.split(",").map(Number);
           const newStartDate = new Date(Date.UTC(year, month - 1, day, 9, 0, 0));
           const newEndDate = endDate;
 
@@ -185,7 +198,7 @@ export default function Appointments() {
     }
     
     fetchOnMount();
-  }, [cartItems, selectedDate, hasInitiallyFetched]);
+  }, [cartItems, hasInitiallyFetched]);
 
   useEffect(() => {
     async function getAppointments() {
