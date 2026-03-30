@@ -171,7 +171,7 @@ export default function Availabilty({
       }
     }
     getAppointments();
-  }, [selectedDate]);
+  }, [selectedDate, cartItems]);
 
   return (
     <div

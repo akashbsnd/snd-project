@@ -172,7 +172,7 @@ export default function Appointments() {
       }
     }
     getAppointments();
-  }, [selectedDate]);
+  }, [selectedDate, cartItems]);
 
   return (
     <div className="bg-white" id="root">
