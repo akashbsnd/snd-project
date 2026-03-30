@@ -127,12 +127,23 @@ export default function Appointments() {
         endTime: 13,
       });
 
+      console.log('[Appointments] fetchOnMount - cartItems:', cartItems);
+      console.log('[Appointments] fetchOnMount - selectedDate:', selectedDate);
+      console.log('[Appointments] fetchOnMount - endDate:', endDate);
+      console.log('[Appointments] fetchOnMount - hasInitiallyFetched:', hasInitiallyFetched);
+
       if (endDate && cartItems.length > 0) {
         try {
           setIsLoading(true);
           const [year, month, day] = selectedDate.split(",").map(Number);
           const newStartDate = new Date(Date.UTC(year, month - 1, day, 9, 0, 0));
           const newEndDate = endDate;
+
+          console.log('[Appointments] Making API call with:', {
+            startAt: newStartDate,
+            endAt: newEndDate,
+            serviceVariationId: cartItems[0]?.packageOption?.id
+          });
 
           const appts = await axios.post(
             `${import.meta.env.VITE_BACKEND_API_URL}/bookings`,
@@ -148,7 +159,9 @@ export default function Appointments() {
             }
           );
 
-          const apptTimes = appts.data.appts.map((appt) => {
+          console.log('[Appointments] API response:', appts.data);
+
+          const apptTimes = (appts.data?.appts || []).map((appt) => {
             let hours = new Date(appt.startAt).getHours();
             const min = new Date(appt.startAt).getMinutes();
             let timeMeridiem = "AM";
@@ -163,7 +176,8 @@ export default function Appointments() {
           setAppointments(apptTimes);
           setHasInitiallyFetched(true);
         } catch (err) {
-          console.error(err);
+          console.error('[Appointments] Error fetching appointments:', err);
+          console.error('[Appointments] Error response:', err.response?.data);
         } finally {
           setIsLoading(false);
         }
@@ -171,7 +185,7 @@ export default function Appointments() {
     }
     
     fetchOnMount();
-  }, [cartItems, hasInitiallyFetched]);
+  }, [cartItems, selectedDate, hasInitiallyFetched]);
 
   useEffect(() => {
     async function getAppointments() {
