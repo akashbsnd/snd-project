@@ -17,6 +17,23 @@ function getJwtToken() {
   return localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
 }
 
+async function getTeamMembers() {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_API_URL}/searchTeamMembers`,
+      {
+        headers: {
+          Authorization: `Bearer ${getJwtToken()}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching team members:", error);
+    return [];
+  }
+}
+
 export default function Availabilty({
   setSelectedDate,
   selectedDate,
@@ -44,11 +61,10 @@ export default function Availabilty({
     );
   }
 
-  // Function to find the next available date with appointments
   async function findNextAvailableDate(startFromDate) {
     if (!cartItems.length) return null;
 
-    const calendarDates = generateCalendarDates({ dateRange: 60 }); // Check up to 60 days ahead
+    const calendarDates = generateCalendarDates({ dateRange: 60 });
     const startIndex = calendarDates.findIndex(
       (calDate) =>
         `${calDate.year},${formatDate(calDate.month)},${formatDate(calDate.date)}` ===
@@ -57,7 +73,9 @@ export default function Availabilty({
 
     if (startIndex === -1) return null;
 
-    // Check dates starting from the day after the selected date
+    const teamMembers = await getTeamMembers();
+    const teamMemberIds = teamMembers.map(tm => tm.id);
+
     for (let i = startIndex + 1; i < calendarDates.length; i++) {
       const calDate = calendarDates[i];
       const dateString = `${calDate.year},${formatDate(calDate.month)},${formatDate(calDate.date)}`;
@@ -69,7 +87,6 @@ export default function Availabilty({
         });
 
           if (endDate) {
-            // Create Date object from the date string format (year,month,day)
             const [year, month, day] = dateString.split(",").map(Number);
             const newStartDate = new Date(Date.UTC(year, month - 1, day, 9, 0, 0));
             const newEndDate = endDate;
@@ -80,6 +97,7 @@ export default function Availabilty({
               startAt: newStartDate,
               endAt: newEndDate,
               serviceVariationId: cartItems[0].packageOption.id,
+              teamMemberIds: teamMemberIds,
             },
             {
               headers: {
@@ -97,7 +115,6 @@ export default function Availabilty({
               dateName: calDate.dateName,
             };
             
-            // Validate the date object before returning
             if (isValidDate(dateObj)) {
               return dateObj;
             }
@@ -105,7 +122,6 @@ export default function Availabilty({
         }
       } catch (err) {
         console.error(`Error checking date ${dateString}:`, err);
-        // Continue to next date if there's an error
       }
     }
 
@@ -122,10 +138,12 @@ export default function Availabilty({
         });
 
         if (endDate && cartItems.length) {
-          // Parse selectedDate format (year,month,day) to create Date object
           const [year, month, day] = selectedDate.split(",").map(Number);
           const newStartDate = new Date(Date.UTC(year, month - 1, day, 9, 0, 0));
           const newEndDate = endDate;
+
+          const teamMembers = await getTeamMembers();
+          const teamMemberIds = teamMembers.map(tm => tm.id);
 
           const appts = await axios.post(
             `${import.meta.env.VITE_BACKEND_API_URL}/bookings`,
@@ -133,6 +151,7 @@ export default function Availabilty({
               startAt: newStartDate,
               endAt: newEndDate,
               serviceVariationId: cartItems[0].packageOption.id,
+              teamMemberIds: teamMemberIds,
             },
             {
               headers: {
@@ -152,11 +171,15 @@ export default function Availabilty({
               timeMeridiem = "PM";
             }
 
-            return { hrs: hours, min: min, timeMeridiem: timeMeridiem };
+            return { 
+              hrs: hours, 
+              min: min, 
+              timeMeridiem: timeMeridiem,
+              teamMemberId: appt.teamMemberId,
+            };
           });
           setAppointments(apptTimes);
 
-          // If no appointments, find the next available date
           if (apptTimes.length === 0) {
             const nextAvail = await findNextAvailableDate(selectedDate);
             setNextAvailableDate(nextAvail);
