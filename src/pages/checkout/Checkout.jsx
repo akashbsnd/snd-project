@@ -5,7 +5,7 @@ import "./checkout.css";
 import CheckoutTimer from "../../components/Checkout/CheckoutCart/CheckoutTimer";
 import CheckoutForm from "../../components/Checkout/CheckoutForm/CheckoutForm";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { BookAppointment } from "../../hooks/BookAppointment";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
@@ -22,7 +22,29 @@ export default function Checkout() {
   const [isBooking, setIsBooking] = useState(false);
   const [mobileCartOpen, setMobileCartOpen] = useState(false);
   const [mobileToggle, setMobileToggle] = useState(false);
-  const { cartItems } = useContext(CartContext) || JSON.parse(localStorage.getItem("cart"));
+  const { cartItems, setCartItems } = useContext(CartContext);
+
+  const syncCartFromStorage = useCallback(() => {
+    const storedCart = localStorage.getItem("cart") || sessionStorage.getItem("cart");
+    if (storedCart) {
+      try {
+        const parsedCart = JSON.parse(storedCart);
+        if (Array.isArray(parsedCart) && parsedCart.length > 0 && cartItems.length === 0) {
+          setCartItems(parsedCart);
+        }
+      } catch (e) {
+        console.error("Error parsing cart from storage:", e);
+      }
+    }
+  }, [cartItems.length, setCartItems]);
+
+  useEffect(() => {
+    syncCartFromStorage();
+    const pendingRedirect = sessionStorage.getItem("pendingOAuthRedirect");
+    if (pendingRedirect === "true") {
+      sessionStorage.removeItem("pendingOAuthRedirect");
+    }
+  }, [syncCartFromStorage]);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",

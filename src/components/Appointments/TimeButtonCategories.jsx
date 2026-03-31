@@ -38,7 +38,9 @@ export default function TimeButtonCategories({
     updatedCartItems[0]["apptDate"] = selectedDate;
     localStorage.setItem("cart", JSON.stringify(updatedCartItems));
     setCartItems(updatedCartItems);
-    if (authLink) {
+
+    if (time && selectedDate && authLink) {
+      sessionStorage.setItem("pendingOAuthRedirect", "true");
       window.location.href = authLink;
     }
   }
