@@ -12,6 +12,7 @@ import axios from "axios";
 import { generateCalendarDates } from "../../hooks/generateCalendarDates";
 import { formatDate } from "../../hooks/dateFuncs";
 import { CartContext } from "../../context/CartContext";
+import MobileMenu from "../../components/MobileMenu/MobileMenu";
 
 function getJwtToken() {
   return localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
@@ -24,6 +25,7 @@ function getFormattedDate() {
 
 export default function Appointments() {
   const [toggleCalendarView, setToggleCalendarView] = useState(false);
+  const [mobileToggle, setMobileToggle] = useState(false);
   const [selectedDate, setSelectedDate] = useState(() => {
     const now = new Date();
     return `${now.getFullYear()},${formatDate(now.getMonth() + 1)},${formatDate(now.getDate())}`;
@@ -308,10 +310,13 @@ export default function Appointments() {
               </section>
               <aside className="transition-opacity delay-150 duration-500 ease-in-out opacity-100 hidden md-lg:block md-lg:px-4 max-w-cart-sidebar min-w-cart-sidebar ">
                 <div className="sticky top-2">
-                  {/* Service Cart */}
                   <Cart />
                 </div>
               </aside>
+
+              <MobileMenu mobileToggle={mobileToggle} setMobileToggle={setMobileToggle}>
+                <Cart />
+              </MobileMenu>
             </div>
           </div>
           <Footer />

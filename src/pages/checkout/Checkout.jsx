@@ -7,9 +7,22 @@ import CheckoutForm from "../../components/Checkout/CheckoutForm/CheckoutForm";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BookAppointment } from "../../hooks/BookAppointment";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+import { calculateItemsTotal } from "../../hooks/calculateItemsTotal";
+import CheckoutCartTotals from "../../components/Checkout/CheckoutCart/CheckoutCartTotals";
+import PackageItemList from "../../components/Cart/PackageItemList";
+import Button from "../../components/Button";
+import { useNavigate } from "react-router-dom";
+import MobileMenu from "../../components/MobileMenu/MobileMenu";
 
 export default function Checkout() {
+  const navigate = useNavigate();
   const [isCurrUser, setIsCurrUser] = useState(false);
+  const [isBooking, setIsBooking] = useState(false);
+  const [mobileCartOpen, setMobileCartOpen] = useState(false);
+  const [mobileToggle, setMobileToggle] = useState(false);
+  const { cartItems } = useContext(CartContext);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -104,28 +117,102 @@ export default function Checkout() {
   return (
     <div className="bg-white" id="root">
       <div className="mb-0 flex min-h-screen relative">
-        <div className="flex flex-col flex-grow">
+        <div className="flex flex-col flex-grow checkout-page">
           <div className="p-4">
             <h1>Checkout</h1>
           </div>
-          <div className="flex justify-center flex-grow w-full max-w-lg mx-auto">
+          <div className="flex justify-center flex-grow max-w-lg mx-auto">
             <form className="flex flex-col w-full items-center">
               <CheckoutTimer />
 
-              <aside className="flex justify-between mt-8 w-full items-start">
+              <div className="flex md-lg:flex-row justify-between mt-8 w-full items-start gap-6">
                 <CheckoutForm
                   isCurrUser={isCurrUser}
                   userInfo={userInfo}
                   setUserInfo={setUserInfo}
                 />
-                <CheckoutCart
-                  userInfo={userInfo}
-                  BookAppointment={BookAppointment}
-                  authLink={authLink}
-                />
-              </aside>
+                <aside className="checkout-desktop-cart hidden md-lg:flex flex-col w-full max-w-[340px] shrink-0">
+                  <CheckoutCart
+                    userInfo={userInfo}
+                    BookAppointment={BookAppointment}
+                    authLink={authLink}
+                  />
+                </aside>
+              </div>
             </form>
           </div>
+          
+          {cartItems.length > 0 && (
+            <div className="mobile-cart-container">
+              <div
+                className={`mobile-checkout-cart ${mobileCartOpen ? 'open' : ''}`}
+              >
+                <button
+                  type="button"
+                  className="w-full px-4 py-3 flex items-center justify-between bg-white border-t border-gray-200"
+                  onClick={() => setMobileCartOpen(!mobileCartOpen)}
+                >
+                  <div className="flex flex-col items-start">
+                    <span className="font-semibold text-sm">
+                      {labels.bookings.appointmentSummary}
+                    </span>
+                    <span className="text-sm text-core-text-20">
+                      ${calculateItemsTotal()} ・ {cartItems.length} {cartItems.length === 1 ? 'service' : 'services'}
+                    </span>
+                  </div>
+                  <svg
+                    className={`w-4 h-4 transition-transform ${mobileCartOpen ? 'rotate-180' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                  </svg>
+                </button>
+                
+                <div className={`mobile-cart-content bg-white px-4 pb-4 ${mobileCartOpen ? 'block' : 'hidden'}`}>
+                  <div className="border border-solid border-black/[.05] rounded-md mb-4">
+                    <PackageItemList cartItems={cartItems} />
+                    <CheckoutCartTotals />
+                  </div>
+                  <Button
+                    className="button w-full"
+                    onClick={async () => {
+                      setIsBooking(true);
+                      try {
+                        await BookAppointment(userInfo, navigate);
+                      } finally {
+                        setIsBooking(false);
+                      }
+                    }}
+                    label={isBooking ? "Booking..." : labels.checkout.bookApt}
+                    disabled={isBooking}
+                  />
+                </div>
+              </div>
+
+              <MobileMenu mobileToggle={mobileToggle} setMobileToggle={setMobileToggle}>
+                <div className="border border-solid border-black/[.05] rounded-md mb-4">
+                  <PackageItemList cartItems={cartItems} />
+                  <CheckoutCartTotals />
+                </div>
+                <Button
+                  className="button w-full"
+                  onClick={async () => {
+                    setIsBooking(true);
+                    try {
+                      await BookAppointment(userInfo, navigate);
+                    } finally {
+                      setIsBooking(false);
+                    }
+                  }}
+                  label={isBooking ? "Booking..." : labels.checkout.bookApt}
+                  disabled={isBooking}
+                />
+              </MobileMenu>
+            </div>
+          )}
+          
           <Footer />
         </div>
       </div>

@@ -6,6 +6,7 @@ import PackageServiceList from "../../components/Package/PackageServiceList";
 import "./Package.css";
 import { useState } from "react";
 import Footer from "../../components/Footer";
+import MobileMenu from "../../components/MobileMenu/MobileMenu";
 
 export default function Package({
   packageName,
@@ -16,6 +17,7 @@ export default function Package({
   packageVersion,
 }) {
   const [packageOption, setPackageOption] = useState(null);
+  const [mobileToggle, setMobileToggle] = useState(false);
   /*
   Add verbage to scheduling page:
   need service sooner than the available time slots? Call us (link to phone number) for additional availability.
@@ -82,6 +84,14 @@ export default function Package({
             </div>
           </div>
         </div>
+
+        <MobileMenu mobileToggle={mobileToggle} setMobileToggle={setMobileToggle}>
+          <div className="p-4">
+            <h3 className="mb-2">Your Selection</h3>
+            <p className="text-sm text-gray-600">{packageName}</p>
+            <p className="font-semibold">{packagePrice} - {packageTimeAlloted}</p>
+          </div>
+        </MobileMenu>
 
         <Footer />
       </div>

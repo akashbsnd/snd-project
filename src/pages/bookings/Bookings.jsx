@@ -4,8 +4,12 @@ import "./Booking.css";
 import Footer from "../../components/Footer";
 import CartButtonsSection from "../../components/Cart/CartButtonsSection";
 import Header from "../../components/Header";
+import MobileMenu from "../../components/MobileMenu/MobileMenu";
+import { useState } from "react";
 
 export default function Bookings() {
+  const [mobileToggle, setMobileToggle] = useState(false);
+  
   return (
     <div id="bookings">
       <Header />
@@ -32,12 +36,15 @@ export default function Bookings() {
 
               <aside className="transition-opacity delay-150 duration-500 ease-in-out opacity-100 hidden md-lg:block md-lg:px-4 max-w-cart-sidebar min-w-cart-sidebar ">
                 <div className="sticky top-2">
-                  {/* Service Cart */}
                   <Cart />
-
                   <CartButtonsSection />
                 </div>
               </aside>
+
+              <MobileMenu mobileToggle={mobileToggle} setMobileToggle={setMobileToggle}>
+                <Cart />
+                <CartButtonsSection />
+              </MobileMenu>
             </div>
 
             <Footer />

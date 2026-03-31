@@ -8,11 +8,13 @@ import AddOnOption from "../../components/AddOns/AddOnOption";
 import "./AddOn.css";
 import AddOnButtons from "../../components/AddOns/AddOnButtons";
 import Cart from "../../components/Cart/Cart";
+import MobileMenu from "../../components/MobileMenu/MobileMenu";
 
 export default function AddOns({ packageName }) {
   const { modifiers } = useContext(ModifierSession);
   const { packages } = useContext(PackageSession);
   const [addOnOption, setAddOnOption] = useState([]);
+  const [mobileToggle, setMobileToggle] = useState(false);
 
   const findPackage = packages.find(
     (packages) => packages.name === packageName,
@@ -54,10 +56,13 @@ export default function AddOns({ packageName }) {
 
             <aside className="transition-opacity delay-150 duration-500 ease-in-out opacity-100 hidden md-lg:block md-lg:px-4 max-w-cart-sidebar min-w-cart-sidebar ">
               <div className="sticky top-2">
-                {/* Service Cart */}
                 <Cart />
               </div>
             </aside>
+
+            <MobileMenu mobileToggle={mobileToggle} setMobileToggle={setMobileToggle}>
+              <Cart />
+            </MobileMenu>
           </div>
 
           <Footer />
