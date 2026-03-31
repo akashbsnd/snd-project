@@ -22,7 +22,7 @@ export default function Checkout() {
   const [isBooking, setIsBooking] = useState(false);
   const [mobileCartOpen, setMobileCartOpen] = useState(false);
   const [mobileToggle, setMobileToggle] = useState(false);
-  const { cartItems } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext) || JSON.parse(localStorage.getItem("cart"));
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",

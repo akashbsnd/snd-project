@@ -36,6 +36,7 @@ export default function TimeButtonCategories({
     const updatedCartItems = [...cartItems];
     updatedCartItems[0]["apptTime"] = time;
     updatedCartItems[0]["apptDate"] = selectedDate;
+    localStorage.setItem("cart", JSON.stringify(updatedCartItems));
     setCartItems(updatedCartItems);
     if (authLink) {
       window.location.href = authLink;
