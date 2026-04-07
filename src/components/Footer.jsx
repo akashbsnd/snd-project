@@ -21,7 +21,7 @@ export default function Footer() {
         <footer className="row py-3">
           {/* Contact Us */}
           <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center">
-            <h5 className="fs-5 mt-3 mt-lg-0 mb-3">Mobile Detailing Unit</h5>
+            <h5 className="fs-5 mt-3 mt-lg-0 mb-3" style={{ color: "#dc6696" }}>Mobile Detailing Unit</h5>
             <div className="row row-cols-1 g-0">
               <div className="col">
                 <div className="footer-list mb-3">
@@ -141,7 +141,7 @@ export default function Footer() {
 
           {/* Cities */}
           <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center">
-            <h5 className="fs-5 mt-3 mt-lg-0 mb-3">We Serve</h5>
+            <h5 className="fs-5 mt-3 mt-lg-0 mb-3" style={{ color: "#dc6696" }}>We Serve</h5>
             <div className="row row-cols-1 row-cols-lg-2 g-0">
               <div className="col">
                 <div className="footer-list mb-3">
@@ -198,7 +198,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center">
-            <h5 className="fs-5 mt-3 mt-lg-0 mb-3">Quick Links</h5>
+            <h5 className="fs-5 mt-3 mt-lg-0 mb-3" style={{ color: "#dc6696" }}>Quick Links</h5>
             <div className="row row-cols-1 g-0">
               <div className="col">
                 <div className="footer-list mb-3">
