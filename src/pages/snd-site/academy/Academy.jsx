@@ -370,12 +370,12 @@ const Academy = () => {
       >
         <div style={{ width: "100%", maxWidth: "1400px", margin: "0 auto", padding: "0 1rem" }}>
           <iframe
+            className="academy-iframe"
             src="https://app.urable.com/form/hws1GTjmzNePWUFsFmWJ/JoQVFvA5IeMA8DS2W8bh"
             scrolling="no"
             frameBorder="0"
             marginHeight="0"
             marginWidth="0"
-            height="650px"
             width="100%"
             title="Supreme Nomads Academy Form"
           />

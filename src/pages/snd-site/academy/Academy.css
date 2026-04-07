@@ -128,8 +128,15 @@
   border-radius: 0 !important;
 }
 
-/* Responsive adjustments */
+.academy-iframe {
+  height: 650px;
+}
+
 @media (max-width: 768px) {
+  .academy-iframe {
+    height: 900px;
+  }
+
   .academy-quote {
     padding: 2rem 0;
   }
