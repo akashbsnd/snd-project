@@ -876,6 +876,11 @@ button.filter-button:hover {
   }
 }
 
+/* Hide scroll carets by default, shown on mobile */
+.scroll-caret {
+  display: none;
+}
+
 /* Mobile Price Cards - Full Width with Horizontal Scroll (max-width: 767.98px) */
 @media (max-width: 585px) {
   .tab-content .row {
@@ -948,11 +953,6 @@ button.filter-button:hover {
   .scroll-caret-right {
     right: 2px;
   }
-}
-
-/* Hide scroll carets on desktop */
-.scroll-caret {
-  display: none;
 }
 
 /* Price Layout */
