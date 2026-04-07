@@ -672,9 +672,9 @@ export default function Services() {
       {/* Detailing Packages Section */}
       <section id="detailingPrice" className="py-5 paint-packages bg-white">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-8 text-center">
-              <h2 className="display-4">Detailing Packages</h2>
+          <div className="row">
+            <div className="col-lg-8">
+              <h2 className="display-4 mb-5">Detailing Packages</h2>
             </div>
           </div>
 

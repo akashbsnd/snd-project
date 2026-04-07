@@ -438,23 +438,19 @@ export default function About() {
                     </h2>
                 <p className="fs-5 text-[rgba(102,102,102)] lh-base">
                       At Supreme Nomads, perfection is at the heart of how we
-                      operate. Even as a respected name in the Charlotte Auto
-                      Industry, we're committed to continuous improvement and
-                      applying our expertise. A clean environment allows for
-                      some peace amongst the chaos in the day to day, and that
-                      extends to your second-largest investment, your vehicle.
-                      Between work, family, road trips, or just leisure driving,
-                      it's easy to use your vehicle, but hard to find time to
-                      keep it clean. We understand this need and seek to find a
-                      personalized detailing plan for every customer. These
-                      words resonate deeply with us at supreme nomads detailing.
-                      even as a respected name in the Charlotte auto industry,
-                      we're committed to continuous improvement and sharing our
-                      expertise. stay tuned as we develop the supreme nomads
-                      academy, where we'll offer insights and training to
-                      elevate your detailing skills! click below to subscribe
-                      for updates and be the first to know when we launch!
-                    </p>
+                      operate. A clean environment allows for some peace amongst
+                      the chaos in the day to day, and that extends to your
+                      second-largest investment, your vehicle. Between work, family,
+                      road trips, or just leisure driving, it's easy to use your
+                      vehicle, but hard to find time to keep it clean. We understand
+                      this need and seek to find a personalized detailing plan for
+                      every customer. These words resonate deeply with us at Supreme
+                      Nomads Detailing. Even as a well-respected name in the
+                      Charlotte Auto Industry, we're committed to continuous
+                      improvement and sharing our expertise. Stay tuned as we develop
+                      the <Link to="/academy" style={{ color: "#dca958" }}>Supreme Nomads Academy</Link>, where we'll offer insights and
+                      training to elevate your detailing skills!
+                  </p>
                   </div>
                 </div>
                 <div className="col-lg-6 col-12">
@@ -579,7 +575,6 @@ export default function About() {
                   Supreme Nomads Detailing was formed to help others take care of
                   their prized possessions. Akash and I connected through our
                   shared enthusiasm for cars and detailing.
-                  through our shared enthusiasm for cars and detailing.
                 </p>
               </div>
             </div>
