@@ -364,7 +364,7 @@ export default function About() {
       </nav>
 
       {/* Hero */}
-      <section className="hero-section hero-about">
+      <section className="hero-section hero-about" style={{ position: "relative" }}>
         <div className="hero-overlay"></div>
         <div className="container py-5 hero-content">
           <div className="row py-5">
@@ -372,6 +372,14 @@ export default function About() {
               <h2 className="page-title display-3 mt-5 text-white">About Us</h2>
             </div>
           </div>
+        </div>
+        <div style={{ position: "absolute", bottom: "8%", left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
+          <a
+            href="#about-us"
+            className="btn mainbtn btn-outline-primary"
+          >
+            <iconify-icon icon="tabler:arrow-down" className="arrow-icon" />
+          </a>
         </div>
       </section>
 
@@ -508,10 +516,10 @@ export default function About() {
                 <p className="fs-5 text-[rgba(102,102,102)] lh-base">
                   I was born and raised in New Jersey. I've moved around a lot
                   and have even lived in Texas for a couple of years. I finished
-                  high school in Cary, NC and have lived in Charlotte since
-                  {getDynamicDate(2015, 2025)}. I majored in Computer Science at University of North
+                  high school in Cary, NC and have lived in Charlotte since 2015.
+                  I majored in Computer Science at University of North
                   Carolina at Charlotte Class of '19 and have a masters in Data
-                  Science and Business Analytics {getDynamicDate(2020, 2025)}. Since my childhood, I have
+                  Science and Business Analytics 2020. Since my childhood, I have
                   always been interested in 2 things. Cars, and tech. After
                   working in the tech industry for several years, I decided to
                   pursue my other passion for cars. I learned to work on my 2006

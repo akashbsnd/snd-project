@@ -375,7 +375,7 @@ const Academy = () => {
             frameBorder="0"
             marginHeight="0"
             marginWidth="0"
-            height="1200px"
+            height="650px"
             width="100%"
             title="Supreme Nomads Academy Form"
           />

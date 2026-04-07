@@ -472,13 +472,21 @@ export default function Gallery() {
       </nav>
 
       {/* Hero */}
-      <section className="hero-section hero-gallery">
+      <section className="hero-section hero-gallery" style={{ position: "relative" }}>
         <div className="container py-5">
           <div className="row py-5">
             <div className="d-flex flex-wrap flex-column justify-content-center align-items-center my-5 py-5 text-white">
               <h2 className="page-title display-3 mt-5 text-white">Gallery</h2>
             </div>
           </div>
+        </div>
+        <div style={{ position: "absolute", bottom: "8%", left: "50%", transform: "translateX(-50%)", zIndex: 3 }}>
+          <a
+            href="#gallery"
+            className="btn mainbtn btn-outline-primary"
+          >
+            <iconify-icon icon="tabler:arrow-down" className="arrow-icon" />
+          </a>
         </div>
       </section>
 
