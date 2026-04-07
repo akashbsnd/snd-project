@@ -254,7 +254,8 @@ export default function Home() {
     setTimeout(() => {
       if (window.Swiper) {
         new window.Swiper(".project-swiper", {
-          slidesPerView: "auto",
+          slidesPerView: 1,
+          slidesPerGroup: 1,
           spaceBetween: 30,
           navigation: {
             nextEl: ".icon-arrow-right",
@@ -609,7 +610,10 @@ export default function Home() {
           >
             <div className="container">
               <div className="row align-items-center">
-                <div className="col-md-6 padding-medium pe-lg-5 border-end">
+                <div className="col-md-6 padding-medium pe-lg-5 d-none d-md-block" style={{ borderRight: "1px solid #333" }}>
+                  <h2 className="display-4 text-center">Quick Links</h2>
+                </div>
+                <div className="col-md-6 d-block d-md-none padding-medium">
                   <h2 className="display-4 text-center">Quick Links</h2>
                 </div>
                 <div className="col-md-6 padding-medium-2 ps-md-5 d-grid gap-3">
