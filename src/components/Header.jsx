@@ -288,8 +288,8 @@ export default function Header() {
                         />
                     </div>
                     <div className="offcanvas-body">
-                        {/* Routes */}
-                        <ul className="navbar-nav align-items-center justify-content-end justify-content-xxl-center flex-grow-1">
+                        {/* Routes - centered */}
+                        <ul className="navbar-nav align-items-center justify-content-center flex-grow-1">
                             <li className="nav-item">
                                 <Link
                                     className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/")}`}
@@ -330,8 +330,10 @@ export default function Header() {
                                     Academy
                                 </Link>
                             </li>
-                            {/* Socials */}
-                            <div className="d-flex mt-lg-0 align-items-center justify-content-center offcanvas-body social-div">
+                        </ul>
+                        {/* Socials + Book Now - right aligned */}
+                        <div className="d-flex align-items-center ms-auto mt-3 mt-xl-0">
+                            <div className="d-flex align-items-center justify-content-center social-div">
                                 <ul className="d-flex flex-row gap-2 list-unstyled mb-0 social-ul">
                                     <li className="nav-item">
                                         <a
@@ -423,7 +425,7 @@ export default function Header() {
                                     Book Now
                                 </Link>
                             </div>
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>

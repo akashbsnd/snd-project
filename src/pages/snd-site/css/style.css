@@ -576,6 +576,23 @@ button.filter-button:hover {
   background-color: #f51fb5 !important;
 }
 
+/* Desktop: true-center nav links and right-pad icons/book-now */
+@media (min-width: 1200px) {
+  .offcanvas-body {
+    position: relative;
+  }
+
+  .offcanvas-body > .navbar-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .offcanvas-body > .d-flex.ms-auto {
+    padding-right: 8px;
+  }
+}
+
 /* Inline Text */
 .navbar-nav .nav-link {
   white-space: nowrap;

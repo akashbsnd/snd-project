@@ -418,53 +418,6 @@
   color: #dc9658;
 }
 
-/* Footer styling - LIGHT THEME */
-#footer .footer-containerG {
-  background-color: transparent;
-}
-
-#footer .footer-logo {
-  height: auto;
-  background-color: transparent;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.price-option p, #footer .footer-containerG .footer-heading2,
-#footer .footer-containerG .footer-heading,
-#footer .footer-containerG .footer-em,
-#footer .footer-containerG .footer-list a,
-#footer .footer-containerG .footer-copy, #footer .footer-list a {
-  color: rgb(102, 102, 102) !important;
-}
-
 .plan-post h2{
   color: #13325c !important;
-}
-
-#footer .social-icon-footer {
-  color: rgb(102, 102, 102) !important;
-}
-
-#footer .nav-link {
-  color: rgb(102, 102, 102) !important;
-}
-
-#footer .nav-link:hover {
-  color: #333333 !important;
-}
-
-/* Icons by Icons8 text styling */
-#footer .footer-list .small {
-  color: rgb(102, 102, 102) !important;
-  font-size: 0.875rem !important;
-  font-weight: 500 !important;
-}
-
-#footer .footer-list .small a {
-  color: rgb(102, 102, 102) !important;
-}
-
-#footer .footer-list .small a:hover {
-  text-decoration: none !important;
 }

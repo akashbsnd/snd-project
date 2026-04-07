@@ -2,6 +2,7 @@ import "../css/vendor.css";
 import "swiper/css";
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Footer from "../../../components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/style.css";
 import "./Academy.css";
@@ -204,8 +205,8 @@ const Academy = () => {
               />
             </div>
             <div className="offcanvas-body">
-              {/* Routes */}
-              <ul className="navbar-nav align-items-center justify-content-end justify-content-xxl-center flex-grow-1">
+              {/* Routes - centered */}
+              <ul className="navbar-nav align-items-center justify-content-center flex-grow-1">
                 <li className="nav-item">
                   <Link
                     className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/")}`}
@@ -246,8 +247,10 @@ const Academy = () => {
                     Academy
                   </Link>
                 </li>
-                {/* Socials */}
-                <div className="d-flex mt-lg-0 align-items-center justify-content-center offcanvas-body social-div">
+              </ul>
+              {/* Socials + Book Now - right aligned */}
+              <div className="d-flex align-items-center ms-auto mt-3 mt-xl-0">
+                <div className="d-flex align-items-center justify-content-center social-div">
                   <ul className="d-flex flex-row gap-2 list-unstyled mb-0 social-ul">
                     <li className="nav-item">
                       <a
@@ -339,7 +342,7 @@ const Academy = () => {
                     Book Now
                   </Link>
                 </div>
-              </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -359,339 +362,27 @@ const Academy = () => {
         </div>
       </section>
 
-      <div className="pb-5 academy-quote">
-        <div className="container">
-          <div className="row justify-content-center"></div>
-
-          <div className="col-12 text-center">
-            <p className="fs-3 my-5 pt-5 text-[rgba(102,102,102)]">
-              As Richard Feynman says, "If you want to master something, teach
-              it." Whether you're looking to start your own detailing business
-              or just want to learn some tips and tricks to take care of your
-              own vehicle in between details, you've come to the right spot.
-              Even if you have no interest in detailing, we encourage you to
-              stick around as we share our passion for automobiles and the art
-              of preserving them. We've got something for all of you. Want to
-              know when this section releases?
-            </p>
-          </div>
-          <div className="row justify-content-center py-3">
-            <div className="col-md-6 text-center">
-              <h2 className="fs-3 text-uppercase mb-4">
-                Join The Mailing List!
-              </h2>
-              <form
-                id="form"
-                method="post"
-                action="#"
-                onSubmit={handleSubmit}
-                className="form-group flex-wrap"
-              >
-                <div className="d-flex flex-column gap-3 mb-3">
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Write Your Name Here"
-                    className="form-control ps-3"
-                    required
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Write Your Email Here"
-                    className="form-control ps-3"
-                    required
-                  />
-                </div>
-                <div className="d-grid">
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-lg text-uppercase btn-rounded-none"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+      <div
+        style={{
+          background: "#111",
+          padding: "3rem 0",
+        }}
+      >
+        <div style={{ width: "100%", maxWidth: "1400px", margin: "0 auto", padding: "0 1rem" }}>
+          <iframe
+            src="https://app.urable.com/form/hws1GTjmzNePWUFsFmWJ/JoQVFvA5IeMA8DS2W8bh"
+            scrolling="no"
+            frameBorder="0"
+            marginHeight="0"
+            marginWidth="0"
+            height="1200px"
+            width="100%"
+            title="Supreme Nomads Academy Form"
+          />
         </div>
       </div>
 
-      {/* Footer */}
-      <section id="footer">
-        <div className="container footer-containerG mt-5 mt-md-0 pt-2">
-          <div>
-            <img
-              src="https://res.cloudinary.com/dnsc73sla/image/upload/v1752006942/logo-gold-horse-name_dmbkjk.svg"
-              alt="Supreme Nomands Logo"
-              className="footer-logo mx-auto d-block mt-5"
-            />
-          </div>
-
-          {/* Main Footer */}
-          <footer className="row py-3">
-            {/* Contact Us */}
-            <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center">
-              <h5 className="fs-5 mt-3 mt-lg-0 mb-3">Mobile Detailing Unit</h5>
-              <div className="row row-cols-1 g-0">
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <h6 className="mobile footer-heading2">We Come To You!</h6>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a
-                      href="tel:+1704-561-1927"
-                      className="nav-link text-uppercase p-0"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <iconify-icon
-                        icon="mdi:phone"
-                        style={{ verticalAlign: "middle", marginRight: "6px" }}
-                      ></iconify-icon>
-                      704-561-1927
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a
-                      href="mailto:info@supremenomads.com"
-                      className="nav-link text-uppercase p-0 footer-em"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <iconify-icon
-                        icon="mdi:email"
-                        style={{ verticalAlign: "middle", marginRight: "6px" }}
-                      ></iconify-icon>
-                      info@supremenomads.com
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <div className="d-flex justify-content-center align-items-center">
-                      <a
-                        href="https://www.tiktok.com/@supremenomads704"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <iconify-icon
-                          className="social-icon-footer pe-4"
-                          icon="ri:tiktok-fill"
-                        ></iconify-icon>
-                      </a>
-                      <a
-                        href="https://www.instagram.com/supremenomads"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <iconify-icon
-                          className="social-icon-footer pe-4"
-                          icon="mdi:instagram"
-                        ></iconify-icon>
-                      </a>
-                      <a
-                        href="https://www.facebook.com/Supremenomads/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => window.open(e.target.href, "_blank")}
-                      >
-                        <iconify-icon
-                          className="social-icon-footer pe-4"
-                          icon="mdi:facebook"
-                        ></iconify-icon>
-                      </a>
-                      <a
-                        href="https://www.yelp.com/biz/supreme-nomads-detailing-charlotte"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <iconify-icon
-                          className="social-icon-footer pe-4"
-                          icon="mdi:yelp"
-                        ></iconify-icon>
-                      </a>
-                      <a
-                        href="https://www.youtube.com/@SupremeNomads"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <iconify-icon
-                          className="social-icon-footer"
-                          icon="mdi:youtube"
-                        ></iconify-icon>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <p>
-                      Icons by
-                      <a
-                        href="https://icons8.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Icons8
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Cities */}
-            <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center">
-              <h5 className="fs-5 mt-3 mt-lg-0 mb-3">We Serve</h5>
-              <div className="row row-cols-1 row-cols-lg-2 g-0">
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a href="#" className="nav-link text-uppercase p-0">
-                      Charlotte
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a href="#" className="nav-link text-uppercase p-0">
-                      Concord
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a href="#" className="nav-link text-uppercase p-0">
-                      Harrisburg
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a href="#" className="nav-link text-uppercase p-0">
-                      Huntersville
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a href="#" className="nav-link text-uppercase p-0">
-                      Matthews
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a href="#" className="nav-link text-uppercase p-0">
-                      Waxhaw
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a href="#" className="nav-link text-uppercase p-0">
-                      Lake Norman
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a href="#" className="nav-link text-uppercase p-0">
-                      Fort Mill, SC
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a href="#" className="nav-link text-uppercase p-0">
-                      Indian Land, SC
-                    </a>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <a href="#" className="nav-link text-uppercase p-0">
-                      Rock Hill, SC
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Quick Links */}
-            <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center">
-              <h5 className="fs-5 mt-3 mt-lg-0 mb-3">Quick Links</h5>
-              <div className="row row-cols-1 g-0">
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <Link to="/" className="nav-link text-uppercase p-0">
-                      Home
-                    </Link>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <Link
-                      to="/gallery"
-                      className="nav-link text-uppercase p-0"
-                    >
-                      Gallery
-                    </Link>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <Link
-                      to="/services"
-                      className="nav-link text-uppercase p-0"
-                    >
-                      Our Services
-                    </Link>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <Link
-                      to="/about"
-                      className="nav-link text-uppercase p-0"
-                    >
-                      About Us
-                    </Link>
-                  </div>
-                </div>
-                <div className="col">
-                  <div className="footer-list mb-3">
-                    <Link
-                      to="/academy"
-                      className="nav-link text-uppercase p-0"
-                    >
-                      Academy
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </footer>
-        </div>
-
-        {/* Copyright */}
-        <div className="container">
-          <footer className="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center py-2 border-top">
-            <p className="font-rgb(102, 102, 102) mb-1 mb-md-0 footer-copy">
-              © 2022 - {new Date().getFullYear()} | All Rights Reserved
-            </p>
-            <p className="font-rgb(102, 102, 102) mb-0 footer-copy">Supreme Nomads Detailing LLC</p>
-          </footer>
-        </div>
-      </section>
+      <Footer />
     </>
   );
 };
