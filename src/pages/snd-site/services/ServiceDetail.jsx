@@ -9,6 +9,10 @@ import Logo from "../images/horizontal-logo.png";
 export default function ServiceDetail({ title, children }) {
   const location = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const openFacebook = (event) => {
     event.preventDefault();
     window.open("https://www.facebook.com/Supremenomads/", "_blank");
@@ -159,7 +163,7 @@ export default function ServiceDetail({ title, children }) {
                   <Link className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/academy")}`} to="/academy">Academy</Link>
                 </li>
               </ul>
-              <div className="d-flex align-items-center ms-auto mt-3 mt-xl-0">
+              <div className="d-flex align-items-center ms-auto mt-3 mt-xl-0 socials-booknow-wrapper">
                 <div className="d-flex align-items-center justify-content-center social-div">
                   <ul className="d-flex flex-row gap-2 list-unstyled mb-0 social-ul">
                     <li className="nav-item"><a className="nav-link d-flex align-items-center p-0 m-0" href="tel:+17045611927" target="_blank" rel="noopener noreferrer"><iconify-icon icon="ic:baseline-call" className="social-icon text-white" /></a></li>

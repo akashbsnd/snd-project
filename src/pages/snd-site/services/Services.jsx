@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Footer from "../../../components/Footer";
 import Logo from "../images/horizontal-logo.png";
@@ -80,7 +80,7 @@ function PaintProtectionCard({
                   <span>
                     1 Year Ceramic Sealant
                     <sup className="sup-line">
-                      <a href="#disclaimers">1</a>
+                      <a href="#disclaimers-packages" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers-packages")?.scrollIntoView({ behavior: "smooth", block: "center" }); }}>1</a>
                     </sup>
                   </span>
                 ) : (
@@ -175,7 +175,38 @@ const PAINT_TABS = {
 export default function Services() {
   const [activeTab, setActiveTab] = useState("regular-tab-pane");
   const [paintTab, setPaintTab] = useState(PAINT_TABS.REGULAR);
+  const [maintenanceTab, setMaintenanceTab] = useState("maintenance-regular");
   const location = useLocation();
+
+  const selectVehicleSize = (size) => {
+    if (size === "regular") {
+      setActiveTab("regular-tab-pane");
+      setPaintTab(PAINT_TABS.REGULAR);
+      setMaintenanceTab("maintenance-regular");
+    } else if (size === "medium") {
+      setActiveTab("medium-tab-pane");
+      setPaintTab(PAINT_TABS.MEDIUM);
+      setMaintenanceTab("maintenance-medium");
+    } else if (size === "van") {
+      setActiveTab("van-tab-pane");
+      setPaintTab(PAINT_TABS.VAN);
+      setMaintenanceTab("maintenance-van");
+    }
+  };
+
+  const detailingScrollRef = useRef(null);
+  const paintScrollRef = useRef(null);
+  const maintenanceScrollRef = useRef(null);
+
+  const scrollCards = (ref, direction) => {
+    const container = ref.current?.querySelector(".row");
+    if (!container) return;
+    const scrollAmount = container.offsetWidth * 0.85;
+    container.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  };
 
   const openFacebook = (event) => {
     event.preventDefault();
@@ -306,7 +337,9 @@ export default function Services() {
   }, []);
 
   const handleTabClick = (tabId) => {
-    setActiveTab(tabId);
+    if (tabId === "regular-tab-pane") selectVehicleSize("regular");
+    else if (tabId === "medium-tab-pane") selectVehicleSize("medium");
+    else if (tabId === "van-tab-pane") selectVehicleSize("van");
   };
 
   // Navbar scroll effect
@@ -562,7 +595,7 @@ export default function Services() {
                 </li>
               </ul>
               {/* Socials + Book Now - right aligned */}
-              <div className="d-flex align-items-center ms-auto mt-3 mt-xl-0">
+              <div className="d-flex align-items-center ms-auto mt-3 mt-xl-0 socials-booknow-wrapper">
                 <div className="d-flex align-items-center justify-content-center social-div">
                   <ul className="d-flex flex-row gap-2 list-unstyled mb-0 social-ul">
                     <li className="nav-item">
@@ -716,7 +749,11 @@ export default function Services() {
             </div>
           </div>
 
-          <div className="tab-content mt-4" id="paintProtectionTabContent">
+          <div className="scroll-cards-wrapper" ref={detailingScrollRef}>
+            <button className="scroll-caret scroll-caret-left" onClick={() => scrollCards(detailingScrollRef, "left")} aria-label="Scroll left">
+              <iconify-icon icon="mdi:chevron-left" />
+            </button>
+            <div className="tab-content mt-4" id="paintProtectionTabContent">
             {activeTab === "regular-tab-pane" && (
               <div className="row">
                 <div className="col-lg-3 mb-4">
@@ -729,7 +766,7 @@ export default function Services() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        6 Month Ceramic Wax1
+                        <span>6 Month Ceramic Wax<sup className="wax-footnote"><a href="#disclaimers-packages" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers-packages")?.scrollIntoView({ behavior: "smooth", block: "center" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -837,7 +874,7 @@ export default function Services() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        6 Month Ceramic Wax1
+                        <span>6 Month Ceramic Wax<sup className="wax-footnote"><a href="#disclaimers-packages" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers-packages")?.scrollIntoView({ behavior: "smooth", block: "center" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -976,7 +1013,7 @@ export default function Services() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        Basic Wax Coating1
+                        <span>Basic Wax Coating<sup className="wax-footnote"><a href="#disclaimers-packages" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers-packages")?.scrollIntoView({ behavior: "smooth", block: "center" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -1056,7 +1093,7 @@ export default function Services() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        6 Month Ceramic Wax1
+                        <span>6 Month Ceramic Wax<sup className="wax-footnote"><a href="#disclaimers-packages" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers-packages")?.scrollIntoView({ behavior: "smooth", block: "center" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -1164,7 +1201,7 @@ export default function Services() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        6 Month Ceramic Wax1
+                        <span>6 Month Ceramic Wax<sup className="wax-footnote"><a href="#disclaimers-packages" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers-packages")?.scrollIntoView({ behavior: "smooth", block: "center" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -1303,7 +1340,7 @@ export default function Services() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        Basic Wax Coating1
+                        <span>Basic Wax Coating<sup className="wax-footnote"><a href="#disclaimers-packages" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers-packages")?.scrollIntoView({ behavior: "smooth", block: "center" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -1369,7 +1406,7 @@ export default function Services() {
               </div>
             )}
 
-            <div id="disclaimers" className="container py-3">
+            <div id="disclaimers-packages" className="container py-3" style={{ fontSize: "0.75rem", color: "#666" }}>
               <ul className="list-unstyled">
                 <li className="py-2">
                   <sup className="sup-line">
@@ -1383,6 +1420,10 @@ export default function Services() {
               </ul>
             </div>
 
+          </div>
+          <button className="scroll-caret scroll-caret-right" onClick={() => scrollCards(detailingScrollRef, "right")} aria-label="Scroll right">
+            <iconify-icon icon="mdi:chevron-right" />
+          </button>
           </div>
         </div>
       </section>
@@ -1401,7 +1442,7 @@ export default function Services() {
                     type="button"
                     role="tab"
                     className={`m-0 mb-2 nav-link ${paintTab === PAINT_TABS.REGULAR ? "active" : ""}`}
-                    onClick={() => setPaintTab(PAINT_TABS.REGULAR)}
+                    onClick={() => selectVehicleSize("regular")}
                     aria-selected={paintTab === PAINT_TABS.REGULAR}
                   >
                     Sedan/Coupé
@@ -1412,7 +1453,7 @@ export default function Services() {
                     type="button"
                     role="tab"
                     className={`m-0 mb-2 nav-link ${paintTab === PAINT_TABS.MEDIUM ? "active" : ""}`}
-                    onClick={() => setPaintTab(PAINT_TABS.MEDIUM)}
+                    onClick={() => selectVehicleSize("medium")}
                     aria-selected={paintTab === PAINT_TABS.MEDIUM}
                   >
                     2 Row SUV/Small Truck
@@ -1423,7 +1464,7 @@ export default function Services() {
                     type="button"
                     role="tab"
                     className={`m-0 mb-2 nav-link ${paintTab === PAINT_TABS.VAN ? "active" : ""}`}
-                    onClick={() => setPaintTab(PAINT_TABS.VAN)}
+                    onClick={() => selectVehicleSize("van")}
                     aria-selected={paintTab === PAINT_TABS.VAN}
                   >
                     3 Row SUV/Large Truck
@@ -1432,7 +1473,11 @@ export default function Services() {
               </div>
             </div>
 
-            <div className="tab-content" id="paintProtectionTabContent">
+            <div className="scroll-cards-wrapper" ref={paintScrollRef}>
+              <button className="scroll-caret scroll-caret-left" onClick={() => scrollCards(paintScrollRef, "left")} aria-label="Scroll left">
+                <iconify-icon icon="mdi:chevron-left" />
+              </button>
+              <div className="tab-content" id="paintProtectionTabContent">
               {paintTab === PAINT_TABS.REGULAR && (
                 <div className="row py-4">
                   <PaintProtectionCard
@@ -1497,6 +1542,10 @@ export default function Services() {
                 </div>
               )}
             </div>
+              <button className="scroll-caret scroll-caret-right" onClick={() => scrollCards(paintScrollRef, "right")} aria-label="Scroll right">
+                <iconify-icon icon="mdi:chevron-right" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -1515,39 +1564,165 @@ export default function Services() {
             If our calendar cannot accommodate the 40 day time frame, we will
             work with you to choose the next available slot.
           </p>
-          <div className="row py-4">
-            <div className="col-lg-6 pb-4">
-              <div className="py-5 plan-post text-center">
-                <p className="header-top">12 Washes</p>
-                <h2 className="display-5">$800</h2>
-                <Link
-                  to="/booking"
-                  className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
+
+          {/* Maintenance Tabs */}
+          <div className="nav-tabs mb-5" id="paintProtectionTab">
+            <div className="row justify-content-left">
+              <div className="col-md-auto">
+                <button
+                  type="button"
+                  role="tab"
+                  className={`m-0 mb-2 nav-link ${maintenanceTab === "maintenance-regular" ? "active" : ""}`}
+                  onClick={() => selectVehicleSize("regular")}
+                  aria-selected={maintenanceTab === "maintenance-regular"}
                 >
-                  Book now
-                  <iconify-icon
-                    icon="tabler:arrow-right"
-                    className="arrow-icon"
-                  />
-                </Link>
+                  Sedan/Coupé
+                </button>
+              </div>
+              <div className="col-md-auto">
+                <button
+                  type="button"
+                  role="tab"
+                  className={`m-0 mb-2 nav-link ${maintenanceTab === "maintenance-medium" ? "active" : ""}`}
+                  onClick={() => selectVehicleSize("medium")}
+                  aria-selected={maintenanceTab === "maintenance-medium"}
+                >
+                  2 Row SUV/Small Truck
+                </button>
+              </div>
+              <div className="col-md-auto">
+                <button
+                  type="button"
+                  role="tab"
+                  className={`m-0 mb-2 nav-link ${maintenanceTab === "maintenance-van" ? "active" : ""}`}
+                  onClick={() => selectVehicleSize("van")}
+                  aria-selected={maintenanceTab === "maintenance-van"}
+                >
+                  3 Row SUV/Large Truck
+                </button>
               </div>
             </div>
-            <div className="col-lg-6 pb-4">
-              <div className="py-5 plan-post text-center">
-                <p className="header-top">6 Washes</p>
-                <h2 className="display-5">$500</h2>
-                <Link
-                  to="/booking"
-                  className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
-                >
-                  Book now
-                  <iconify-icon
-                    icon="tabler:arrow-right"
-                    className="arrow-icon"
-                  />
-                </Link>
+          </div>
+
+          <div className="scroll-cards-wrapper" ref={maintenanceScrollRef}>
+            <button className="scroll-caret scroll-caret-left" onClick={() => scrollCards(maintenanceScrollRef, "left")} aria-label="Scroll left">
+              <iconify-icon icon="mdi:chevron-left" />
+            </button>
+            <div className="tab-content mt-4">
+            {maintenanceTab === "maintenance-regular" && (
+            <div className="row py-4">
+              <div className="col-lg-6 pb-4">
+                <div className="py-5 plan-post text-center">
+                  <p className="header-top">12 Washes</p>
+                  <h2 className="display-5">$800</h2>
+                  <Link
+                    to="/booking"
+                    className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
+                  >
+                    Book now
+                    <iconify-icon
+                      icon="tabler:arrow-right"
+                      className="arrow-icon"
+                    />
+                  </Link>
+                </div>
+              </div>
+              <div className="col-lg-6 pb-4">
+                <div className="py-5 plan-post text-center">
+                  <p className="header-top">6 Washes</p>
+                  <h2 className="display-5">$500</h2>
+                  <Link
+                    to="/booking"
+                    className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
+                  >
+                    Book now
+                    <iconify-icon
+                      icon="tabler:arrow-right"
+                      className="arrow-icon"
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
+          )}
+
+          {maintenanceTab === "maintenance-medium" && (
+            <div className="row py-4">
+              <div className="col-lg-6 pb-4">
+                <div className="py-5 plan-post text-center">
+                  <p className="header-top">12 Washes</p>
+                  <h2 className="display-5">$1,000</h2>
+                  <Link
+                    to="/booking"
+                    className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
+                  >
+                    Book now
+                    <iconify-icon
+                      icon="tabler:arrow-right"
+                      className="arrow-icon"
+                    />
+                  </Link>
+                </div>
+              </div>
+              <div className="col-lg-6 pb-4">
+                <div className="py-5 plan-post text-center">
+                  <p className="header-top">6 Washes</p>
+                  <h2 className="display-5">$600</h2>
+                  <Link
+                    to="/booking"
+                    className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
+                  >
+                    Book now
+                    <iconify-icon
+                      icon="tabler:arrow-right"
+                      className="arrow-icon"
+                    />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {maintenanceTab === "maintenance-van" && (
+            <div className="row py-4">
+              <div className="col-lg-6 pb-4">
+                <div className="py-5 plan-post text-center">
+                  <p className="header-top">12 Washes</p>
+                  <h2 className="display-5">$1,200</h2>
+                  <Link
+                    to="/booking"
+                    className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
+                  >
+                    Book now
+                    <iconify-icon
+                      icon="tabler:arrow-right"
+                      className="arrow-icon"
+                    />
+                  </Link>
+                </div>
+              </div>
+              <div className="col-lg-6 pb-4">
+                <div className="py-5 plan-post text-center">
+                  <p className="header-top">6 Washes</p>
+                  <h2 className="display-5">$700</h2>
+                  <Link
+                    to="/booking"
+                    className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
+                  >
+                    Book now
+                    <iconify-icon
+                      icon="tabler:arrow-right"
+                      className="arrow-icon"
+                    />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+          </div>
+            <button className="scroll-caret scroll-caret-right" onClick={() => scrollCards(maintenanceScrollRef, "right")} aria-label="Scroll right">
+              <iconify-icon icon="mdi:chevron-right" />
+            </button>
           </div>
         </div>
       </section>
@@ -1641,7 +1816,7 @@ export default function Services() {
       </section>
 
       {/* Disclaimers */}
-      <div id="disclaimers" className="container py-3">
+      <div id="disclaimers" className="container py-3" style={{ fontSize: "0.75rem", color: "#666" }}>
         <ul className="list-unstyled">
           <li className="py-2">
             <sup className="sup-line">

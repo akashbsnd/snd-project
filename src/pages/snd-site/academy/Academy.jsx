@@ -249,7 +249,7 @@ const Academy = () => {
                 </li>
               </ul>
               {/* Socials + Book Now - right aligned */}
-              <div className="d-flex align-items-center ms-auto mt-3 mt-xl-0">
+              <div className="d-flex align-items-center ms-auto mt-3 mt-xl-0 socials-booknow-wrapper">
                 <div className="d-flex align-items-center justify-content-center social-div">
                   <ul className="d-flex flex-row gap-2 list-unstyled mb-0 social-ul">
                     <li className="nav-item">

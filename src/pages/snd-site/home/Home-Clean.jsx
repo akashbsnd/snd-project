@@ -456,7 +456,7 @@ export default function Home() {
                 </li>
               </ul>
               {/* Socials + Book Now - right aligned */}
-              <div className="d-flex align-items-center ms-auto mt-3 mt-xl-0">
+              <div className="d-flex align-items-center ms-auto mt-3 mt-xl-0 socials-booknow-wrapper">
                 <div className="d-flex align-items-center justify-content-center social-div">
                   <ul className="d-flex flex-row gap-2 list-unstyled mb-0 social-ul">
                     <li className="nav-item">
@@ -781,7 +781,7 @@ export default function Home() {
           </div>
         </div>
         <div className="text-center pb-5 mb-5">
-          <Link to="/gallery" className="btn btn-primary mt-5">
+          <Link to="/gallery" className="btn btn-primary mt-5" style={{ borderRadius: "8px" }}>
             See More
             <iconify-icon icon="tabler:arrow-right" className="arrow-icon" />
           </Link>
@@ -844,7 +844,7 @@ export default function Home() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        6 Month Ceramic Wax1
+                        <span>6 Month Ceramic Wax<sup className="wax-footnote"><a href="#disclaimers" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers")?.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -952,7 +952,7 @@ export default function Home() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        6 Month Ceramic Wax1
+                        <span>6 Month Ceramic Wax<sup className="wax-footnote"><a href="#disclaimers" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers")?.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -1091,7 +1091,7 @@ export default function Home() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        Basic Wax Coating1
+                        <span>Basic Wax Coating<sup className="wax-footnote"><a href="#disclaimers" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers")?.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -1171,7 +1171,7 @@ export default function Home() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        6 Month Ceramic Wax1
+                        <span>6 Month Ceramic Wax<sup className="wax-footnote"><a href="#disclaimers" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers")?.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -1279,7 +1279,7 @@ export default function Home() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        6 Month Ceramic Wax1
+                        <span>6 Month Ceramic Wax<sup className="wax-footnote"><a href="#disclaimers" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers")?.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -1418,7 +1418,7 @@ export default function Home() {
                           icon="mdi:check"
                           className="price-tick me-2"
                         />
-                        Basic Wax Coating1
+                        <span>Basic Wax Coating<sup className="wax-footnote"><a href="#disclaimers" onClick={(e) => { e.preventDefault(); document.getElementById("disclaimers")?.scrollIntoView({ behavior: "smooth" }); }} style={{ color: "inherit", textDecoration: "none" }}>1</a></sup></span>
                       </p>
                       <p>
                         <iconify-icon
@@ -1484,7 +1484,7 @@ export default function Home() {
               </div>
             )}
 
-            <div id="disclaimers" className="container py-3">
+            <div id="disclaimers" className="container py-3" style={{ fontSize: "0.75rem", color: "#666" }}>
               <ul className="list-unstyled">
                 <li className="py-2">
                   <sup className="sup-line">
@@ -1499,7 +1499,7 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center">
-              <a href="/services" className="btn btn-primary">
+              <a href="/services" className="btn btn-primary" style={{ borderRadius: "8px" }}>
                 View All Services
                 <iconify-icon
                   icon="tabler:arrow-right"

@@ -580,7 +580,7 @@ button.filter-button:hover {
 .book-now-btn {
   font-size: 0.85rem; /* slightly smaller than nav text */
   padding: 0.4rem 1rem; /* compact, clean padding */
-  border-radius: 4px; /* slight roundness for modern look */
+  border-radius: 8px; /* rounded to match all other buttons */
   white-space: nowrap; /* prevent it from wrapping */
   line-height: 2; /* tighter line-height */
   background-color: #dc6696;
@@ -781,10 +781,19 @@ button.filter-button:hover {
 .book-now-btn-links {
   background-color: #dc6696;
   border: #dc6696;
+  border-radius: 8px;
 }
 
 .book-now-btn-links:hover {
   background-color: #f51fb5 !important;
+}
+
+/* Wax footnote superscript */
+.wax-footnote {
+  font-size: 0.6em;
+  vertical-align: super;
+  line-height: 1;
+  margin-left: 1px;
 }
 
 /* Footer */
@@ -881,8 +890,10 @@ button.filter-button:hover {
     padding-right: 1rem;
   }
 
-  .tab-content .row .col-lg-3 {
-    flex: 0 0 calc(100vw - 4rem); /* Full width minus container padding and gap */
+  .tab-content .row .col-lg-3,
+  .tab-content .row .col-lg-4,
+  .tab-content .row .col-lg-6 {
+    flex: 0 0 calc(100vw - 4rem);
     max-width: calc(100vw - 4rem);
     scroll-snap-align: center;
   }
@@ -901,6 +912,47 @@ button.filter-button:hover {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Scroll carets */
+  .scroll-cards-wrapper {
+    position: relative;
+  }
+
+  .scroll-caret {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .scroll-caret:active {
+    background: rgba(220, 102, 150, 0.2);
+  }
+
+  .scroll-caret-left {
+    left: 2px;
+  }
+
+  .scroll-caret-right {
+    right: 2px;
+  }
+}
+
+/* Hide scroll carets on desktop */
+.scroll-caret {
+  display: none;
 }
 
 /* Price Layout */
@@ -957,7 +1009,7 @@ button.filter-button:hover {
   font-size: 0.6em;
   vertical-align: super;
   line-height: 1;
-  margin-left: 1px; /* optional spacing */
+  margin-left: 3px;
 }
 
 .price-option p span {
@@ -1447,16 +1499,23 @@ button.filter-button:hover {
 
 /* Only affects mobile/tablet view (hamburger menu) */
 @media (max-width: 1199.98px) {
-  /* .offcanvas-body .navbar-nav {
-    Your mobile-specific styles here
-  }
-   */
-  /* .offcanvas-body .nav-link {
-    Style mobile nav links differently
-  }
-   */
   .offcanvas .social-div {
     padding: 5%;
+  }
+
+  /* Book Now above social icons on mobile */
+  .socials-booknow-wrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .social-div {
+    order: 2;
+  }
+  .book-now-div {
+    order: 1;
+    width: 100%;
+    margin-bottom: 0.75rem;
+    text-align: center;
   }
 }
 

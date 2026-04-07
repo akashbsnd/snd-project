@@ -141,7 +141,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-about {
-    min-height: 80vh;
+    min-height: 100vh;
     background-position: center center;
   }
 
@@ -165,7 +165,7 @@
 
 @media (max-width: 576px) {
   .hero-about {
-    min-height: 70vh;
+    min-height: 100vh;
     background-position: center center;
   }
 
