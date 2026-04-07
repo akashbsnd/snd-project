@@ -142,7 +142,7 @@ function PaintProtectionCard({
   );
 }
 
-function AddOnCard({ icon, title, sup, text }) {
+function AddOnCard({ icon, title, sup, text, slug }) {
   return (
     <div className="col-md-6 col-lg-4 my-3">
       <div className="services-content text-center border py-3 py-md-5 px-3">
@@ -156,6 +156,11 @@ function AddOnCard({ icon, title, sup, text }) {
           )}
         </h4>
         <p>{text}</p>
+        {slug && (
+          <Link to={`/services/${slug}`} style={{ color: "#999", fontSize: "0.8rem", textDecoration: "none" }}>
+            Learn more <iconify-icon icon="mdi:chevron-right" style={{ fontSize: "0.85rem", verticalAlign: "middle" }} />
+          </Link>
+        )}
       </div>
     </div>
   );
@@ -1557,16 +1562,19 @@ export default function Services() {
                 icon="/images/maintenance-icons/icons8-air-quality-100.png"
                 title="Cabin Air Filter Replacement"
                 sup="2"
+                slug="cabin-air-filter-replacement"
                 text="Most manufacturers recommend replacing your cabin air filter at least once every year. In some cases, a cabin air filter should be replaced every six months, especially if the vehicle regularly travels through highly polluted areas or if the driver and/or passengers have allergies. We recommend letting us change this along with an Interior Package, Odor Removal, or Stain Treatment!"
               />
               <AddOnCard
                 icon="/images/maintenance-icons/icons8-inhale-100.png"
                 title="Odor Removal (Ozone Treatments)"
+                slug="odor-removal"
                 text="Ozone, also known as O3 is aimed to attack smells at a molecular level. Ozone bonds to odor causing molecules effectively killing the smells. Ozone can also drown out organisms and bacteria that may be living in some of the deeper crevices of your vehicle. If you've been unable to identify the source of unpleasant odors in your vehicle, this treatment might just do the trick for you!"
               />
               <AddOnCard
                 icon="/images/maintenance-icons/icons8-pets-100.png"
                 title="Pet Hair Removal"
+                slug="pet-hair-removal"
                 text="We all love to take our furry friends with us wherever we go. In many cases, this means dander and hair gets left behind on the carpets and seats. Pet hair removal requires additional time, tools, and resources. Depending on the carpet quality and hair attribute, this can be a difficult process to restore the interior to a factory state."
               />
               <div id="stain-removal" className="col-md-6 col-lg-4 my-3">
@@ -1592,31 +1600,39 @@ export default function Services() {
                     pairs well with an Ozone Treatment to completely refresh
                     your interior.
                   </p>
+                  <Link to="/services/stain-removal" style={{ color: "#999", fontSize: "0.8rem", textDecoration: "none" }}>
+                    Learn more <iconify-icon icon="mdi:chevron-right" style={{ fontSize: "0.85rem", verticalAlign: "middle" }} />
+                  </Link>
                 </div>
               </div>
               <AddOnCard
                 icon="/images/maintenance-icons/icons8-engine-100.png"
                 title="Engine Bay Detail"
+                slug="engine-bay-detail"
                 text="Do you have dust and/or debris in your engine bay? Let us take care of cleaning your engine and bay! Some of the benefits of a clean engine bay include, removal of spilled oils and/or coolant that may potentially cause heating issues, a clean slate for easier identification of leaks, and a happier mechanic!"
               />
               <AddOnCard
                 icon="/images/maintenance-icons/icons8-headlight-100.png"
                 title="Headlight Restoration"
+                slug="headlight-restoration"
                 text="Over time, the exposure to sunlight, weather, and environment, can cause headlight lenses to deteriorate, reducing their effectiveness. Headlight restoration is the process used to remove oxidation, yellowing, and cloudiness from vehicle headlights to improve their appearance and performance. Let us restore your headlights to their original clarity. Added benefits include increased night time visibility and increased resale value!"
               />
               <AddOnCard
                 icon="/images/maintenance-icons/icons8-paint-brush-100.png"
                 title="Paint Touch Up"
+                slug="paint-touch-up"
                 text="Daily driving can expose your car to harsh conditions, leading to rock chips, scratches from mailboxes, or even scrapes from shopping carts. For minor paint damage, touch-up paint offers a cost-effective alternative to a full respray. While it won't completely erase the blemish, it will significantly reduce its visibility and shield your vehicle's metal from the elements."
               />
               <AddOnCard
                 icon="/images/maintenance-icons/icons8-car-door-100.png"
                 title="Trim Restoration"
+                slug="trim-restoration"
                 text="Cladding, garnishes, rubber seals, grilles, and other non-painted parts deal with harsh weather conditions. What was once shining black trims, are now faded gray after years of taking a beating. We can restore the look of your vehicle's trim accents to get it looking like new!"
               />
               <AddOnCard
                 icon="/images/maintenance-icons/icons8-undercarriage-100.png"
                 title="Undercarriage Cleaning"
+                slug="undercarriage-cleaning"
                 text="Whether you've recently been through salt, been on a road trip, or off roading, the underside of your vehicle may have accumulated dirt, grime, and/or salt. An undercarriage cleaning is the perfect solution to remove unwanted debris. Benefits include reduced risk of rust and corrosion, reduced suspension wear, and more!"
               />
             </div>
