@@ -336,6 +336,19 @@ iconify-icon.icon-arrow-right:active {
   border: 1px solid var(--bs-border-color);
 }
 
+.plan-post .btn-primary,
+.plan-post .book-now-btn-links {
+  background-color: #dc6696;
+  border-color: #dc6696;
+  border-radius: 8px;
+}
+
+.plan-post .btn-primary:hover,
+.plan-post .book-now-btn-links:hover {
+  background-color: #f51fb5;
+  border-color: #f51fb5;
+}
+
 .price-tick {
   color: var(--accent-color);
 }

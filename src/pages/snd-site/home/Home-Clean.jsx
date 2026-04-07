@@ -127,22 +127,20 @@ export default function Home() {
 
   // Carousel navigation using smooth scrolling
   const scrollCarousel = (direction) => {
-    console.log("🎡🎡🎡🎡 SCROLL CLICKED 🎡🎡🎡🎡🎡");
-    console.log("📍 Direction:", direction);
-
     const carousel = document.getElementById("projectsCarousel");
     if (carousel) {
-      const scrollAmount = 330; // Width of one item + gap
+      const firstChild = carousel.querySelector(":scope > div");
+      const scrollAmount = firstChild
+        ? firstChild.offsetWidth + 30 // slide width + gap
+        : 330;
       const currentScroll = carousel.scrollLeft;
 
       if (direction === "left") {
-        console.log("⬅️ Moving left");
         carousel.scrollTo({
           left: Math.max(0, currentScroll - scrollAmount),
           behavior: "smooth",
         });
       } else {
-        console.log("➡️ Moving right");
         carousel.scrollTo({
           left: currentScroll + scrollAmount,
           behavior: "smooth",
@@ -699,8 +697,9 @@ export default function Home() {
                     gap: "30px",
                     padding: "0 15px",
                     scrollBehavior: "smooth",
-                    scrollbarWidth: "none", // Hide scrollbar for cleaner look
-                    msOverflowStyle: "none", // Hide scrollbar for IE/Edge
+                    scrollSnapType: "x mandatory",
+                    scrollbarWidth: "none",
+                    msOverflowStyle: "none",
                   }}
                 >
                   {displayedImages.map((image, index) => (
@@ -709,6 +708,7 @@ export default function Home() {
                       style={{
                         flex: "0 0 calc(33.333% - 20px)",
                         minWidth: "300px",
+                        scrollSnapAlign: "start",
                         position: "relative",
                         overflow: "hidden",
                         borderRadius: "10px",
