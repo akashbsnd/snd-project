@@ -7,6 +7,8 @@ Description: Turbo  is a Free Bootstrap Website Template for Car Wash by Templat
 Version: 1.0 
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
 /*--------------------------------------------------------------
 This is main CSS file that contains custom style rules used in this template
 --------------------------------------------------------------*/
@@ -589,6 +591,10 @@ button.filter-button:hover {
   background-color: #f51fb5 !important;
 }
 
+.navbar-brand img {
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.7));
+}
+
 /* Desktop: true-center nav links and right-pad icons/book-now */
 @media (min-width: 1200px) {
   .offcanvas-body {
@@ -782,6 +788,11 @@ button.filter-button:hover {
 }
 
 /* Footer */
+
+.footer-copy {
+  font-family: 'Audiowide', sans-serif;
+  text-transform: uppercase;
+}
 
 .footer-heading2 {
   color: #dc6696;
