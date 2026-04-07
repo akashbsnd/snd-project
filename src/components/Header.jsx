@@ -1,17 +1,13 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Logo from "../../public/images/horizontal-logo.png";
-import { CartContext } from "../context/CartContext";
-import { getPackageBaseUrl } from "../hooks/packageNameCamelCase";
 import "../pages/snd-site/css/vendor.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../pages/snd-site/css/style.css";
 
 export default function Header() {
     const location = useLocation();
-    const { cartItems } = useContext(CartContext);
-    const [isCartOpen, setIsCartOpen] = useState(false);
 
     const openFacebook = (event) => {
         event.preventDefault();
@@ -304,32 +300,32 @@ export default function Header() {
                             </li>
                             <li className="nav-item">
                                 <Link
-                                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/gallery")}`}
-                                    to="/snd-site/gallery"
+                                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/gallery")}`}
+                                    to="/gallery"
                                 >
                                     Gallery
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link
-                                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/services")}`}
-                                    to="/snd-site/services"
+                                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/services")}`}
+                                    to="/services"
                                 >
                                     Our Services
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link
-                                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/about")}`}
-                                    to="/snd-site/about"
+                                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/about")}`}
+                                    to="/about"
                                 >
                                     About Us
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link
-                                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/academy")}`}
-                                    to="/snd-site/academy"
+                                    className={`nav-link text-white text-uppercase mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/academy")}`}
+                                    to="/academy"
                                 >
                                     Academy
                                 </Link>
@@ -421,7 +417,7 @@ export default function Header() {
                             {/* Book Now */}
                             <div className="book-now-div">
                                 <Link
-                                    to="/bookings"
+                                    to="/booking"
                                     className="btn btn-primary book-now-btn w-100 w-xl-auto ms-0 ms-xl-3"
                                 >
                                     Book Now

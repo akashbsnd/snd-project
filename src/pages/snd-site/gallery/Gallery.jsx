@@ -339,32 +339,32 @@ export default function Gallery() {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/gallery")}`}
-                    to="/snd-site/gallery"
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/gallery")}`}
+                    to="/gallery"
                   >
                     Gallery
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/services")}`}
-                    to="/snd-site/services"
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/services")}`}
+                    to="/services"
                   >
                     Our Services
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/about")}`}
-                    to="/snd-site/about"
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/about")}`}
+                    to="/about"
                   >
                     About Us
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/academy")}`}
-                    to="/snd-site/academy"
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/academy")}`}
+                    to="/academy"
                   >
                     Academy
                   </Link>
@@ -456,7 +456,7 @@ export default function Gallery() {
                 {/* Book Now */}
                 <div className="book-now-div">
                   <Link
-                    to="/bookings"
+                    to="/booking"
                     className="btn btn-primary book-now-btn w-100 w-xl-auto ms-0 ms-xl-3"
                   >
                     Book Now
@@ -814,7 +814,7 @@ export default function Gallery() {
                 <div className="col">
                   <div className="footer-list mb-3">
                     <Link
-                      to="/snd-site/gallery"
+                      to="/gallery"
                       className="nav-link text-uppercase p-0"
                     >
                       Gallery
@@ -824,7 +824,7 @@ export default function Gallery() {
                 <div className="col">
                   <div className="footer-list mb-3">
                     <Link
-                      to="/snd-site/services"
+                      to="/services"
                       className="nav-link text-uppercase p-0"
                     >
                       Our Services
@@ -834,7 +834,7 @@ export default function Gallery() {
                 <div className="col">
                   <div className="footer-list mb-3">
                     <Link
-                      to="/snd-site/about"
+                      to="/about"
                       className="nav-link text-uppercase p-0"
                     >
                       About Us
@@ -844,7 +844,7 @@ export default function Gallery() {
                 <div className="col">
                   <div className="footer-list mb-3">
                     <Link
-                      to="/snd-site/academy"
+                      to="/academy"
                       className="nav-link text-uppercase p-0"
                     >
                       Academy

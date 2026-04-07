@@ -130,7 +130,7 @@ function PaintProtectionCard({
           )}
         </div>
         <Link
-          to="/bookings"
+          to="/booking"
           className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
         >
           Book now
@@ -524,32 +524,32 @@ export default function Services() {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/gallery")}`}
-                    to="/snd-site/gallery"
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/gallery")}`}
+                    to="/gallery"
                   >
                     Gallery
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/services")}`}
-                    to="/snd-site/services"
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/services")}`}
+                    to="/services"
                   >
                     Our Services
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/about")}`}
-                    to="/snd-site/about"
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/about")}`}
+                    to="/about"
                   >
                     About Us
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/snd-site/academy")}`}
-                    to="/snd-site/academy"
+                    className={`nav-link text-white text-uppercase fw-bold mx-2 px-1 mb-2 mb-lg-0 ${isActiveLink("/academy")}`}
+                    to="/academy"
                   >
                     Academy
                   </Link>
@@ -641,7 +641,7 @@ export default function Services() {
                 {/* Book Now */}
                 <div className="book-now-div">
                   <Link
-                    to="/bookings"
+                    to="/booking"
                     className="btn btn-primary book-now-btn w-100 w-xl-auto ms-0 ms-xl-3"
                   >
                     Book Now
@@ -809,7 +809,7 @@ export default function Services() {
                       </p>
                     </div>
                     <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
+                      <a href="/booking" className="btn btn-primary">
                         Book Now
                         <iconify-icon
                           icon="tabler:arrow-right"
@@ -882,7 +882,7 @@ export default function Services() {
                       </p>
                     </div>
                     <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
+                      <a href="/booking" className="btn btn-primary">
                         Book Now
                         <iconify-icon
                           icon="tabler:arrow-right"
@@ -948,7 +948,7 @@ export default function Services() {
                       </p>
                     </div>
                     <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
+                      <a href="/booking" className="btn btn-primary">
                         Book Now
                         <iconify-icon
                           icon="tabler:arrow-right"
@@ -1021,7 +1021,7 @@ export default function Services() {
                       </p>
                     </div>
                     <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
+                      <a href="/booking" className="btn btn-primary">
                         Book Now
                         <iconify-icon
                           icon="tabler:arrow-right"
@@ -1136,7 +1136,7 @@ export default function Services() {
                       </p>
                     </div>
                     <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
+                      <a href="/booking" className="btn btn-primary">
                         Book Now
                         <iconify-icon
                           icon="tabler:arrow-right"
@@ -1209,7 +1209,7 @@ export default function Services() {
                       </p>
                     </div>
                     <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
+                      <a href="/booking" className="btn btn-primary">
                         Book Now
                         <iconify-icon
                           icon="tabler:arrow-right"
@@ -1275,7 +1275,7 @@ export default function Services() {
                       </p>
                     </div>
                     <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
+                      <a href="/booking" className="btn btn-primary">
                         Book Now
                         <iconify-icon
                           icon="tabler:arrow-right"
@@ -1348,7 +1348,7 @@ export default function Services() {
                       </p>
                     </div>
                     <div className="text-center mt-4">
-                      <a href="/bookings" className="btn btn-primary">
+                      <a href="/booking" className="btn btn-primary">
                         Book Now
                         <iconify-icon
                           icon="tabler:arrow-right"
@@ -1513,7 +1513,7 @@ export default function Services() {
                 <p className="header-top">12 Washes</p>
                 <h2 className="display-5">$800</h2>
                 <Link
-                  to="/bookings"
+                  to="/booking"
                   className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
                 >
                   Book now
@@ -1529,7 +1529,7 @@ export default function Services() {
                 <p className="header-top">6 Washes</p>
                 <h2 className="display-5">$500</h2>
                 <Link
-                  to="/bookings"
+                  to="/booking"
                   className="btn btn-primary mt-3 px-4 py-3 mx-2 book-now-btn-links"
                 >
                   Book now
@@ -1938,7 +1938,7 @@ export default function Services() {
                   <div className="col">
                     <div className="footer-list mb-3">
                       <Link
-                        to="/snd-site/gallery"
+                        to="/gallery"
                         className="nav-link text-uppercase p-0"
                       >
                         Gallery
@@ -1948,7 +1948,7 @@ export default function Services() {
                   <div className="col">
                     <div className="footer-list mb-3">
                       <Link
-                        to="/snd-site/services"
+                        to="/services"
                         className="nav-link text-uppercase p-0"
                       >
                         Our Services
@@ -1958,7 +1958,7 @@ export default function Services() {
                   <div className="col">
                     <div className="footer-list mb-3">
                       <Link
-                        to="/snd-site/about"
+                        to="/about"
                         className="nav-link text-uppercase p-0"
                       >
                         About Us
@@ -1968,7 +1968,7 @@ export default function Services() {
                   <div className="col">
                     <div className="footer-list mb-3">
                       <Link
-                        to="/snd-site/academy"
+                        to="/academy"
                         className="nav-link text-uppercase p-0"
                       >
                         Academy
