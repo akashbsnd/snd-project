@@ -201,7 +201,10 @@ export default function Services() {
   const scrollCards = (ref, direction) => {
     const container = ref.current?.querySelector(".row");
     if (!container) return;
-    const scrollAmount = container.offsetWidth * 0.85;
+    const card = container.querySelector("[class*='col-lg-']");
+    if (!card) return;
+    const gap = parseFloat(getComputedStyle(container).gap) || 16;
+    const scrollAmount = card.offsetWidth + gap;
     container.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
