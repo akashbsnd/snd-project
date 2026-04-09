@@ -12,11 +12,11 @@ import { urlFor } from "../../../lib/sanityClient";
 
 const portableTextComponents = {
   block: {
-    h1: ({ children }) => <h1 style={{ color: "#13325c" }}>{children}</h1>,
-    h2: ({ children }) => <h2 style={{ color: "#13325c" }}>{children}</h2>,
-    h3: ({ children }) => <h3 style={{ color: "#13325c" }}>{children}</h3>,
+    h1: ({ children }) => <h1 style={{ color: "#13325c", marginTop: "3rem", marginBottom: "0.75rem", lineHeight: "1.4" }}>{children}</h1>,
+    h2: ({ children }) => <h2 style={{ color: "#13325c", marginTop: "3rem", marginBottom: "0.75rem", lineHeight: "1.4" }}>{children}</h2>,
+    h3: ({ children }) => <h3 style={{ color: "#13325c", marginTop: "2.5rem", marginBottom: "0.75rem", lineHeight: "1.4" }}>{children}</h3>,
     normal: ({ children }) => (
-      <p className="fs-5 lh-lg" style={{ color: "#444" }}>
+      <p className="fs-5 lh-lg" style={{ color: "#444", marginBottom: "1.25rem" }}>
         {children}
       </p>
     ),
@@ -40,15 +40,19 @@ const portableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="fs-5 lh-lg" style={{ color: "#444" }}>
+      <ul className="fs-5 lh-lg" style={{ color: "#444", paddingLeft: "1.5rem" }}>
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="fs-5 lh-lg" style={{ color: "#444" }}>
+      <ol className="fs-5 lh-lg" style={{ color: "#444", paddingLeft: "1.5rem" }}>
         {children}
       </ol>
     ),
+  },
+  listItem: {
+    bullet: ({ children }) => <li style={{ listStyle: "disc", marginBottom: "0.25rem" }}>{children}</li>,
+    number: ({ children }) => <li style={{ listStyle: "decimal", marginBottom: "0.25rem" }}>{children}</li>,
   },
   types: {
     image: ({ value }) => {

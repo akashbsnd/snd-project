@@ -18,10 +18,10 @@ export default function Footer() {
         </div>
 
         {/* Main Footer */}
-        <footer className="row footer-sections-row py-3">
-          {/* Contact Us */}
-          <div className="col-12 col-lg-3 footer-section mb-4 mb-lg-0 text-center">
-            <h5 className="fs-5 mt-3 mt-lg-0 fw-bold" style={{ color: "#dc6696" }}>Mobile Detailing Unit</h5>
+        <footer className="footer-main-grid py-3">
+          {/* Contact Us — 6 direct children: heading + 5 rows */}
+          <div className="footer-col-subgrid">
+            <h5 className="fs-5 fw-bold mt-3 mt-lg-0" style={{ color: "#dc6696" }}>Mobile Detailing Unit</h5>
             <div className="footer-list mb-3 mb-lg-0">
               <h6 className="mobile footer-heading2">We Come To You!</h6>
             </div>
@@ -131,31 +131,39 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Cities */}
-          <div className="col-12 col-lg-6 footer-section mb-4 mb-lg-0 text-center">
-            <h5 className="fs-5 mt-3 mt-lg-0 fw-bold" style={{ color: "#dc6696" }}>We Serve</h5>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, auto)", columnGap: "2.5rem", rowGap: "0.75rem", margin: "0 auto", width: "fit-content", textAlign: "left" }}>
+          {/* Cities — 6 direct children: heading + 5 city rows */}
+          <div className="footer-col-subgrid footer-col-cities">
+            <h5 className="fs-5 fw-bold mt-3 mt-lg-0" style={{ color: "#dc6696" }}>We Serve</h5>
+            <div className="cities-row">
               <a href="#" className="nav-link text-uppercase p-0">Charlotte</a>
               <a href="#" className="nav-link text-uppercase p-0">Concord</a>
               <a href="#" className="nav-link text-uppercase p-0">Cornelius</a>
+            </div>
+            <div className="cities-row">
               <a href="#" className="nav-link text-uppercase p-0">Harrisburg</a>
               <a href="#" className="nav-link text-uppercase p-0">Huntersville</a>
               <a href="#" className="nav-link text-uppercase p-0">Indian Trail</a>
+            </div>
+            <div className="cities-row">
               <a href="#" className="nav-link text-uppercase p-0">Matthews</a>
               <a href="#" className="nav-link text-uppercase p-0">Mooresville</a>
               <a href="#" className="nav-link text-uppercase p-0">Waxhaw</a>
+            </div>
+            <div className="cities-row">
               <a href="#" className="nav-link text-uppercase p-0">Lake Norman</a>
               <a href="#" className="nav-link text-uppercase p-0">Pineville</a>
               <a href="#" className="nav-link text-uppercase p-0" style={{ whiteSpace: "nowrap" }}>Fort Mill, SC</a>
+            </div>
+            <div className="cities-row">
               <a href="#" className="nav-link text-uppercase p-0" style={{ whiteSpace: "nowrap" }}>Indian Land, SC</a>
               <a href="#" className="nav-link text-uppercase p-0" style={{ whiteSpace: "nowrap" }}>Lake Wylie, SC</a>
               <a href="#" className="nav-link text-uppercase p-0">Rock Hill, SC</a>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="col-12 col-lg-3 footer-section mb-4 mb-lg-0 text-center">
-            <h5 className="fs-5 mt-3 mt-lg-0 fw-bold" style={{ color: "#dc6696" }}>Quick Links</h5>
+          {/* Quick Links — 6 direct children: heading + 5 links */}
+          <div className="footer-col-subgrid">
+            <h5 className="fs-5 fw-bold mt-3 mt-lg-0" style={{ color: "#dc6696" }}>Quick Links</h5>
             <div className="footer-list mb-3 mb-lg-0">
               <Link to="/" className="nav-link text-uppercase p-0">Home</Link>
             </div>

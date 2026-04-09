@@ -819,28 +819,51 @@ button.filter-button:hover {
 }
 
 /* Footer row alignment */
+.footer-col-subgrid {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.footer-col-cities .cities-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1.5rem;
+  text-align: left;
+  width: 100%;
+}
+
 @media (min-width: 992px) {
-  .footer-sections-row {
+  .footer-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: repeat(6, auto);
+    column-gap: 2rem;
+    row-gap: 0.75rem;
     align-items: start;
   }
-  .footer-sections-row .footer-section > * {
-    min-height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .footer-col-subgrid {
+    display: grid;
+    grid-row: 1 / span 6;
+    grid-template-rows: subgrid;
+    justify-items: center;
+    margin-bottom: 0;
   }
-  .footer-sections-row .footer-section .text-lg-start > * {
-    justify-content: flex-start;
+  .footer-col-cities {
+    justify-items: center;
+  }
+  .footer-col-cities .cities-row {
+    padding-left: 3rem;
   }
 }
 
 /* Scale down We Serve cities on smaller desktops */
 @media (min-width: 992px) and (max-width: 1299.98px) {
-  .footer-sections-row .row-cols-3 .col a {
+  .footer-col-cities .cities-row a {
     font-size: 0.8em;
   }
-  .footer-sections-row .row-cols-3 {
-    --bs-gutter-x: 0.5rem;
+  .footer-col-cities .cities-row {
+    column-gap: 0.75rem;
+    padding-left: 1.5rem;
   }
 }
 
