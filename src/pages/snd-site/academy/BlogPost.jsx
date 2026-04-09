@@ -128,7 +128,7 @@ export default function BlogPost() {
   return (
     <>
       {/* Nav */}
-      <nav className="navbar fixed-top navbar-expand-xl container-fluid p-sm-3 p-2">
+      <nav className="navbar fixed-top navbar-expand-xl container-fluid p-sm-3 p-2" style={{ background: "#051f42" }}>
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             <img src={Logo} alt="logo" />
@@ -253,7 +253,7 @@ export default function BlogPost() {
             <Link
               to="/academy"
               className="text-decoration-none mb-4 d-inline-block small"
-              style={{ color: "#dca958" }}
+              style={{ color: "#dca958", marginTop: "1.5rem" }}
             >
               ← Back to Academy
             </Link>
