@@ -8,6 +8,7 @@ import "../css/style.css";
 import "./Academy.css";
 import Logo from "../images/horizontal-logo.png";
 import { usePost } from "../../../hooks/usePosts";
+import { urlFor } from "../../../lib/sanityClient";
 
 const portableTextComponents = {
   block: {
@@ -48,6 +49,18 @@ const portableTextComponents = {
         {children}
       </ol>
     ),
+  },
+  types: {
+    image: ({ value }) => {
+      if (!value?.asset) return null;
+      return (
+        <img
+          src={urlFor(value).width(900).auto("format").url()}
+          alt={value.alt || ""}
+          className="img-fluid rounded my-4 w-100"
+        />
+      );
+    },
   },
 };
 

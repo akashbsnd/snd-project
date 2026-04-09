@@ -801,7 +801,7 @@ button.filter-button:hover {
 .footer-copy {
   font-family: 'Audiowide', sans-serif;
   text-transform: uppercase;
-  color: #dca958;
+  color: #f1d4a6;
 }
 
 .footer-heading2 {
@@ -816,6 +816,32 @@ button.filter-button:hover {
 
 .footer-em {
   font-size: 0.775em !important;
+}
+
+/* Footer row alignment */
+@media (min-width: 992px) {
+  .footer-sections-row {
+    align-items: start;
+  }
+  .footer-sections-row .footer-section > * {
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-sections-row .footer-section .text-lg-start > * {
+    justify-content: flex-start;
+  }
+}
+
+/* Scale down We Serve cities on smaller desktops */
+@media (min-width: 992px) and (max-width: 1299.98px) {
+  .footer-sections-row .row-cols-3 .col a {
+    font-size: 0.8em;
+  }
+  .footer-sections-row .row-cols-3 {
+    --bs-gutter-x: 0.5rem;
+  }
 }
 
 /* Home Detailing Packages */
