@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@portabletext/react": "^6.0.3",
     "@radix-ui/react-slot": "^1.2.4",
+    "@sanity/client": "^7.20.0",
+    "@sanity/image-url": "^2.1.1",
     "@square/web-sdk": "^2.1.0",
     "@tailwindcss/vite": "^4.1.17",
     "axios": "1.13.2",

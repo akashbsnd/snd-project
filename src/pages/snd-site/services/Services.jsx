@@ -155,7 +155,7 @@ function AddOnCard({ icon, title, sup, text, slug }) {
             </sup>
           )}
         </h4>
-        <p>{text}</p>
+        <p dangerouslySetInnerHTML={{ __html: text }} />
         {slug && (
           <Link to={`/services/${slug}`} style={{ color: "#999", fontSize: "0.8rem", textDecoration: "none" }}>
             Learn more <iconify-icon icon="mdi:chevron-right" style={{ fontSize: "0.85rem", verticalAlign: "middle" }} />
@@ -1747,7 +1747,7 @@ export default function Services() {
                 icon="/images/maintenance-icons/icons8-inhale-100.png"
                 title="Odor Removal (Ozone Treatments)"
                 slug="odor-removal"
-                text="Ozone, also known as O3 is aimed to attack smells at a molecular level. Ozone bonds to odor causing molecules effectively killing the smells. Ozone can also drown out organisms and bacteria that may be living in some of the deeper crevices of your vehicle. If you've been unable to identify the source of unpleasant odors in your vehicle, this treatment might just do the trick for you!"
+                text="Ozone, also known as O<sup>3</sup> is aimed to attack smells at a molecular level. Ozone bonds to odor causing molecules effectively killing the smells. Ozone can also drown out organisms and bacteria that may be living in some of the deeper crevices of your vehicle. If you've been unable to identify the source of unpleasant odors in your vehicle, this treatment might just do the trick for you!"
               />
               <AddOnCard
                 icon="/images/maintenance-icons/icons8-pets-100.png"

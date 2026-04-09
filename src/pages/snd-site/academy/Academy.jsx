@@ -7,9 +7,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/style.css";
 import "./Academy.css";
 import Logo from "../images/horizontal-logo.png";
+import { usePosts } from "../../../hooks/usePosts";
 
 const Academy = () => {
   const location = useLocation();
+  const { posts, loading: postsLoading } = usePosts();
 
   const openFacebook = (event) => {
     event.preventDefault();
@@ -18,6 +20,15 @@ const Academy = () => {
 
   const isActiveLink = (path) => {
     return location.pathname === path ? "active" : "";
+  };
+
+  const formatDate = (iso) => {
+    if (!iso) return "";
+    return new Date(iso).toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
   };
 
   const [formData, setFormData] = useState({
@@ -381,6 +392,84 @@ const Academy = () => {
           />
         </div>
       </div>
+
+      {/* Blog Posts Grid */}
+      <section style={{ background: "#f8f9fa", padding: "4rem 0" }}>
+        <div className="container">
+          <h2 className="text-center mb-2 fw-bold" style={{ color: "#13325c" }}>
+            SND Articles
+          </h2>
+          <p className="text-center text-muted mb-5">
+            Tips, tricks, and insights from the Supreme Nomads team
+          </p>
+
+          {postsLoading ? (
+            <div className="text-center py-5">
+              <div className="spinner-border" style={{ color: "#dca958" }} role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          ) : posts.length === 0 ? (
+            <p className="text-center text-muted py-5">No posts yet. Check back soon!</p>
+          ) : (
+            <div className="row g-4">
+              {posts.map((post) => (
+                <div key={post.slug} className="col-12 col-sm-6 col-lg-4">
+                  <Link
+                    to={`/academy/${post.slug}`}
+                    className="text-decoration-none"
+                    style={{ color: "inherit" }}
+                  >
+                    <div
+                      className="card h-100 border-0 shadow-sm"
+                      style={{ transition: "transform 0.2s", cursor: "pointer" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-4px)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+                    >
+                      {post.imageUrl ? (
+                        <img
+                          src={post.imageUrl}
+                          alt={post.title}
+                          className="card-img-top"
+                          style={{ height: "200px", objectFit: "cover" }}
+                        />
+                      ) : (
+                        <div
+                          className="card-img-top"
+                          style={{ height: "200px", background: "#ddd" }}
+                        />
+                      )}
+                      <div className="card-body d-flex flex-column p-3">
+                        <div className="d-flex align-items-center mb-2 gap-2">
+                          {post.authorImage && (
+                            <img
+                              src={post.authorImage}
+                              alt={post.authorName}
+                              style={{
+                                width: "32px",
+                                height: "32px",
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
+                            />
+                          )}
+                          <div>
+                            <div className="small text-muted">{post.authorName}</div>
+                            <div className="small text-muted">{formatDate(post.publishedAt)}</div>
+                          </div>
+                        </div>
+                        <h5 className="card-title fw-bold mt-auto mb-0" style={{ color: "#13325c" }}>
+                          {post.title}
+                        </h5>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       <Footer />
     </>

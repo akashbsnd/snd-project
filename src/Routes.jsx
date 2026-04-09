@@ -4,6 +4,7 @@ import About from "./pages/snd-site/about/About";
 import Gallery from "./pages/snd-site/gallery/Gallery";
 import Services from "./pages/snd-site/services/Services";
 import Academy from "./pages/snd-site/academy/Academy";
+import BlogPost from "./pages/snd-site/academy/BlogPost";
 import Booking from "./pages/booking/Booking";
 import CabinAirFilterReplacement from "./pages/snd-site/services/add-ons/CabinAirFilterReplacement";
 import OdorRemoval from "./pages/snd-site/services/add-ons/OdorRemoval";
@@ -34,6 +35,7 @@ export default function BrowserRoutes() {
         <Route path="/services/trim-restoration" element={<TrimRestoration />} />
         <Route path="/services/undercarriage-cleaning" element={<UndercarriageCleaning />} />
         <Route path="/academy" element={<Academy />} />
+        <Route path="/academy/:slug" element={<BlogPost />} />
       </Routes>
     </BrowserRouter>
   );
