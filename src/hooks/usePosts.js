@@ -8,7 +8,7 @@ const POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) {
   "authorName": author->name,
   "authorSlug": author->slug.current,
   "authorImage": author->image.asset->url,
-  "imageUrl": mainImage.asset->url
+  mainImage
 }[0..50]`;
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0] {
@@ -18,8 +18,7 @@ const POST_QUERY = `*[_type == "post" && slug.current == $slug][0] {
   "authorName": author->name,
   "authorSlug": author->slug.current,
   "authorImage": author->image.asset->url,
-  "imageUrl": mainImage.asset->url,
-  "imageAlt": mainImage.alt,
+  mainImage,
   body
 }`;
 

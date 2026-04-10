@@ -301,10 +301,10 @@ export default function BlogPost() {
             </div>
 
             {/* Featured Image */}
-            {post.imageUrl && (
+            {post.mainImage && (
               <img
-                src={post.imageUrl}
-                alt={post.imageAlt || post.title}
+                src={urlFor(post.mainImage).width(1200).height(630).fit("crop").crop("focalpoint").auto("format").url()}
+                alt={post.mainImage?.alt || post.title}
                 className="img-fluid rounded mb-4 w-100"
                 style={{ maxHeight: "480px", objectFit: "cover" }}
               />

@@ -8,6 +8,7 @@ import "../css/style.css";
 import "./Academy.css";
 import Logo from "../images/horizontal-logo.png";
 import { usePosts } from "../../../hooks/usePosts";
+import { urlFor } from "../../../lib/sanityClient";
 
 const Academy = () => {
   const location = useLocation();
@@ -406,10 +407,10 @@ const Academy = () => {
                       onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-4px)")}
                       onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
                     >
-                      {post.imageUrl ? (
+                      {post.mainImage ? (
                         <img
-                          src={post.imageUrl}
-                          alt={post.title}
+                          src={urlFor(post.mainImage).width(600).height(400).fit("crop").crop("focalpoint").auto("format").url()}
+                          alt={post.mainImage?.alt || post.title}
                           className="card-img-top"
                           style={{ height: "200px", objectFit: "cover" }}
                         />
