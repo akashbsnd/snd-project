@@ -373,26 +373,6 @@ const Academy = () => {
         </div>
       </section>
 
-      <div
-        style={{
-          background: "#111",
-          padding: "3rem 0",
-        }}
-      >
-        <div style={{ width: "100%", maxWidth: "1400px", margin: "0 auto", padding: "0 1rem" }}>
-          <iframe
-            className="academy-iframe"
-            src="https://app.urable.com/form/hws1GTjmzNePWUFsFmWJ/JoQVFvA5IeMA8DS2W8bh"
-            scrolling="no"
-            frameBorder="0"
-            marginHeight="0"
-            marginWidth="0"
-            width="100%"
-            title="Supreme Nomads Academy Form"
-          />
-        </div>
-      </div>
-
       {/* Blog Posts Grid */}
       <section style={{ background: "#f8f9fa", padding: "4rem 0" }}>
         <div className="container">
@@ -470,6 +450,26 @@ const Academy = () => {
           )}
         </div>
       </section>
+
+      <div
+        style={{
+          background: "#111",
+          padding: "3rem 0",
+        }}
+      >
+        <div style={{ width: "100%", maxWidth: "1400px", margin: "0 auto", padding: "0 1rem" }}>
+          <iframe
+            className="academy-iframe"
+            src="https://app.urable.com/form/hws1GTjmzNePWUFsFmWJ/JoQVFvA5IeMA8DS2W8bh"
+            scrolling="no"
+            frameBorder="0"
+            marginHeight="0"
+            marginWidth="0"
+            width="100%"
+            title="Supreme Nomads Academy Form"
+          />
+        </div>
+      </div>
 
       <Footer />
     </>

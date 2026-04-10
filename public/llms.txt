@@ -1,0 +1,37 @@
+# Supreme Nomads Detailing
+
+> Supreme Nomads Detailing is a mobile auto detailing company based in Charlotte, NC. We come to you — no drop-off required. Founded in 2022, we specialize in premium detailing, ceramic coatings, and paint protection film across the Charlotte metro area and surrounding cities in NC and SC.
+
+Supreme Nomads Detailing LLC is co-owned by Akash and Tenzin, both Charlotte residents with backgrounds in technology and a passion for cars. The company's mission is to provide personalized, high-quality detailing with a focus on quality service, punctuality, and clear communication on every job.
+
+Contact: info@supremenomads.com | (704) 561-1927 | (704) 312-2725
+
+## Services
+
+- [Detailing Packages](/services): Four tiers — Premium ($300–$400), Exterior Only ($160–$200), Interior Only ($160–$180), and Express ($125–$175). Prices vary by vehicle size: Sedan/Coupé, 2-Row SUV/Small Truck, and 3-Row SUV/Large Truck.
+- [Paint Protection Packages](/services): Supreme Nomads Special ($475–$625), Ceramic Coating ($950–$1,300+), and Paint Protection Film/PPF ($1,000–$1,200+). Ceramic Coating includes 2-stage hand-applied ceramic and 2-step paint correction for 5–7 year longevity.
+- [Maintenance Plans](/services): Available to paint protection customers. 6-wash ($500–$700) and 12-wash ($800–$1,200) plans by vehicle size. Each wash must be scheduled within 40 days.
+- [Add-On Services](/services): Cabin Air Filter Replacement, Ozone Odor Removal, Pet Hair Removal, Stain Removal (extractor vacuum), Engine Bay Detail, Headlight Restoration, Paint Touch Up, Trim Restoration, Undercarriage Cleaning.
+
+## Pages
+
+- [Home](/): Overview of services, gallery of past work, pricing overview, and quick booking link.
+- [Book Now](/booking): Online booking page to schedule a detailing appointment.
+- [Our Services](/services): Full breakdown of all detailing packages, paint protection options, maintenance plans, and add-on services with pricing.
+- [Gallery](/gallery): Photo gallery of completed detailing jobs including ceramic coatings, PPF, and interior work.
+- [About Us](/about): Background on founders Akash and Tenzin, company mission, and operating philosophy.
+- [Academy](/academy): The SND Academy — educational articles, tips, and detailing insights from the Supreme Nomads team. Posts are published via Sanity CMS.
+
+## Service Area
+
+**North Carolina:** Charlotte, Concord, Cornelius, Harrisburg, Huntersville, Indian Trail, Matthews, Mooresville, Waxhaw, Lake Norman, Pineville
+
+**South Carolina:** Fort Mill, Indian Land, Lake Wylie, Rock Hill
+
+## Social
+
+- TikTok: https://www.tiktok.com/@supremenomads704
+- Instagram: https://www.instagram.com/supremenomads
+- Facebook: https://www.facebook.com/Supremenomads/
+- YouTube: https://www.youtube.com/@SupremeNomads
+- Yelp: https://www.yelp.com/biz/supreme-nomads-detailing-charlotte
