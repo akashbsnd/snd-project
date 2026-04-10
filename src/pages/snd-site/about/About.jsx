@@ -369,7 +369,7 @@ export default function About() {
         <div className="container py-5 hero-content">
           <div className="row py-5">
             <div className="d-flex flex-wrap flex-column justify-content-center align-items-center my-5 py-5 text-white">
-              <h2 className="page-title display-3 mt-5 text-white">About Us</h2>
+              <h1 className="page-title display-3 mt-5 text-white">About Us</h1>
             </div>
           </div>
         </div>

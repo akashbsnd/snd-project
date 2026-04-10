@@ -476,7 +476,7 @@ export default function Gallery() {
         <div className="container py-5">
           <div className="row py-5">
             <div className="d-flex flex-wrap flex-column justify-content-center align-items-center my-5 py-5 text-white">
-              <h2 className="page-title display-3 mt-5 text-white">Gallery</h2>
+              <h1 className="page-title display-3 mt-5 text-white">Gallery</h1>
             </div>
           </div>
         </div>

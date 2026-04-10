@@ -576,10 +576,10 @@ export default function Home() {
         <div className="hero-container">
           <div className="row justify-content-center">
             <div className="hero-text-div col-12 col-md-10 text-center px-3 px-sm-5">
-              <p className="hero-text">
+              <h1 className="hero-text">
                 At <span className="sndName">Supreme Nomads Detailing</span>,
                 our top priority is you.
-              </p>
+              </h1>
               <p className="hero-text mb-4">
                 We strive for quality service, punctuality, and clear
                 communication every time we see you.
