@@ -2,7 +2,10 @@ import ServiceDetail from "../ServiceDetail";
 
 export default function CabinAirFilterReplacement() {
   return (
-    <ServiceDetail title="Cabin Air Filter Replacement">
+    <ServiceDetail
+      title="Cabin Air Filter Replacement"
+      heroImage="https://res.cloudinary.com/dnsc73sla/image/upload/w_1920,h_800,c_fill,q_auto,f_auto/v1775782389/climate-control_zok691.jpg"
+    >
       <h3 className="mb-4" style={{ color: "#dca958" }}>Breathe Easier on Every Drive</h3>
       <p className="fs-5 lh-lg" style={{ color: "#666" }}>
         Your vehicle's cabin air filter is the unsung hero of your daily commute. It quietly works behind the scenes, filtering out dust, pollen, exhaust fumes, and other airborne contaminants before they enter the passenger compartment. Most manufacturers recommend replacing this filter at least once a year—or every six months if you frequently drive through heavily polluted areas, construction zones, or rural roads where dust is prevalent. For drivers in Charlotte, North Carolina—where pollen counts rank among the highest in the Southeast—staying on top of this vehicle maintenance item is especially important if you or your passengers suffer from allergies or respiratory sensitivities.

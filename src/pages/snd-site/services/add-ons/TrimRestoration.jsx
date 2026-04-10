@@ -2,7 +2,10 @@ import ServiceDetail from "../ServiceDetail";
 
 export default function TrimRestoration() {
   return (
-    <ServiceDetail title="Trim Restoration">
+    <ServiceDetail
+      title="Trim Restoration"
+      heroImage="https://res.cloudinary.com/dnsc73sla/image/upload/w_1920,h_800,c_fill,q_auto,f_auto/v1775784826/trim-restoration_kcpch7.jpg"
+    >
       <h3 className="mb-4" style={{ color: "#dca958" }}>Bring Back the Bold, Dark Finish</h3>
       <p className="fs-5 lh-lg" style={{ color: "#666" }}>
         The black plastic and rubber trim on your vehicle—around windows, along side moldings, on bumpers, and across mirror caps—gives your car a clean, defined look when it's new. But over time, UV exposure, heat, and the elements cause these trim pieces to fade, turning them a chalky, washed-out gray. Faded trim is one of the most aging visual cues on any vehicle, instantly making even a well-maintained car look older than it is. At Supreme Nomads Detailing in Charlotte, North Carolina, our Trim Restoration service reverses this fading, bringing your exterior trim back to its deep, rich black finish.

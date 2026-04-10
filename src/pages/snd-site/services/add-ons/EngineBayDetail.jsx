@@ -2,7 +2,10 @@ import ServiceDetail from "../ServiceDetail";
 
 export default function EngineBayDetail() {
   return (
-    <ServiceDetail title="Engine Bay Detail">
+    <ServiceDetail
+      title="Engine Bay Detail"
+      heroImage="https://res.cloudinary.com/dnsc73sla/image/upload/w_1920,h_800,c_fill,q_auto,f_auto/v1775783685/engine-bay_u41qam.heic"
+    >
       <h3 className="mb-4" style={{ color: "#dca958" }}>Under the Hood, Above Expectations</h3>
       <p className="fs-5 lh-lg" style={{ color: "#666" }}>
         Your engine bay is the heart of your vehicle, and while it may not be the first thing people see, a clean engine compartment says a lot about how well your car is maintained. Over months and years of driving, your engine bay accumulates a thick layer of grease, road grime, dust, and oil residue. This buildup doesn't just look bad—it can actually trap heat, mask fluid leaks, and make it harder for your mechanic to identify potential problems during routine inspections. At Supreme Nomads Detailing in Charlotte, North Carolina, our Engine Bay Detail service strips away that buildup to reveal a clean, well-kept engine compartment that looks like it belongs in a showroom.

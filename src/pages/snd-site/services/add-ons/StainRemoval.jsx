@@ -2,7 +2,10 @@ import ServiceDetail from "../ServiceDetail";
 
 export default function StainRemoval() {
   return (
-    <ServiceDetail title="Stain Removal (Extractor Vacuum)">
+    <ServiceDetail
+      title="Stain Removal (Extractor Vacuum)"
+      heroImage="https://res.cloudinary.com/dnsc73sla/image/upload/w_1920,h_800,c_fill,q_auto,f_auto/v1775782520/stain-removal_an6tjo.jpg"
+    >
       <h3 className="mb-4" style={{ color: "#dca958" }}>Deep Clean Beyond the Surface</h3>
       <p className="fs-5 lh-lg" style={{ color: "#666" }}>
         Life happens in your car. Coffee spills during the morning commute, kids dropping food in the back seat, muddy boots after a rainy day—over time, these everyday moments leave behind stains that regular cleaning can't touch. Standard shampoo and conditioner treatments work well for surface-level dirt, but when contaminants have soaked deep into your upholstery fibers or carpet backing, you need something more powerful. At Supreme Nomads Detailing in Charlotte, North Carolina, our Stain Removal service uses professional-grade extractor vacuums that inject hot cleaning solution deep into fabrics and immediately extract it along with the embedded dirt, grime, and stains.

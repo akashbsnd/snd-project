@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router";
+import { useEffect } from "react";
 import Home from "./pages/snd-site/home/Home-Clean";
 import About from "./pages/snd-site/about/About";
 import Gallery from "./pages/snd-site/gallery/Gallery";
@@ -16,9 +17,20 @@ import PaintTouchUp from "./pages/snd-site/services/add-ons/PaintTouchUp";
 import TrimRestoration from "./pages/snd-site/services/add-ons/TrimRestoration";
 import UndercarriageCleaning from "./pages/snd-site/services/add-ons/UndercarriageCleaning";
 
+function ScrollToHash() {
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (!hash) return;
+    const el = document.querySelector(hash);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }, [hash]);
+  return null;
+}
+
 export default function BrowserRoutes() {
   return (
     <BrowserRouter>
+      <ScrollToHash />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/booking" element={<Booking />} />

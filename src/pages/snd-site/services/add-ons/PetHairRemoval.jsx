@@ -2,7 +2,10 @@ import ServiceDetail from "../ServiceDetail";
 
 export default function PetHairRemoval() {
   return (
-    <ServiceDetail title="Pet Hair Removal">
+    <ServiceDetail
+      title="Pet Hair Removal"
+      heroImage="https://res.cloudinary.com/dnsc73sla/image/upload/w_1920,h_800,c_fill,q_auto,f_auto/v1775781830/shiba-inu-car_chbnet.jpg"
+    >
       <h3 className="mb-4" style={{ color: "#dca958" }}>Because Your Best Friend Deserves a Clean Ride Too</h3>
       <p className="fs-5 lh-lg" style={{ color: "#666" }}>
         We love our furry companions, and for most pet owners, leaving them at home every time you drive somewhere just isn't realistic. Whether it's a trip to the vet, a ride to the park, or a cross-country adventure, pets inevitably leave behind a trail of hair, dander, and occasional messes. Pet hair has a way of embedding itself deep into fabric fibers—car seats, carpets, and floor mats can become covered quickly, and a standard vacuum often isn't enough to remove it all. That's where Supreme Nomads Detailing in Charlotte, North Carolina comes in with our dedicated Pet Hair Removal service—one of our most requested professional auto detailing add-ons.

@@ -2,6 +2,7 @@ import ServiceDetail from "../ServiceDetail";
 
 export default function PaintTouchUp() {
   return (
+    // TODO: Add hero image for Paint Touch Up
     <ServiceDetail title="Paint Touch Up">
       <h3 className="mb-4" style={{ color: "#dca958" }}>Small Fixes, Big Impact</h3>
       <p className="fs-5 lh-lg" style={{ color: "#666" }}>

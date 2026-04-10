@@ -2,7 +2,10 @@ import ServiceDetail from "../ServiceDetail";
 
 export default function OdorRemoval() {
   return (
-    <ServiceDetail title="Odor Removal (Ozone Treatments)">
+    <ServiceDetail
+      title="Odor Removal (Ozone Treatments)"
+      heroImage="https://res.cloudinary.com/dnsc73sla/image/upload/w_1920,h_800,c_fill,q_auto,f_auto/v1775783430/ozone-vent_fxzyc3.jpg"
+    >
       <h3 className="mb-4" style={{ color: "#dca958" }}>Eliminate Odors at the Molecular Level</h3>
       <p className="fs-5 lh-lg" style={{ color: "#666" }}>
         Persistent odors in your vehicle can be more than just an inconvenience—they can make every drive uncomfortable for you and your passengers. Whether the source is cigarette smoke, pet dander, food spills, mold, or something you simply can't identify, traditional air fresheners only mask the problem. At Supreme Nomads Detailing in Charlotte, North Carolina, our Ozone Treatment takes a fundamentally different approach by attacking odor-causing molecules at their core. Ozone (O<sup>3</sup>) is a powerful oxidizer that bonds directly to these molecules, neutralizing them rather than simply covering them up.

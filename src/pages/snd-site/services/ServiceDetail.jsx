@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/style.css";
 import Logo from "../images/horizontal-logo.png";
 
-export default function ServiceDetail({ title, children }) {
+export default function ServiceDetail({ title, heroImage, children }) {
   const location = useLocation();
 
   useEffect(() => {
@@ -184,7 +184,7 @@ export default function ServiceDetail({ title, children }) {
       </nav>
 
       {/* Hero */}
-      <section className="hero-section hero-services" style={{ position: "relative" }}>
+      <section className="hero-section hero-services" style={{ position: "relative", ...(heroImage && { backgroundImage: `url(${heroImage})`, backgroundPosition: "center center" }) }}>
         <div className="container py-5 hero-content">
           <div className="row py-5">
             <div className="d-flex flex-wrap flex-column justify-content-center align-items-center my-5 py-5 text-white">
@@ -200,7 +200,7 @@ export default function ServiceDetail({ title, children }) {
           <div className="row justify-content-center">
             <div className="col-lg-8">
               <div className="mb-4">
-                <Link to="/services" style={{ color: "#dca958", textDecoration: "none", fontSize: "0.9rem" }}>
+                <Link to="/services#add-ons-section" style={{ color: "#dca958", textDecoration: "none", fontSize: "0.9rem" }}>
                   <iconify-icon icon="mdi:chevron-left" style={{ fontSize: "1rem", verticalAlign: "middle" }} /> Back to Our Services
                 </Link>
               </div>

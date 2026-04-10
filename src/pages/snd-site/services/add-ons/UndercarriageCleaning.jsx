@@ -2,7 +2,10 @@ import ServiceDetail from "../ServiceDetail";
 
 export default function UndercarriageCleaning() {
   return (
-    <ServiceDetail title="Undercarriage Cleaning">
+    <ServiceDetail
+      title="Undercarriage Cleaning"
+      heroImage="https://res.cloudinary.com/dnsc73sla/image/upload/w_1920,h_800,c_fill,q_auto,f_auto/v1775784499/undercarriage_k7zm2i.jpg"
+    >
       <h3 className="mb-4" style={{ color: "#dca958" }}>Protect What You Can't See</h3>
       <p className="fs-5 lh-lg" style={{ color: "#666" }}>
         The underside of your vehicle endures more abuse than any other surface. Road salt, mud, gravel, standing water, and chemical runoff constantly bombard your undercarriage every time you drive. This accumulation traps moisture against metal components—frame rails, suspension parts, brake lines, exhaust components, and fuel lines—creating the perfect conditions for corrosion. At Supreme Nomads Detailing in Charlotte, North Carolina, our Undercarriage Cleaning service removes this buildup and helps protect the structural integrity of your vehicle from the ground up.

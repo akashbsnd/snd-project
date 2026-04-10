@@ -2,7 +2,10 @@ import ServiceDetail from "../ServiceDetail";
 
 export default function HeadlightRestoration() {
   return (
-    <ServiceDetail title="Headlight Restoration">
+    <ServiceDetail
+      title="Headlight Restoration"
+      heroImage="https://res.cloudinary.com/dnsc73sla/image/upload/w_1920,h_800,c_fill,q_auto,f_auto/v1754101079/hero-academy_vhftjc.png"
+    >
       <h3 className="mb-4" style={{ color: "#dca958" }}>See the Road Clearly Again</h3>
       <p className="fs-5 lh-lg" style={{ color: "#666" }}>
         Foggy, yellowed headlights are more than a cosmetic issue—they're a safety hazard. Over time, the UV-protective coating on your headlight lenses breaks down from constant sun exposure, causing the polycarbonate plastic to oxidize and turn hazy. This oxidation can reduce your headlight output by as much as 80%, dramatically cutting your visibility at night and making it harder for other drivers to see you. At Supreme Nomads Detailing in Charlotte, North Carolina, our Headlight Restoration service removes that oxidation layer and restores your lenses to near-factory clarity, improving both the look and safety of your vehicle.
