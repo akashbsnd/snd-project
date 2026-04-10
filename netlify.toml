@@ -4,8 +4,18 @@
   functions = "netlify/functions"
   publish = "dist"
 
-## Uncomment to use this redirect for Single Page Applications
-## Not needed for static site generators.
+## Serve static SEO files directly (must come before the SPA catch-all)
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+
+[[redirects]]
+  from = "/robots.txt"
+  to = "/robots.txt"
+  status = 200
+
+## Single Page Application catch-all
 [[redirects]]
   from = "/*"
   to = "/index.html"
