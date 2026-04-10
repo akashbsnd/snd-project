@@ -1,19 +1,8 @@
 # example netlify.toml
 [build]
-  command = "vite build"
+  command = "npm run build"
   functions = "netlify/functions"
   publish = "dist"
-
-## Serve static SEO files directly (must come before the SPA catch-all)
-[[redirects]]
-  from = "/sitemap.xml"
-  to = "/sitemap.xml"
-  status = 200
-
-[[redirects]]
-  from = "/robots.txt"
-  to = "/robots.txt"
-  status = 200
 
 ## Single Page Application catch-all
 [[redirects]]
