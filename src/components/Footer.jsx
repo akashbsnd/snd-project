@@ -104,10 +104,21 @@ export default function Footer() {
                   href="https://www.youtube.com/@SupremeNomads"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="me-3"
                 >
                   <iconify-icon
                     className="social-icon-footer"
                     icon="mdi:youtube"
+                  />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/supreme-nomads-detailing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <iconify-icon
+                    className="social-icon-footer"
+                    icon="mdi:linkedin"
                   />
                 </a>
               </div>
